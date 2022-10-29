@@ -45,7 +45,7 @@ export default function Login() {
               Forgot password?
             </a>
             <a
-              href="login"
+              href="/signup"
               className="font-body text-gray-700 hover:text-black text-sm md:text-base"
             >
               Create new account
@@ -58,7 +58,7 @@ export default function Login() {
             Or continue with
           </p>
           <a
-            href="login"
+            // href="login"
             className="flex items-center space-between py-2 px-4 m-2 bg-white text-black hover:bg-gray-400 transition-all duration-500 rounded shadow-2xl border-2 border-gray-600 text-base font-semibold font-body cursor-pointer"
           >
             <FcGoogle
