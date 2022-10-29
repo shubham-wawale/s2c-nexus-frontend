@@ -10,7 +10,7 @@ export default function Login() {
       <img
         src={login}
         alt="Company Login"
-        className="w-3/5 md:block max-h-screen"
+        className="w-3/6 md:block max-h-screen"
       />
       <div className="flex  flex-col items-center w-full p-10 overflow-auto">
         <h2 className="text-xl md:text-3xl text-center mt-4 font-body uppercase font-bold">

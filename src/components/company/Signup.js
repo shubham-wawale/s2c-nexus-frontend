@@ -10,7 +10,7 @@ export default function Signup() {
       <img
         src={login}
         alt="Company Signup"
-        className="w-3/5 md:block max-h-screen"
+        className="w-3/6 md:block max-h-screen"
       />
       <div className="flex flex-col items-center w-full p-10 overflow-auto">
 
