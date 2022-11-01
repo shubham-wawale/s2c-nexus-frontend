@@ -4,7 +4,7 @@ export default function SideNav() {
   
      <div id="main-div" >
         
-        <aside class="aside is-placed-left is-expanded  mt-12">
+        <aside class="aside bg-[#0f172a] is-placed-left is-expanded  mt-16">
         <div class="aside-tools">
         <div>
           Admin <b class="font-black">TCS</b>

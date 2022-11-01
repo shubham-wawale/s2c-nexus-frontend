@@ -1,40 +1,44 @@
-import React from 'react';
-import Navbar from './navBar';
-import SideNav from './sideNav';
-import StudentTable from './table';
-class Dashboard extends React.Component {
-  
-  render(){
-  return (
-    <div id="app">
-      <Navbar/>
+import React from "react";
+import Drives from "./Drives";
+import Navbar from "./navBar";
+import SideNav from "./sideNav";
+import StudentTable from "./table";
 
-      <SideNav  margin='2rem'/>
-      <StudentTable/>  
-    <footer class="footer">
-      <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
-        <div class="flex items-center justify-start space-x-3">
-          <div>
-            © 2022, S2CNexus.com
+export default function CompanyDash() {
+  return (
+    <>
+      <Navbar />
+
+      <SideNav margin="2rem" />
+
+      <Drives />
+      <StudentTable />
+
+      {/* <footer class="footer">
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+          <div class="flex items-center justify-start space-x-3">
+            <div>© 2022, S2CNexus.com</div>
+            <div>
+              <p>
+                Distributed By:{" "}
+                <a href="https://github.com/" target="_blank">
+                  S2C-Nexus
+                </a>
+              </p>
+            </div>
+            <a href="https://github.com/" style={{ height: "20px" }}>
+              <img src="https://img.shields.io/github/v/release/justboil/admin-one-tailwind?color=%23999" />
+            </a>
           </div>
-          <div>
-            <p>Distributed By: <a href="https://github.com/" target="_blank">S2C-Nexus</a></p>
-          </div>
-          <a href="https://github.com/" style={{height: "20px"}}>
-            <img src="https://img.shields.io/github/v/release/justboil/admin-one-tailwind?color=%23999" />
-          </a>
         </div>
-        
-      </div>
-    </footer>
-    </div>
+      </footer>
+     */}
+    </>
   );
 }
-}
-export default Dashboard
 
-
-    {/* <nav id="navbar-main" class="navbar is-fixed-top">
+{
+  /* <nav id="navbar-main" class="navbar is-fixed-top">
       <div class="navbar-brand">
         <a class="navbar-item mobile-aside-button">
           <span class="icon"><i class="mdi mdi-forwardburger mdi-24px"></i></span>
@@ -121,10 +125,14 @@ export default Dashboard
         </div>
       </div>
     </nav>
-     */}
+     */
+}
 
-{/* SIDE NAV CODE */}
-{/* <aside class="aside is-placed-left is-expanded">
+{
+  /* SIDE NAV CODE */
+}
+{
+  /* <aside class="aside is-placed-left is-expanded">
       <div class="aside-tools">
         <div>
           Admin <b class="font-black">TCS</b>
@@ -153,8 +161,10 @@ export default Dashboard
               <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
               <span class="menu-item-label">Company Profile</span>
             </a>
-          </li> */}
-          {/* <li class="--set-active-profile-html">
+          </li> */
+}
+{
+  /* <li class="--set-active-profile-html">
             <a href="#">
               <span class="icon"><i class="mdi mdi-account-circle"></i></span>
               <span class="menu-item-label">Company Profile</span>
@@ -165,8 +175,10 @@ export default Dashboard
               <span class="icon"><i class="mdi mdi-lock"></i></span>
               <span class="menu-item-label">Log Out</span>
             </a>
-          </li> */}
-          {/* <li>
+          </li> */
+}
+{
+  /* <li>
             <a class="dropdown">
               <span class="icon"><i class="mdi mdi-view-list"></i></span>
               <span class="menu-item-label">Submenus</span>
@@ -221,10 +233,14 @@ export default Dashboard
           <span>Premium Demo</span>
         </a>
       </div>
-    </section> */}
-    
-    {/* CENTER CODE*/}
-    {/* <section class="is-hero-bar">
+    </section> */
+}
+
+{
+  /* CENTER CODE*/
+}
+{
+  /* <section class="is-hero-bar">
       <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         <h1 class="title">
           Dashboard
@@ -318,11 +334,11 @@ export default Dashboard
             <button type="button" class="button small textual --jb-notification-dismiss">Dismiss</button>
           </div>
         </div>
-        </section> */}
-  
-        
+        </section> */
+}
 
-    {/* <div id="sample-modal" class="modal">
+{
+  /* <div id="sample-modal" class="modal">
       <div class="modal-background --jb-modal-close">
       </div>
         <div class="modal-card">
@@ -356,4 +372,5 @@ export default Dashboard
       </div>
     </div>
     </div>
-    */}
+    */
+}
