@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './navBar';
 import SideNav from './sideNav';
 import StudentTable from './table';
 class Dashboard extends React.Component {
@@ -6,7 +7,9 @@ class Dashboard extends React.Component {
   render(){
   return (
     <div id="app">
-      <SideNav/>
+      <Navbar/>
+
+      <SideNav  margin='2rem'/>
       <StudentTable/>  
     <footer class="footer">
       <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">

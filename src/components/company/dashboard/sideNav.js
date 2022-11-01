@@ -2,8 +2,9 @@ import React from "react";
 export default function SideNav() {
     return (
   
-     <div id="main-div">
-        <aside class="aside is-placed-left is-expanded">
+     <div id="main-div" >
+        
+        <aside class="aside is-placed-left is-expanded  mt-12">
         <div class="aside-tools">
         <div>
           Admin <b class="font-black">TCS</b>
@@ -80,13 +81,13 @@ export default function SideNav() {
             </a>
           </li> */}
           <li>
-            <a href="https://therichpost.com" class="has-icon">
+            <a href="/" class="has-icon">
               <span class="icon"><i class="mdi mdi-help-circle"></i></span>
               <span class="menu-item-label">About</span>
             </a>
           </li>
           <li>
-            <a href="https://therichpost.com" class="has-icon">
+            <a href="/" class="has-icon">
               <span class="icon"><i class="mdi mdi-github-circle"></i></span>
               <span class="menu-item-label">GitHub</span>
             </a>

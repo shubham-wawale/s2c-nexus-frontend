@@ -46,6 +46,10 @@ module.exports = {
             rose: colors.rose,
             white: colors.white,
             black: colors.black,
+            mygrey:{
+                100:'#1F2937'
+
+            },
             myCyan: {
                 100: '#5fcac7'
             },

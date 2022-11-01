@@ -11,9 +11,9 @@ export default function StudentTable() {
               <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
               Applied Students
             </p>
-            <a href="#" class="card-header-icon">
+            {/* <a href="#" class="card-header-icon">
               <span class="icon"><i class="mdi mdi-reload"></i></span>
-            </a>
+            </a> */}
           </header>
           <div class="card-content">
             <table>
@@ -24,23 +24,49 @@ export default function StudentTable() {
                 <th>Branch</th>
                 <th>Email-Id</th>
                 <th>Batch</th>
-                <th>Created</th>
-                <th></th>
+                <th>Applied On</th>  
               </tr>
               </thead>
               <tbody>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+                <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
+                  <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
+                </td>
+                <td class="actions-cell">
+                  <div class="buttons right nowrap">
+                    <button class="button small text-center inline-flex items-center green --jb-modal"  data-target="sample-modal-2" type="button">
+                      <span class="icon"><i class="mdi mdi-check"></i></span>Accept
+                    </button>
+                    <button class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
+                      <span class="icon"><i class="mdi mdi-window-close"></i></span>Reject
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
+                </td>
+                <td data-label="Name">Riya Patel</td>
+                <td data-label="Branch">IT</td>
+                <td data-label="Email-Id">riyapatel@gmail.com</td>
+                <td data-label="Batch">2023</td>
+
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -57,17 +83,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -84,17 +111,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -111,17 +139,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -138,17 +167,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -165,17 +195,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -192,17 +223,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -219,17 +251,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -246,17 +279,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -273,17 +307,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -300,17 +335,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -327,17 +363,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -354,44 +391,18 @@ export default function StudentTable() {
                 </td>
               </tr>
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
-                  <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
-                </td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                  
-
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-check"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-window-close"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
-                </td>
-                <td data-label="Name">Riya Patel</td>
-                <td data-label="Branch">IT</td>
-                <td data-label="Email-Id">riyapatel@gmail.com</td>
-                <td data-label="Batch">2023</td>
-
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
@@ -410,17 +421,18 @@ export default function StudentTable() {
 
 
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full" />
-                  </div>
+              <td class="check-cell">
+                <div class="flex items-center">
+                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                    </div>
                 </td>
                 <td data-label="Name">Riya Patel</td>
                 <td data-label="Branch">IT</td>
                 <td data-label="Email-Id">riyapatel@gmail.com</td>
                 <td data-label="Batch">2023</td>
 
-                <td data-label="Created">
+                <td data-label="Applied On">
                   <small class="text-gray-500" title="Oct 25, 2021">Oct 25, 2021</small>
                 </td>
                 <td class="actions-cell">
