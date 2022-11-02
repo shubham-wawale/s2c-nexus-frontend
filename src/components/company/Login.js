@@ -3,8 +3,47 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import login from "../../images/login.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate()
+  const [credentials, setCredentials] = useState({
+    email:"",
+    password:""
+  })
+  const [companyUserId, setCompanyUserid] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleLoginChange = (e) => {
+    const {name, value} = e.target
+    console.log(name,value)
+    setCredentials(prevValue => (
+      {
+        ...prevValue,
+        [name]:value
+      }
+    ))
+  }
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault()
+    console.log(credentials)
+    axios.post('http://localhost:8080/company/login', credentials)
+    .then(function (response) {
+      if(response.data.success) {
+        setCompanyUserid(response.data.companyId) 
+        console.log(response.data.message)
+        navigate("/compdashboard")
+      } else {
+        setErrorMessage(response.data.message)
+        console.log(response.data.message)
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
   return (
     <div className="flex flex-row h-screen overfow-hidden ">
       <img
@@ -21,22 +60,24 @@ export default function Login() {
         </h3>
         <form className="flex flex-col items-center pt-2 md:pt-8 w-full max-w-md mx-auto">
           <input
+            name="email"
+            onChange={handleLoginChange}
             className="font-body mt-2 py-2 px-4 block w-full rounded text-lg focus:ring-2 focus:border-transparent focus:ring-blue-500 outline-none border-2 border-gray-300 placeholder-gray-500"
-            type="email"
             placeholder="Email"
           />
 
           <input
+            name="password"
+            onChange={handleLoginChange}
             className="font-body mt-2 py-2 px-4 block w-full rounded text-lg focus:ring-2 focus:border-transparent focus:ring-blue-500 outline-none border-2 border-gray-300 placeholder-gray-500"
-            type="password"
             placeholder="Password"
           />
 
-          <input
+          <button
+            onClick={handleLoginSubmit}
             type="submit"
-            value="Login"
             className="font-body font-semibold tracking-wider disabled:bg-gray-400 w-full max-w-md uppercase py-2 md:py-4 px-4 md:px-6 mt-4 rounded bg-black text-white text-lg md:text-xl transition duration-500 hover:bg-gray-600 cursor-pointer"
-          />
+          >Login</button>
           <div className="flex pt-6 justify-between w-full max-w-md">
             <a
               href="login"

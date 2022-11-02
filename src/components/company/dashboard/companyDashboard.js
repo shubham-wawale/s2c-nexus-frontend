@@ -12,7 +12,7 @@ export default function CompanyDash() {
       <SideNav margin="2rem" />
 
       <Drives />
-      <StudentTable />
+      {/* <StudentTable /> */}
 
       {/* <footer class="footer">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">

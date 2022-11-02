@@ -5,6 +5,7 @@ export default function Drives() {
   return (
     <div>
         <DriveCard/>
+        <DriveCard/>
     </div>
   )
 }
