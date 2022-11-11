@@ -66,7 +66,7 @@ export default function Signup() {
             </a>
           </div>
         </form>
-        <hr className="w-full h-1 bg-black rounded-full my-6 block" />
+        {/* <hr className="w-full h-1 bg-black rounded-full my-6 block" />
         <div>
           <p className="font-body font-bold text-center text-gray-800 pb-4">
             Or continue with
@@ -81,7 +81,7 @@ export default function Signup() {
             />
             Google
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
