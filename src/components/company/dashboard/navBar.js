@@ -8,6 +8,8 @@ export default function Navbar() {
             <img
               class="rounded-full border border-gray-100 shadow-sm h-10 mx-3"
               src="./images/login.png"
+
+
             />
 
             <span class="mx-3 text-white text-xl font-semibold my-2">S2C Nexus</span>

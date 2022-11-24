@@ -23,7 +23,7 @@ export default function SideNav() {
         
         <ul class="menu-list">
           <li class="--set-active-tables-html">
-            <a href="#">
+            <a href="/company/CreateDrive">
               <span class="icon"><i class="mdi mdi-table"></i></span>
               <span class="menu-item-label">Create Drive</span>
             </a>

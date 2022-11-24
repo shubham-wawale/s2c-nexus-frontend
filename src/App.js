@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import CompanyDash from "./components/company/dashboard/companyDashboard";
 import Drive from "./components/company/dashboard/Drive";
+import DriveForm from "./components/company/dashboard/CreateDriveForm";
 
 import Navbar from "./components/company/dashboard/navBar";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/compdashboard" element={<CompanyDash />}></Route>
           <Route path="/company/drive" element={<Drive />}></Route>
+          <Route path="/company/CreateDrive" element={<DriveForm />}></Route>
           
 
 
