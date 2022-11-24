@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function DriveCard() {
   const navigate = useNavigate()
   const handleDriveCardClick = () => {
-    navigate("/company/drive")
+    navigate("/studentTable")
   }
   return (
     <section>

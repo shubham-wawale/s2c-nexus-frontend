@@ -14,7 +14,7 @@ export default function SideNav() {
         <p class="menu-label">General</p>
         <ul class="menu-list">
           <li class="active">
-            <a href="#">
+            <a href="/compdashboard">
               <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
               <span class="menu-item-label">Dashboard</span>
             </a>
@@ -23,7 +23,7 @@ export default function SideNav() {
         
         <ul class="menu-list">
           <li class="--set-active-tables-html">
-            <a href="/company/CreateDrive">
+            <a href="/createDrive">
               <span class="icon"><i class="mdi mdi-table"></i></span>
               <span class="menu-item-label">Create Drive</span>
             </a>

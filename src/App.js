@@ -6,7 +6,7 @@ import {
   Route
 } from "react-router-dom"
 import CompanyDash from "./components/company/dashboard/companyDashboard";
-import Drive from "./components/company/dashboard/Drive";
+import StudentTable from "./components/company/dashboard/table";
 import DriveForm from "./components/company/dashboard/CreateDriveForm";
 
 import Navbar from "./components/company/dashboard/navBar";
@@ -23,9 +23,8 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/compdashboard" element={<CompanyDash />}></Route>
-          <Route path="/company/drive" element={<Drive />}></Route>
-          <Route path="/company/CreateDrive" element={<DriveForm />}></Route>
-          
+          <Route path="/createDrive" element={<DriveForm />}></Route>
+          <Route path="/studentTable" element={<StudentTable />}></Route>
 
 
         </Routes>

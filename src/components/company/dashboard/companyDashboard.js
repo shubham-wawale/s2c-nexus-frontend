@@ -1,19 +1,16 @@
 import React from "react";
-import DriveForm from "./CreateDriveForm";
-import Drives from "./Drives";
+import DriveCard from "./DriveCard";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
-import StudentTable from "./table";
+
 
 export default function CompanyDash() {
   return (
     <>
       <Navbar />
-
-      <SideNav margin="2rem" />
-<DriveForm/>
-      <Drives /> 
-      <StudentTable />
+      <SideNav  />
+      <DriveCard />
+      
 
       {/* <footer class="footer">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">

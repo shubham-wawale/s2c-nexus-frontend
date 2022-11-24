@@ -1,4 +1,6 @@
 import React from "react";
+import Navbar from "./navBar";
+import SideNav from "./sideNav";
 
 const Users = [
   {
@@ -54,6 +56,7 @@ const Users = [
 ];
 
 class StudentTable extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -108,6 +111,9 @@ class StudentTable extends React.Component {
 
   render() {
     return (
+      <>
+  <Navbar />
+  <SideNav  />
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -198,8 +204,10 @@ class StudentTable extends React.Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
+  
 }
 
 export default StudentTable;

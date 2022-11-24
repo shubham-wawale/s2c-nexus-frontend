@@ -1,5 +1,6 @@
 import React from 'react'
-import StudentTable from './table'
+import DriveCard from './DriveCard'
+
 import Navbar from './navBar'
 import SideNav from './sideNav'
 
@@ -8,7 +9,7 @@ export default function Drive() {
     <>
         <Navbar />
         <SideNav margin="2rem" />
-        <StudentTable />
+        <DriveCard />
     </>
   )
 }
