@@ -35,7 +35,7 @@ export default function SideNav() {
             </a>
           </li> */}
           <li class="--set-active-profile-html">
-            <a href="#">
+            <a href="/companyprofile">
               <span class="icon"><i class="mdi mdi-account-circle"></i></span>
               <span class="menu-item-label">Company Profile</span>
             </a>

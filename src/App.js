@@ -10,6 +10,8 @@ import StudentTable from "./components/company/dashboard/table";
 import DriveForm from "./components/company/dashboard/CreateDriveForm";
 
 import Navbar from "./components/company/dashboard/navBar";
+import CompanyProf from "./components/company/dashboard/companyProfile";
+import CompanyUpdate from "./components/company/dashboard/comoanyUpdate";
 
 function App() {
   return (
@@ -25,6 +27,10 @@ function App() {
           <Route path="/compdashboard" element={<CompanyDash />}></Route>
           <Route path="/createDrive" element={<DriveForm />}></Route>
           <Route path="/studentTable" element={<StudentTable />}></Route>
+          <Route path="/companyprofile" element={<CompanyProf/>}></Route>
+          <Route path="/companyupdate" element={<CompanyUpdate />}></Route>
+
+
 
 
         </Routes>

@@ -1,18 +1,12 @@
 import React from "react";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
-import { useNavigate } from "react-router-dom";
-
-export default function CompanyProf() {
-    const navigate = useNavigate()
-    const handleEditClick = () => {
-        navigate("/companyupdate")
-      }
+export default function CompanyUpdate() {
   return (
     <>
       <Navbar />
       <SideNav />
-      <div class=" flex flex-wrap items-center  justify-center">
+      <div class=" flex flex-wrap items-center justify-center">
         <div class="container  bg-white rounded  shadow-lg  ">
           <div class="h-2/4 sm:h-64 overflow-hidden">
             <img
@@ -36,27 +30,29 @@ export default function CompanyProf() {
                 Tata Consulting & Services
               </h2>
               
-              <div class="grid md:grid-cols-2 mt-8 md:gap-5">
+              <div class="grid md:grid-cols-2  mt-8 md:gap-5">
                 <div>
                   Company Name:
                   <input
-                    type="text"
+                    type="name"
                     name=""
                     id=""
-                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-gray-100 bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
-                    placeholder="Tata Consulting & Services"
-                    readOnly
+                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
+                    placeholder=""
+                    required=""
+                    
                   />
                 </div>
                 <div>
                   Email ID:
                   <input
-                    type="text"
+                    type="name"
                     name=""
                     id=""
-                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-gray-100 bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
-                    placeholder="tcs2022@gmail.com"
-                    readOnly
+                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
+                    placeholder=""
+                    required=""
+                    
                   />
                 </div>
                 <div>
@@ -65,9 +61,9 @@ export default function CompanyProf() {
                     type="text"
                     name=""
                     id=""
-                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-gray-100 bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
-                    placeholder="At TCS, we are building on the belief that business can be a catalyst for change. Our purpose is to connect people to opportunities in the digital economy and that mission is central to the way we operate as a business. Through innovation, partnership, and collective knowledge, TCS believes we can lead positive change for all stakeholders."
-                    readOnly
+                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
+                    placeholder=""
+                    required=""
                   />
                 </div>
                 <div>
@@ -76,16 +72,16 @@ export default function CompanyProf() {
                     type="text"
                     name=""
                     id=""
-                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-gray-100 bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
+                    class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
                     placeholder="2001"
-                    readOnly
+                    
                   />
                 </div>
                 
               </div>
 
-              <div onClick={handleEditClick} class="justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 ... focus:ring-4  focus:ring-blue-300 font-medium rounded-lg dark:focus:ring-blue-800 px-4 py-2 cursor-pointer  w-1/6 mx-auto text-center mt-8  text-black hover:text-white dark:hover:text-white">
-                <button type="submit" >Edit Profile</button>
+              <div  class="justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 ... focus:ring-4  focus:ring-blue-300 font-medium rounded-lg dark:focus:ring-blue-800 px-4 py-2 cursor-pointer  w-1/6 mx-auto text-center mt-8  text-black hover:text-white dark:hover:text-white">
+                <button type="submit" >Save Changes</button>
               </div>
 
               <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mt-8">
@@ -150,13 +146,6 @@ export default function CompanyProf() {
         </div>
       </div>
 
-      {/* <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
-  body {
-    font-family: 'Poppins', sans-serif;
-   }
-</style> */}
-    </>
+      </>
   );
 }
