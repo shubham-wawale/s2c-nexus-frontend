@@ -45,12 +45,15 @@ export default function Login() {
     })
   }
   return (
-    <div className="flex flex-row h-screen overfow-hidden ">
+  <>
+    <div className="flex flex-row h-screen overflow-hidden ">
       <img
         src={login}
         alt="Company Login"
         className="w-3/6 md:block max-h-screen"
+        
       />
+      
       <div className="flex  flex-col items-center w-full p-10 overflow-auto">
         <h2 className="text-xl md:text-3xl text-center mt-4 font-body uppercase font-bold">
           Welcome Back
@@ -110,6 +113,7 @@ export default function Login() {
           </a>
         </div> */}
       </div>
-    </div>
+      </div>
+      </>
   );
 }

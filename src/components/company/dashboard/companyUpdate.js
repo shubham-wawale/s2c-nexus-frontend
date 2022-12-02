@@ -30,7 +30,7 @@ export default function CompanyUpdate() {
                 Tata Consulting & Services
               </h2>
               
-              <div class="grid md:grid-cols-2  mt-8 md:gap-5">
+              <div class="grid md:grid-cols-2 mt-8 md:gap-5">
                 <div>
                   Company Name:
                   <input
@@ -40,6 +40,7 @@ export default function CompanyUpdate() {
                     class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
                     placeholder=""
                     required=""
+                    style = {{borderBottomWidth : 1.0}}
                     
                   />
                 </div>
@@ -52,7 +53,8 @@ export default function CompanyUpdate() {
                     class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
                     placeholder=""
                     required=""
-                    
+                    style = {{borderBottomWidth : 1.0}}
+
                   />
                 </div>
                 <div>
@@ -64,6 +66,8 @@ export default function CompanyUpdate() {
                     class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
                     placeholder=""
                     required=""
+                    style = {{borderBottomWidth : 1.0}}
+
                   />
                 </div>
                 <div>
@@ -74,7 +78,8 @@ export default function CompanyUpdate() {
                     id=""
                     class=" py-2.5 px-2 w-1/2 ml-2 text-sm text-black bg-gray-50 border-0 border-b-1.5 border-gray-300 appearance-none dark:text-blue  focus:outline-none  peer"
                     placeholder="2001"
-                    
+                    style = {{borderBottomWidth : 1.0}}
+
                   />
                 </div>
                 

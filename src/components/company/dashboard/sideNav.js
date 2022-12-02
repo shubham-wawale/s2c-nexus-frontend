@@ -1,7 +1,6 @@
 import React from "react";
 export default function SideNav() {
     return (
-  
      <div id="main-div" >
         
         <aside class="aside bg-[#0f172a] is-placed-left is-expanded  mt-16">
@@ -28,12 +27,7 @@ export default function SideNav() {
               <span class="menu-item-label">Create Drive</span>
             </a>
           </li>
-          {/* <li class="--set-active-forms-html">
-            <a href="#">
-              <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
-              <span class="menu-item-label">Company Profile</span>
-            </a>
-          </li> */}
+          
           <li class="--set-active-profile-html">
             <a href="/companyprofile">
               <span class="icon"><i class="mdi mdi-account-circle"></i></span>
@@ -48,38 +42,9 @@ export default function SideNav() {
           </li>
           </ul>
 
-          {/* <li>
-            <a class="dropdown">
-              <span class="icon"><i class="mdi mdi-view-list"></i></span>
-              <span class="menu-item-label">Submenus</span>
-              <span class="icon"><i class="mdi mdi-plus"></i></span>
-            </a>
-            <ul>
-              <li>
-                <a href="#void">
-                  <span>Sub-item One</span>
-                </a>
-              </li>
-              <li>
-                <a href="#void">
-                  <span>Sub-item Two</span>
-                </a>
-              </li>
-            </ul>
-          </li> */}
-
-
-
-
-
         {/* <p class="menu-label">About</p> */}
         <ul class="menu-list">
-          {/* <li>
-            <a href="https://therichpost.com" onclick="alert('Coming soon'); return false" target="_blank" class="has-icon">
-              <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
-              <span class="menu-item-label">Premium Demo</span>
-            </a>
-          </li> */}
+          
           <li>
             <a href="/" class="has-icon">
               <span class="icon"><i class="mdi mdi-help-circle"></i></span>

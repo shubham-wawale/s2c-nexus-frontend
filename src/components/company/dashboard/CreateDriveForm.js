@@ -28,7 +28,8 @@ class DriveForm extends Component {
     super(props);
     this.state = {
       checked: false,
-      values: []
+      values: [],
+      
     };
   }
   onChangeCheckbox = e => {
@@ -47,6 +48,7 @@ class DriveForm extends Component {
     });
   };
 
+  
   render() {
     return (
       <>
@@ -57,7 +59,7 @@ class DriveForm extends Component {
           <div>
 
             <header class="card-header ">
-              <p class="card-header-title text-3xl font-semibold">
+              <p class="card-header-title text-3xl font-semibold mt-5">
                 <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
                 Create Drive
               </p>
@@ -67,7 +69,7 @@ class DriveForm extends Component {
             </header>
           </div>
 
-          <div class="relative z-0 ml-10 mb-6 mt-12 mr-10 group"  >
+          <div class="relative z-0 ml-10 mb-6 mt-7 mr-10 group"  >
             <input type="name" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="*" />
             <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Drive Name</label>
           </div>
@@ -108,9 +110,9 @@ class DriveForm extends Component {
             <div class="relative z-0 mb-6 ml-10 mr-10 group">
               <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
               <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Passing Year (Batch)</label>         
+                         
             </div>
             
-
             <div class="relative z-0 ml-10 mb-6 mr-10 group">
               <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
               <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Branches Preferred</label>
@@ -123,7 +125,7 @@ class DriveForm extends Component {
                 options={options}
                 value={this.state.values}
               />
-              <p>
+              <p className='mt-2'>
                 <input
                   onChange={this.onChangeCheckbox}
                   type="checkbox"
@@ -136,7 +138,7 @@ class DriveForm extends Component {
             </div>
           </div>
 
-          <button type="submit" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ... focus:ring-4 focus:outline-none ml-10 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:focus:ring-blue-800 mt-5">Create Drive</button>
+          <button type="submit" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ... focus:ring-4 focus:outline-none ml-10 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:focus:ring-blue-800 mb-4 mt-5">Create Drive</button>
         </form>
       </>
 
