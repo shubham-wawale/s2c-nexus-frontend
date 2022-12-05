@@ -2,7 +2,7 @@ import React from "react";
 export default function Navbar() {
   return (
     <div class="main">
-      <nav class="p-3 bg-[#0f172a] fixed w-full  z-50 top-0 left-0  dark:bg-gray-800 dark:border-gray-700 ">
+      <nav class="border-b  p-3 bg-[#0f172a] fixed w-full  z-50 top-0 left-0  dark:bg-gray-800 dark:border-gray-700 ">
         <div class="container w-full m-0  flex  justify-between items-center ">
           <div class="flex flex-column w-3/4 ">
             <img

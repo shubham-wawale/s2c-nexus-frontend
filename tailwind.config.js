@@ -8,6 +8,9 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        fontFamily: {
+            'open-sans': '"Open Sans"'
+        },
         stroke: (theme) => ({
             cyan: theme('colors.myCyan.100'),
             choco: theme('colors.mybrown.100'),
@@ -79,10 +82,14 @@ module.exports = {
                 'checkout-bg': "url('/images/donuts.jpg')"
             }),
 
+            height: {
+                '104': '28rem'
+            },
+
             fontFamily: {
                 header: ['Merienda One'],
                 body: ['ABeeZee'],
-                hero: ['Leckerli One']
+                hero: ['Leckerli One'],
             },
             strokeWidth: {
                 6: '6',
@@ -98,5 +105,7 @@ module.exports = {
             backgroundColor: ['disabled']
         }
     },
-    plugins: []
+    plugins: [
+        require('tailwind-scrollbar-hide')
+    ]
 };

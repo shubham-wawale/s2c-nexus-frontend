@@ -10,6 +10,8 @@ import StudentTable from "./components/company/dashboard/table";
 import DriveForm from "./components/company/dashboard/CreateDriveForm";
 import CompanyProf from "./components/company/dashboard/companyProfile";
 import CompanyUpdate from "./components/company/dashboard/companyUpdate";
+import StudentHome from "./components/student/StudentHome";
+import StudentLogin from "./components/student/Authentication/StudentLogin";
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
           <Route path="/studentTable" element={<StudentTable />}></Route>
           <Route path="/companyprofile" element={<CompanyProf/>}></Route>
           <Route path="/companyupdate" element={<CompanyUpdate />}></Route>
+          <Route path="/studentDashboard" element={<StudentHome />}></Route>
+          <Route path="/studentLogin" element={<StudentLogin />}></Route>
+
 
         </Routes>
       </Router>
