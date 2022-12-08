@@ -15,6 +15,11 @@ const identityReducer = (state = initialState, action) => {
                 ...state,
                 studentId: action.payload
             }
+        case "STUDENT_LOG_OUT":
+            return {
+                ...state,
+                studentId: ""
+            }
         default:
             return state
     }

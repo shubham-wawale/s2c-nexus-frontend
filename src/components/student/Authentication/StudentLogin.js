@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import login from "../../../images/login.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import studentLogin from "./../../../actions/index"
+import {studentLogin,studentLogout} from "./../../../actions/index"
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function StudentLogin() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  var studentId = ""
+  studentId = useSelector(state=> state.identity.studentId)
+  useEffect(()=> {
+    // localStorage.removeItem('state')
+    // dispatch(studentLogout())
+    if(studentId){
+      navigate("/studentDashboard")
+    }
+  },[])
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
@@ -18,7 +28,6 @@ export default function StudentLogin() {
 
   const handleLoginChange = (e) => {
     const { name, value } = e.target
-    console.log(name, value)
     setCredentials(prevValue => (
       {
         ...prevValue,
@@ -30,7 +39,6 @@ export default function StudentLogin() {
   const handleLoginSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    console.log(credentials)
     axios.get('http://localhost:8080/student/login', {
       params: credentials
     }).then(function (response) {
@@ -101,22 +109,6 @@ export default function StudentLogin() {
               </a>
             </div>
           </form>
-          {/* <hr className="w-full h-1 bg-black rounded-full my-6 block" />
-        <div>
-          <p className=" font-bold text-center text-gray-800 pb-4">
-            Or continue with
-          </p>
-          <a
-            // href="login"
-            className="flex items-center space-between py-2 px-4 m-2 bg-white text-black hover:bg-gray-400 transition-all duration-500 rounded shadow-2xl border-2 border-gray-600 text-base font-semibold  cursor-pointer"
-          >
-            <FcGoogle
-              style={{ display: "inline-block", marginRight: "8px" }}
-              size={21}
-            />
-            Google
-          </a>
-        </div> */}
         </div>
       </div>
     </>

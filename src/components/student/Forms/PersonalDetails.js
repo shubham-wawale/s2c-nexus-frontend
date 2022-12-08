@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 export default function PersonalDetails() {  
   const studentId = useSelector(state=> state.identity.studentId)
   useEffect( ()=> {
-    console.log(studentId)
      axios.get("http://localhost:8080/student/getDetails", {
       params: {
         studentId: studentId
@@ -31,7 +30,6 @@ export default function PersonalDetails() {
 
   const handleInputChange = (e)=> {
     const {name, value} = e.target
-    console.log(name,value)
     setPersonalData(prevValue => (
       {
         ...prevValue,
@@ -63,16 +61,6 @@ export default function PersonalDetails() {
     <>
     <div className='overflow-scroll scrollbar-hide h-104 mx-4 shadow-md border-b mb-5 rounded-md '>
       <form className='mx-5 mt-6 grid grid-cols-2 gap-4'>
-        {/* <div class="mb-3">
-          <label for="email" class="block mb-2 text-md font-bold text-[#1F2937]">Email Id</label>
-          <input value={email} type="email" id="email" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
-          p-2.5 w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="block mb-2 text-md font-bold text-[#1F2937]">Password</label>
-          <input type="password" id="password" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
-          p-2.5 w-full bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
-        </div> */}
         <div class="mb-3">
           <label for="name" class="block mb-2 text-md font-bold text-[#1F2937]">Full name</label>
           <input name='name' onChange={handleInputChange} value={personalData.name} type="text" id="name" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 

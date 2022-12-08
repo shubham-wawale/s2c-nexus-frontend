@@ -5,4 +5,13 @@ const studentLogin = (data)=> {
     }
 }
 
-export default studentLogin;
+const studentLogout = ()=> {
+    return {
+        type: "STUDENT_LOG_OUT"
+    }
+}
+
+export {
+    studentLogin,
+    studentLogout
+}

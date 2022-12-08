@@ -12,6 +12,7 @@ import CompanyProf from "./components/company/dashboard/companyProfile";
 import CompanyUpdate from "./components/company/dashboard/companyUpdate";
 import StudentHome from "./components/student/StudentHome";
 import StudentLogin from "./components/student/Authentication/StudentLogin";
+import StudentSignup from "./components/student/Authentication/StudentSignup";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
           <Route path="/companyupdate" element={<CompanyUpdate />}></Route>
           <Route path="/studentDashboard" element={<StudentHome />}></Route>
           <Route path="/studentLogin" element={<StudentLogin />}></Route>
-
+          <Route path="/studentSignup" element={<StudentSignup />}></Route>
 
         </Routes>
       </Router>
