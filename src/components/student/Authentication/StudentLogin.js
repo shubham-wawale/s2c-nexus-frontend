@@ -12,11 +12,11 @@ export default function StudentLogin() {
   var studentId = ""
   studentId = useSelector(state=> state.identity.studentId)
   useEffect(()=> {
-    // localStorage.removeItem('state')
-    // dispatch(studentLogout())
-    if(studentId){
-      navigate("/studentDashboard")
-    }
+    localStorage.removeItem('state')
+    dispatch(studentLogout())
+    // if(studentId){
+    //   navigate("/studentDashboard")
+    // }
   },[])
   const [credentials, setCredentials] = useState({
     email: "",
