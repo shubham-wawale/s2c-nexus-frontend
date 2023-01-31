@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {studentLogin,studentLogout} from "./../../../actions/index"
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import ProjectsImg from "./LoginImg";
 
 export default function StudentLogin() {
   const navigate = useNavigate()
@@ -59,12 +60,7 @@ export default function StudentLogin() {
   return (
     <>
       <div className="flex flex-row h-screen overflow-hidden ">
-        <img
-          src={login}
-          alt="Student Login"
-          className="w-3/6 md:block max-h-screen"
-
-        />
+        <ProjectsImg/>
 
 
         <div className="flex font-open-sans   flex-col items-center w-full p-10 overflow-auto">
