@@ -61,10 +61,11 @@ export default function StudentLogin() {
       <div className="flex flex-row h-screen overflow-hidden ">
         <img
           src={login}
-          alt="Company Login"
+          alt="Student Login"
           className="w-3/6 md:block max-h-screen"
 
         />
+
 
         <div className="flex font-open-sans   flex-col items-center w-full p-10 overflow-auto">
           <h2 className="text-xl md:text-3xl text-center mt-4 uppercase font-bold">
