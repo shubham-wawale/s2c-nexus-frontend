@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import login from "../../../images/login.png";
+import ProjectsImg from "./LoginImg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -54,12 +54,7 @@ export default function StudentSignup() {
     return (
         <>
             <div className="flex flex-row h-screen overflow-hidden ">
-                <img
-                    src={login}
-                    alt="Company Login"
-                    className="w-3/6 md:block max-h-screen"
-
-                />
+            <ProjectsImg/>
 
                 <div className="flex font-open-sans   flex-col items-center w-full p-10 overflow-auto">
                     <h3 className="text-3xl md:text-5xl text-center mt-2 font-bold">
