@@ -45,7 +45,6 @@ export default function StudentLogin() {
       if (response.data.success) {
         setIsLoading(false)
         dispatch(studentLogin(response.data.studentId))
-        alert(response.data.message)
         navigate("/studentDashboard")
       } else {
         alert(response.data.message)
