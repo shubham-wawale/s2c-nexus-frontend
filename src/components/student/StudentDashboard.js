@@ -1,7 +1,9 @@
 import React from 'react'
-import DriveCard from './DriveCard'
+import StuDriveCard from './StuDriveCard'
+import { useEffect } from 'react'
 
 export default function StudentDashboard() {
+  
   return (
     <>
       <div className='font-open-sans'>
@@ -15,7 +17,7 @@ export default function StudentDashboard() {
       </div>
 
 
-     <DriveCard/>
+     {/* <StuDriveCard/> */}
 
     </>
   )

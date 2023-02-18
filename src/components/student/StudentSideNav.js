@@ -44,10 +44,10 @@ export default function StudentSideNav(props) {
                 
               </a>
             </li>
-            <li id="offers" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="offers" ? "bg-[#374151]" : '' }`}>
+            <li id="dforum" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="offers" ? "bg-[#374151]" : '' }`}>
               <a class="rounded-md" href="/companyprofile">
                 <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-                <span class="menu-item-label">Offers</span>
+                <span class="menu-item-label">Discussion Forum</span>
               </a>
             </li>
             <li id="interview" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="interview" ? "bg-[#374151]" : '' }`}>
