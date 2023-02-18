@@ -4,7 +4,9 @@ import { useState } from "react";
 import DriveForm from "./CreateDriveForm";
 
 
-export default function DriveCard() {
+
+export default function DriveCard(props) {
+  
   const navigate = useNavigate()
   const handleDriveCardClick = () => {
     navigate("/studentTable") 
@@ -26,28 +28,28 @@ export default function DriveCard() {
             alt=""
           />
           <div class="p-6 flex flex-col justify-start w-full">
-            <h5 class="text-gray-900 text-xl font-medium">TCS NINJA</h5>
+            <h5 class="text-gray-900 text-xl font-medium">{props.data.driveName}</h5>
             <div class="flex justify-start w-1/2">
-              <h2 class= "text-sm mx-1">Associate Software Developer</h2>
+              <h2 class= "text-sm mx-1">{props.data.jobRole}</h2>
               <h2 class= "text-sm mx-1">|</h2>
-              <h2 class="text-sm mx-1">Mumbai</h2>
+              <h2 class="text-sm mx-1">{props.data.jobLocation}</h2>
             </div>
             <div class="flex justify-start  w-1/2">
               {/* <h2 class="inline-block bg-gray-200 rounded-full my-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-8">Python</h2> */}
-              <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">Python</h2>
-              <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">Java</h2>
+              {props.data.skillsRequired.map(skill=>(
+                <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">{skill}</h2>
+              ))}
             </div>
             <div class="flex justify-start  w-1/2 mb-1">
               <h2 class="text-md text-gray-600 mr-4">CTC Offered:</h2>
-              <h2 class="text-md text-gray-800">6 LPA</h2>
+              <h2 class="text-md text-gray-800">{props.data.ctcOffered}</h2>
             </div>
             <div class="flex justify-start  w-1/2">
               <h2 class="text-md text-gray-600 mr-4 ">Job Type:</h2>
-              <h2 class="text-md text-gray-800">Full Time</h2>
+              <h2 class="text-md text-gray-800">{props.data.jobType}</h2>
             </div>
             <div class="mt-4">
-
-            As an Associate software engineer, you'll be working in a team and on diverse projects. To be successful in this role, you must possess strong analytical, problem solving and technical skills. 
+              {props.data.jobDescription}
             </div>
             
             

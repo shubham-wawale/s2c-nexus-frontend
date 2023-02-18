@@ -2,14 +2,36 @@ import React from "react";
 import DriveCard from "./DriveCard";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
+import {useState, useEffect} from "react";
+import axios from "axios";
 
 
 export default function CompanyDash() {
+  const [driveData, setDriveData] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:8080/company/drives', {
+      params: {
+        companyId: "634f32a053a9c8b4df5f9bd8"
+      }
+    })
+      .then(function (response) {
+        if (response.data.success) {
+          setDriveData(response.data.drives)
+          console.log(response.data.drives)
+        } else {
+          console.log(response.data.message)
+        }
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }, []);
   return (
     <>
       <Navbar />
       <SideNav  />
-      <DriveCard />
+      {driveData ? driveData.map(drive=><DriveCard data={drive}/>) : <h1>No Drives</h1>}
       
 
       {/* <footer class="footer">
