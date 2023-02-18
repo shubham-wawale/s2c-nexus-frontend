@@ -24,7 +24,7 @@ export default function DriveCard(props) {
       <div class=" mt-10   max-w ">
         <div onClick={handleDriveCardClick} class="h-40 hover:scale-105 md:h-auto hover:cursor-grab duration-500 flex flex-col ml-40 mr-40  md:flex-row md:max-w-4xl rounded-lg bg-white shadow-lg group block max-w-xs mx-auto  r  hover:bg-[#edecec] ">
           <img
-            class=" w-full  md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+            class="mx-2 my-4 md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
             src={logo}
             alt=""
           />
@@ -41,7 +41,7 @@ export default function DriveCard(props) {
                 <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">{skill}</h2>
               ))}
             </div>
-            <div class="flex justify-between  w-3/4 mb-1">
+            <div class="flex justify-between w-4/5 mb-1">
             <div class="flex justify-start w-full mb-1">
               <h2 class="text-md text-gray-600 mr-4">CTC Offered:</h2>
               <h2 class="text-md text-gray-800">{props.data.ctcOffered}</h2>
@@ -66,7 +66,7 @@ export default function DriveCard(props) {
           </button> */}
               <button
                 type="button"
-                class=" ml-96 inline-block px-6 py-3 bg-[#0f172a] text-white font-medium text-xs uppercase rounded shadow-md hover:bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 ... hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                class=" ml-96 mt-4 inline-block px-6 py-3 bg-[#0f172a] text-white font-medium text-xs uppercase rounded shadow-md hover:bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 ... hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
               >
                 View Details
               </button>
