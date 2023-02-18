@@ -1,4 +1,5 @@
 import React from 'react'
+import DriveCard from './DriveCard'
 
 export default function StudentDashboard() {
   return (
@@ -12,6 +13,10 @@ export default function StudentDashboard() {
           </svg>
           <span>Eligible Drives</span></div>
       </div>
+
+
+     <DriveCard/>
+
     </>
   )
 }

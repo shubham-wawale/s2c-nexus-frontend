@@ -1,5 +1,6 @@
 import Login from "./components/company/Login";
 import Signup from "./components/company/Signup";
+import Link from "react-scroll/modules/components/Link";
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,7 +23,9 @@ function App() {
     
     <div className="App">
       
+      
       <Router>
+        
         <Routes>
 
           <Route path="/" element={<Login />}></Route>
@@ -35,9 +38,11 @@ function App() {
           <Route path="/studentDashboard" element={<StudentHome />}></Route>
           <Route path="/studentLogin" element={<StudentLogin />}></Route>
           <Route path="/studentSignup" element={<StudentSignup />}></Route>
+
          
 
         </Routes>
+       
       </Router>
       {/* <Navbar/> */}
     </div>

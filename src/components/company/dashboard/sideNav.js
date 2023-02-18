@@ -35,7 +35,7 @@ export default function SideNav() {
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <span class="icon"><i class="mdi mdi-lock"></i></span>
               <span class="menu-item-label">Log Out</span>
             </a>
@@ -51,12 +51,12 @@ export default function SideNav() {
               <span class="menu-item-label">About</span>
             </a>
           </li>
-          <li>
+          {/* <li>
             <a href="/" class="has-icon">
               <span class="icon"><i class="mdi mdi-github-circle"></i></span>
               <span class="menu-item-label">GitHub</span>
             </a>
-          </li>
+          </li> */}
         </ul>
       </div>
     </aside>

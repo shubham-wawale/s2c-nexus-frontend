@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../company/dashboard/navBar'
 import StudentSideNav from './StudentSideNav'
 import StudentDashboard from './StudentDashboard'
+import Resume from './Resume'
 import StudentProfile from './StudentProfile'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -28,6 +29,7 @@ export default function StudentHome() {
       <Navbar />
       <StudentSideNav changeTab={handleTabChange} />
       {activeTab === "dashboard" && <StudentDashboard />}
+      {activeTab === "resume" && <Resume />}
       {activeTab === "appliedDrive" && <StudentDashboard />}
       {activeTab === "profile" && <StudentProfile />}
       {activeTab === "offers" && <StudentDashboard />}

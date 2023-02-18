@@ -37,6 +37,13 @@ export default function StudentSideNav(props) {
                 <span class="menu-item-label">Profile</span>
               </a>
             </li>
+            <li id="resume" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="resume" ? "bg-[#374151]" : '' }`}>
+              <a class="rounded-md" href="/companyprofile">
+                <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+                <span class="menu-item-label" >Resume</span>
+                
+              </a>
+            </li>
             <li id="offers" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="offers" ? "bg-[#374151]" : '' }`}>
               <a class="rounded-md" href="/companyprofile">
                 <span class="icon"><i class="mdi mdi-account-circle"></i></span>
