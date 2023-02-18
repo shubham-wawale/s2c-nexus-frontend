@@ -62,6 +62,7 @@ class StudentTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      tableData: [],
       driveData: {},
       List: Users,
       MasterChecked: false,
@@ -81,15 +82,34 @@ class StudentTable extends React.Component {
         driveId: "63f0b983b46d279b6798b00f"
       }
     })
-      .then((response)=> {
+      .then((response) => {
         if (response.data.success) {
           this.setState({
             driveData: response.data.drive[0],
             skillsRequired: response.data.drive[0].skillsRequired.toString(),
             jobLocation: response.data.drive[0].jobLocation.toString(),
-            preferredBranches: response.data.drive[0].branchesPreferred .toString(),
+            preferredBranches: response.data.drive[0].branchesPreferred.toString(),
           })
           console.log(response.data.drive[0])
+        } else {
+          console.log(response.data.message)
+        }
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    axios.get('http://localhost:8080/company/appliedStudentsDrive', {
+      params: {
+        driveId: "63f0b983b46d279b6798b00f"
+      }
+    })
+      .then((response) => {
+        if (response.data.success) {
+          this.setState({
+            tableData: response.data.drive.appliedStudents ? response.data.drive.appliedStudents : [],
+          })
+          console.log(response.data.drive)
         } else {
           console.log(response.data.message)
         }
@@ -178,7 +198,7 @@ class StudentTable extends React.Component {
             <div class="w-full md:w-3/12 md:mx-2">
 
               <div class="bg-white p-3 border-t-4 border-green-400">
-                 <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{this.state.driveData.driveName}</h1> {/*Drive name to be displayed */}
+                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{this.state.driveData.driveName}</h1> {/*Drive name to be displayed */}
                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{this.state.driveData.jobDescription}</p>
                 <ul
                   class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -191,8 +211,8 @@ class StudentTable extends React.Component {
                 </ul>
               </div>
             </div>
-            
-            
+
+
             <div class="w-full md:w-9/12 mx-2">
 
               <div class="bg-white p-3 shadow-sm rounded-sm">
@@ -273,17 +293,17 @@ class StudentTable extends React.Component {
                   </div>
                 </div>
                 <button
-                className="bg-blue-200 text-black active:bg-blue-500 
+                  className="bg-blue-200 text-black active:bg-blue-500 
       font-bold px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-96 mt-10"
-                type="button"
-                onClick={this.showModal}
-              >
-                Update Drive
-              </button>
+                  type="button"
+                  onClick={this.showModal}
+                >
+                  Update Drive
+                </button>
               </div>
-              
+
             </div>
-            
+
           </div>
         </div>
 
@@ -363,7 +383,7 @@ class StudentTable extends React.Component {
                         <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
                         <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Required Skills</label>
                       </div>
-                      
+
                       <div class="relative z-0 mb-6 ml-10 mr-10 group">
                         <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
                         <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CTC Offered</label>
@@ -438,9 +458,9 @@ class StudentTable extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.List.map((user) => (
-                    <tr key={user.id} className={user.selected ? "selected" : ""}>
-                      <th scope="row">
+                  { this.state.tableData.length!=0 ?  this.state.tableData.map((user) => (
+                    <tr key={user.studentId} >
+                      {/* <th scope="row">
                         <input
                           type="checkbox"
                           checked={user.selected}
@@ -448,7 +468,7 @@ class StudentTable extends React.Component {
                           id="rowcheck{user.id}"
                           onChange={(e) => this.onItemCheck(e, user)}
                         />
-                      </th>
+                      </th> */}
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>{user.branch}</td>
@@ -468,7 +488,7 @@ class StudentTable extends React.Component {
                       </div>
 
                     </tr>
-                  ))}
+                  )) : null}
                 </tbody>
               </table>
               <button
