@@ -33,8 +33,9 @@ export default function DriveCard() {
               <h2 class="text-sm mx-1">Mumbai</h2>
             </div>
             <div class="flex justify-start  w-1/2">
-              <h2 class="border-2 border-grey rounded-md my-4 mr-2 px-2">Python</h2>
-              <h2 class="border-2 border-grey rounded-md my-4 mr-2 px-2">Java</h2>
+              {/* <h2 class="inline-block bg-gray-200 rounded-full my-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-8">Python</h2> */}
+              <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">Python</h2>
+              <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">Java</h2>
             </div>
             <div class="flex justify-start  w-1/2 mb-1">
               <h2 class="text-md text-gray-600 mr-4">CTC Offered:</h2>
