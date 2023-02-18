@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
+import axios from "axios";
 
 
 const Users = [
@@ -61,13 +62,42 @@ class StudentTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      driveData: {},
       List: Users,
       MasterChecked: false,
       SelectedList: [],
       show: false,
+      skillsRequired: "",
+      jobLocation: "",
+      preferredBranches: ""
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:8080/company/driveInfo', {
+      params: {
+        driveId: "63f0b983b46d279b6798b00f"
+      }
+    })
+      .then((response)=> {
+        if (response.data.success) {
+          this.setState({
+            driveData: response.data.drive[0],
+            skillsRequired: response.data.drive[0].skillsRequired.toString(),
+            jobLocation: response.data.drive[0].jobLocation.toString(),
+            preferredBranches: response.data.drive[0].branchesPreferred .toString(),
+          })
+          console.log(response.data.drive[0])
+        } else {
+          console.log(response.data.message)
+        }
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
 
   showModal = () => {
@@ -148,8 +178,8 @@ class StudentTable extends React.Component {
             <div class="w-full md:w-3/12 md:mx-2">
 
               <div class="bg-white p-3 border-t-4 border-green-400">
-                 <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">TCS Digital</h1> {/*Drive name to be displayed */}
-                <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">As a member of our Software Engineering Group, we look first and foremost for people who are passionate around solving business problems through innovation and engineering practices. You'll be required to apply your depth of knowledge and expertise to all aspects of the software development lifecycle, as well as partner continuously with your many stakeholders on a daily basis to stay focused on common goals.</p>
+                 <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{this.state.driveData.driveName}</h1> {/*Drive name to be displayed */}
+                <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{this.state.driveData.jobDescription}</p>
                 <ul
                   class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                   <li class="flex items-center py-3">
@@ -163,7 +193,7 @@ class StudentTable extends React.Component {
             </div>
             
             
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div class="w-full md:w-9/12 mx-2">
 
               <div class="bg-white p-3 shadow-sm rounded-sm">
                 <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -180,65 +210,65 @@ class StudentTable extends React.Component {
                   <div class="grid md:grid-cols-2 text-sm">
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">Job Role</div>
-                      <div class="px-4 py-2">Associate Software Engineer</div>
+                      <div class="px-4 py-2">{this.state.driveData.jobRole}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">Job Type </div>
-                      <div class="px-4 py-2">Fulltime</div>
+                      <div class="px-4 py-2">{this.state.driveData.jobType}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">10th Percentage/CGPA</div>
-                      <div class="px-4 py-2">60% and above</div>
+                      <div class="px-4 py-2">{this.state.driveData.tenthPercentage}%</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">12th Percentage/CGPA</div>
-                      <div class="px-4 py-2">60% and above</div>
+                      <div class="px-4 py-2">{this.state.driveData.twelfthPercentage}%</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">BE CGPA</div>
-                      <div class="px-4 py-2">7 and above</div>
+                      <div class="px-4 py-2">{this.state.driveData.cgpa}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">BE CGPA in Percentage</div>
-                      <div class="px-4 py-2">60% and above</div>
+                      <div class="px-4 py-2">{this.state.driveData.cgpaInPercentage}%</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">No. of Live KT</div>
-                      <div class="px-4 py-2">0</div>
+                      <div class="px-4 py-2">{this.state.driveData.numberOfDeadKT}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">No. of Dead KT</div>
-                      <div class="px-4 py-2">0</div>
+                      <div class="px-4 py-2">{this.state.driveData.numberOfDeadKT}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">No. of Academic Gaps</div>
-                      <div class="px-4 py-2">1</div>
+                      <div class="px-4 py-2">{this.state.driveData.numberOfAcademicGaps}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">No. of Drops during Engineering</div>
-                      <div class="px-4 py-2">0</div>
+                      <div class="px-4 py-2">{this.state.driveData.numberOfDegreeGaps}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">Required Skills</div>
-                      <div class="px-4 py-2">Python, Java</div>
+                      <div class="px-4 py-2">{this.state.skillsRequired}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">CTC Offered</div>
-                      <div class="px-4 py-2">7 LPA</div>
+                      <div class="px-4 py-2">{this.state.driveData.ctcOffered}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">Job Location</div>
-                      <div class="px-4 py-2">Mumbai, Banglore</div>
+                      <div class="px-4 py-2">{this.state.jobLocation}</div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">Passing Year</div>
                       <div class="px-4 py-2">
-                        <a class="text-blue-800" href="mailto:jane@example.com">2023</a>
+                        <a class="text-blue-800" href="mailto:jane@example.com">{this.state.driveData.batch}</a>
                       </div>
                     </div>
                     <div class="grid grid-cols-2">
                       <div class="px-4 py-2 font-semibold">Preferred Branches</div>
-                      <div class="px-4 py-2">Comps, IT</div>
+                      <div class="px-4 py-2">{this.state.preferredBranches}</div>
                     </div>
                   </div>
                 </div>
@@ -256,8 +286,6 @@ class StudentTable extends React.Component {
             
           </div>
         </div>
-
-
 
 
         {this.state.show ? (
