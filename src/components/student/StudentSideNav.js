@@ -45,7 +45,7 @@ export default function StudentSideNav(props) {
               </a>
             </li>
 
-            <li id="resume" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="resume" ? "bg-[#374151]" : '' }`}>
+            <li id="interview" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="interview" ? "bg-[#374151]" : '' }`}>
               <a class="rounded-md" href="">
                 <span class="icon"><i class="mdi mdi-account-circle"></i></span>
                 <span class="menu-item-label" >Interviews</span>
