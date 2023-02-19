@@ -1,6 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 
 export const StudentInterview = () => {
+    const navigate = useNavigate()
+    const interview=()=>{
+        navigate("https://s2c-nexus-jwao.onrender.com") 
+    }
+    
     return (
         <>
             <div>
@@ -20,11 +26,11 @@ export const StudentInterview = () => {
                 <div className='mx-5 mt-2 grid grid-cols-2 gap-4'>
     
           <div class="border cols-span-2 p-2 bg-[#C2D3E4]">
-          <div><b>Company:</b> </div>
+          <div><b>Company: Tata Consultancy Services</b> </div>
           
           
         </div>
-        <button class="bg-green-500 w-1/3 text-white font-bold py-2 px-1 border border-black-700 rounded">
+        <button onClick={interview} class="bg-green-500 w-1/3 text-white font-bold py-2 px-1 border border-black-700 rounded">
                     Join Interview
                 </button>
       </div>

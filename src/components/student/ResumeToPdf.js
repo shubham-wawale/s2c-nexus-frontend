@@ -33,7 +33,7 @@ function ResumePDF({ data }) {
             />
             <div class="absolute top-0 right-0 h-4 w-4 my-1  z-2"></div>
           </div> */}
-          <h1 class="mb-0 text-xl font-bold text-gray-750">Akansha Tripathi</h1>
+          <h1 class="mb-0 text-xl font-bold text-gray-750">Shubham Wawale</h1>
           <h2 class="m-0 ml-2 text-md font-semibold text-gray-700 leading-snugish">
             Full Stack Web Developer
           </h2>
@@ -45,7 +45,7 @@ function ResumePDF({ data }) {
               |
             </h2>
             <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-              akanshatripathi@gmail.com
+              wawaleshubham@gmail.com
             </h3>
             <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
               |
