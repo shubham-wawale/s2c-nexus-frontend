@@ -20,6 +20,9 @@ export default function ProjectDetails() {
           p-2.5 w-full bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
         </div>
     </div>
+    <div class="mb-3 cols-span-1">
+            <button className="mt-2 w-1/5 focus:outline-none bg-[#1F2937] px-1 py-1 rounded-md font-bold text-lg text-[#d1d5db] border">Add Project</button>
+          </div>
     </div>
     
   <button className="float-right mr-4 ml-auto focus:outline-none bg-[#1F2937] px-1 py-1 rounded-md font-bold text-lg text-[#d1d5db] w-28 border">Save</button>
