@@ -7,30 +7,30 @@ import logo from '../../images/logos.png'
 
 
 export default function StuDriveCard(props) {
-    useEffect(() => {
-        axios.get('http://localhost:8080/company/driveInfo', {
-          params: {
-            driveId: "63f0b983b46d279b6798b00f"
-          }
-        })
-          .then((response)=> {
-            if (response.data.success) {
-                setDriveData=response.data.drive[0]
-              console.log(response.data.drive[0])
-            } else {
-              console.log(response.data.message)
-            }
-            console.log(response)
-          })
-      },[])
+    // useEffect(() => {
+    //     axios.get('http://localhost:8080/company/driveInfo', {
+    //       params: {
+    //         driveId: props.driveData._id
+    //       }
+    //     })
+    //       .then((response)=> {
+    //         if (response.data.success) {
+    //             setDriveData=response.data.drive[0]
+    //           console.log(response.data.drive[0])
+    //         } else {
+    //           console.log(response.data.message)
+    //         }
+    //         console.log(response)
+    //       })
+    //   },[])
 
-      const [driveData,setDriveData]=useState({
+      // const [driveData,setDriveData]=useState({
 
-      })
+      // })
 
   const navigate = useNavigate()
   const handleDriveCardClick = () => {
-    navigate("/studentTable") 
+    navigate("/studentDriveInfo") 
   }
   
   return (
@@ -44,27 +44,27 @@ export default function StuDriveCard(props) {
         alt=""
       />
       <div class="p-6 flex flex-col justify-start w-full">
-        <h5 class="text-gray-900 text-xl font-medium">{driveData.driveName}</h5>
+        <h5 class="text-gray-900 text-xl font-medium">{props.driveData.driveName}</h5>
         <div class="flex justify-start w-full">
-          <h2 class= "text-sm mx-1">{driveData.jobRole}</h2>
+          <h2 class= "text-sm mx-1">{props.driveData.jobRole}</h2>
           <h2 class= "text-sm mx-1">|</h2>
-          <h2 class="text-sm mx-1">{driveData.jobLocation}</h2>
+          <h2 class="text-sm mx-1">{props.driveData.jobLocation}</h2>
         </div>
         <div class="flex justify-start  w-1/2">
           {/* <h2 class="inline-block bg-gray-200 rounded-full my-4 px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-8">Python</h2> */}
-          {driveData.skillsRequired.map(skill=>(
+          {props.driveData.skillsRequired.map(skill=>(
             <h2 class="border-2 bg-gray-200 border-grey rounded-md my-4 mr-2 px-2">{skill}</h2>
           ))}
         </div>
         <div class="flex justify-between w-4/5 mb-1">
         <div class="flex justify-start w-full mb-1">
           <h2 class="text-md text-gray-600 mr-4">CTC Offered:</h2>
-          <h2 class="text-md text-gray-800">{driveData.ctcOffered}</h2>
+          <h2 class="text-md text-gray-800">{props.driveData.ctcOffered}</h2>
         </div>
           <h2 class= "text-md mx-1">|</h2>
         <div class="flex justify-start  w-full ml-10">
           <h2 class="text-md text-gray-600 mr-4 ">Job Type:</h2>
-          <h2 class="text-md text-gray-800">{driveData.jobType}</h2>
+          <h2 class="text-md text-gray-800">{props.driveData.jobType}</h2>
         </div>
         </div>
         {/* <div class="mt-4">

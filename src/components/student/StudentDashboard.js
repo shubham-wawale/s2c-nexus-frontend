@@ -1,9 +1,53 @@
 import React from 'react'
 import StuDriveCard from './StuDriveCard'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function StudentDashboard() {
-  
+  const [driveData, setDriveData] = useState([])
+  const [studentData, setStudentData] = useState({})
+  const [eligibileDrives, setEligibleDrives] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:8080/student/drives')
+      .then(function (response) {
+        if (response.data.success) {
+          setDriveData(response.data.drives)
+          console.log(response.data.drives)
+        } else {
+          console.log(response.data.message)
+        }
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    axios.get('http://localhost:8080/student/getDetails',{
+      params: {
+        studentId: "638d14885c37719538d6c86d"
+      }
+    }).then(function (response) {
+        if (response.data.success) {
+          setDriveData(response.data.studentData)
+          console.log(response.data.studentData)
+        } else {
+          console.log(response.data.message)
+        }
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    var filteredDrives = driveData.filter(drive => (
+      studentData.academicDetails.tenth.marks >= drive.tenthPercentage &&
+      studentData.academicDetails.twelfth.marks >= drive.twelfthPercentage &&
+      studentData.academicDetails.degreeCgpa >= drive.cgpa &&
+      studentData.academicDetails.activeBacklogs <= drive.numberOfLiveKT &&
+      studentData.academicDetails.previousBacklogs <= drive.numberOfDeadKT &&
+      studentData.academicDetails.academicGap <= drive.numberOfAcademicGaps &&
+      studentData.academicDetails.degreeGap <= drive.numberOfDegreeGaps
+    ))
+    setEligibleDrives(filteredDrives)
+  }, []);
   return (
     <>
       <div className='font-open-sans'>
@@ -17,7 +61,9 @@ export default function StudentDashboard() {
       </div>
 
 
-     {/* <StuDriveCard/> */}
+     {eligibileDrives.map(drive=> (
+      <StuDriveCard drivedata={drive} studentData={studentData}  />
+     ))}
 
     </>
   )
