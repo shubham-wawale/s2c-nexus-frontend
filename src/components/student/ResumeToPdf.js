@@ -18,36 +18,59 @@ function ResumePDF({ data }) {
 
   return (
     <>
-    <div ref={ref} className="p-4">
-      <h1 className="text-4xl font-bold mb-4">Ashutosh</h1>
-      <p className="text-lg font-medium mb-2">
-        abc@gmail.com | 9888889888
-      </p>
-      <p className="text-lg font-medium mb-2">Anantyamn</p>
-      <h2 className="text-2xl font-bold mt-6 mb-2">Summary</h2>
-      <p className="text-lg">Good boy is me. honest and discipline is my forte how are you i am handpump.</p>
-      <h2 className="text-2xl font-bold mt-6 mb-2">Education</h2>
-      {/* {data.education.map((item, index) => ( */}
-        <div  className="mb-4">
-          <h3 className="text-xl font-bold">RI VIddya mandoir</h3>
-          <p className="text-lg">Btech</p>
-          <p className="text-lg">2021</p>
-        </div>
-      {/* ))} */}
-      <h2 className="text-2xl font-bold mt-6 mb-2">Experience</h2>
-      {/* {data.experience.map((item, index) => ( */}
-        <div className="mb-4">
-          <h3 className="text-xl font-bold">TCS</h3>
-          <p className="text-lg">HR</p>
-          <p className="text-lg">2nd Aug - 3rd jan</p>
-          <ul className="list-disc list-inside text-lg">
-            {/* {item.highlights.map((highlight, index) => (
-              <li key={index}>{highlight}</li>
-            ))} */}
+    <div ref={ref} className="bg-white mx-auto max-w-4xl p-8 rounded-lg shadow-lg">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">John Doe</h2>
+        <p className="text-gray-600">Front-end Developer</p>
+      </div>
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-gray-800 mb-2">Skills</h3>
+        <ul className="list-disc list-inside">
+          <li>ReactJS</li>
+          <li>HTML/CSS</li>
+          <li>JavaScript</li>
+          <li>Tailwind CSS</li>
+          <li>Git/Github</li>
+        </ul>
+      </div>
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-gray-800 mb-2">Experience</h3>
+        <div>
+          <p className="text-gray-600 mb-1">Front-end Developer - ABC Company (2019 - present)</p>
+          <ul className="list-disc list-inside">
+            <li>Developed and maintained web applications using ReactJS and Tailwind CSS</li>
+            <li>Collaborated with the team to ensure code quality and project timelines were met</li>
           </ul>
         </div>
-      {/* ))} */}
-      
+        <div className="mt-4">
+          <p className="text-gray-600 mb-1">Web Developer - XYZ Agency (2017 - 2019)</p>
+          <ul className="list-disc list-inside">
+            <li>Designed and developed websites using HTML/CSS and JavaScript</li>
+            <li>Managed website content and updates using CMS platforms</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">Education</h3>
+        <div>
+          <p className="text-gray-600 mb-1">Bachelor of Science in Computer Science - University of ABC (2013 - 2017)</p>
+          <ul className="list-disc list-inside">
+            <li>Specialized in software development and programming languages</li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-gray-600 mb-1">Bachelor of Science in Computer Science - University of ABC (2013 - 2017)</p>
+          <ul className="list-disc list-inside">
+            <li>Specialized in software development and programming languages</li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-gray-600 mb-1">Bachelor of Science in Computer Science - University of ABC (2013 - 2017)</p>
+          <ul className="list-disc list-inside">
+            <li>Specialized in software development and programming languages</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8" onClick={handleDownload}>
     Download PDF

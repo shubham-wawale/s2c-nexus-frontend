@@ -317,7 +317,7 @@ class AboutDrive extends React.Component {
               </div>
             </div>
 
-          <div/>
+          </div>
         ) : null}
         
         {/* </div> */}
