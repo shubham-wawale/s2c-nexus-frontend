@@ -14,6 +14,7 @@ import CompanyUpdate from "./components/company/dashboard/companyUpdate";
 import StudentHome from "./components/student/StudentHome";
 import StudentLogin from "./components/student/Authentication/StudentLogin";
 import StudentSignup from "./components/student/Authentication/StudentSignup";
+import StudentDriveInfo from "./components/student/StudentDriveInfo";
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/studentDashboard" element={<StudentHome />}></Route>
           <Route path="/studentLogin" element={<StudentLogin />}></Route>
           <Route path="/studentSignup" element={<StudentSignup />}></Route>
+          <Route path="/studentDriveInfo" element={<StudentDriveInfo />}></Route>
 
          
 
