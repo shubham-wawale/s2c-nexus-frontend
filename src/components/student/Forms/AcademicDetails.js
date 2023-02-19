@@ -31,6 +31,7 @@ export default function AcademicDetails() {
           certifications: data.academicDetails.certifications
        }))
        setCertifications(data.academicDetails.certifications)
+       setTechnicalSkills(data.academicDetails.technicalSkills.toString())
   }
    }).catch (error=> {
   console.log(error.response)
@@ -52,10 +53,12 @@ const [academicData, setAcademicData] = useState({
   academicGap: "",
   academicSkills:"",
   degreeGap: "",
-  certifications: []
+  certifications: [],
+  technicalSkills: []
 })
 
 const [semester, setSemester] = useState("");
+const [technicalSkills, setTechnicalSkills] = useState("");
 const [gpa, SetGpa] = useState("")
 const [marksheets, setMarksheets] = useState([]);
 const [certificationData, setCertificationData] = useState({})
@@ -75,6 +78,11 @@ const handleInputChange = (e) => {
 const handleRadioButtonChange = (e) => {
   const { name, value } = e.target
   setSeniorSecondary(name)
+}
+
+const handleSkillsChange = e => {
+  const {value } = e.target
+  setTechnicalSkills(value)
 }
 
 const handleFileChange = (e) => {
@@ -125,7 +133,8 @@ const handleAcademicDetailSubmit = (e) => {
     academicGap: academicData.academicGap,
     academicSkills: academicData.academicSkills,
     degreeGap: academicData.degreeGap,
-    certifications: certifications
+    certifications: certifications,
+    technicalSkills: technicalSkills.split(",")
   }
   axios.post('http://localhost:8080/student/updateDetails', {
     studentId: "638d14885c37719538d6c86d",
@@ -333,8 +342,8 @@ return (
         <span>Technical Skills:</span></div>
       <div className='mx-5 mt-2 grid grid-cols-2 gap-4'>
         <div class="mb-3">
-          <label for="tenthPassingYear" class="block  text-sm font-bold text-[#1F2937]">Skills</label>
-          <input name='tenthPassingYear' onChange={handleInputChange} type="text" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
+          <label for="technicalSkills" class="block  text-sm font-bold text-[#1F2937]">Skills</label>
+          <input value={technicalSkills}  name='technicalSkills' onChange={handleSkillsChange} type="text" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
           p-1.5  w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
         </div>
         </div>

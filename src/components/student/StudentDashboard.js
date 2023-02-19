@@ -16,7 +16,6 @@ export default function StudentDashboard() {
         } else {
           console.log(response.data.message)
         }
-        console.log(response)
       })
       .catch(function (error) {
         console.log(error);
@@ -27,26 +26,25 @@ export default function StudentDashboard() {
       }
     }).then(function (response) {
         if (response.data.success) {
-          setDriveData(response.data.studentData)
-          console.log(response.data.studentData)
+          setStudentData(response.data.studentData)
         } else {
           console.log(response.data.message)
         }
-        console.log(response)
       })
       .catch(function (error) {
         console.log(error);
       })
-    var filteredDrives = driveData.filter(drive => (
-      studentData.academicDetails.tenth.marks >= drive.tenthPercentage &&
-      studentData.academicDetails.twelfth.marks >= drive.twelfthPercentage &&
-      studentData.academicDetails.degreeCgpa >= drive.cgpa &&
-      studentData.academicDetails.activeBacklogs <= drive.numberOfLiveKT &&
-      studentData.academicDetails.previousBacklogs <= drive.numberOfDeadKT &&
-      studentData.academicDetails.academicGap <= drive.numberOfAcademicGaps &&
-      studentData.academicDetails.degreeGap <= drive.numberOfDegreeGaps
-    ))
-    setEligibleDrives(filteredDrives)
+    // var filteredDrives = driveData.filter(drive => (
+    //   studentData.academicDetails.tenth.marks >= parseInt(drive.tenthPercentage) &&
+    //   studentData.academicDetails.twelfth.marks >= parseInt(drive.twelfthPercentage) &&
+    //   studentData.academicDetails.degreeCgpa >= parseInt(drive.cgpa) &&
+    //   studentData.academicDetails.activeBacklogs <= parseInt(drive.numberOfLiveKT) &&
+    //   studentData.academicDetails.previousBacklogs <= parseInt(drive.numberOfDeadKT) &&
+    //   studentData.academicDetails.academicGap <= parseInt(drive.numberOfAcademicGaps) &&
+    //   studentData.academicDetails.degreeGap <= parseInt(drive.numberOfDegreeGaps)
+    // ))
+    // console.log(filteredDrives)
+    // setEligibleDrives(filteredDrives)
   }, []);
   return (
     <>
@@ -61,9 +59,9 @@ export default function StudentDashboard() {
       </div>
 
 
-     {eligibileDrives.map(drive=> (
-      <StuDriveCard drivedata={drive} studentData={studentData}  />
-     ))}
+     {driveData && driveData.length!==0 ? driveData.map(drive=> (
+      <StuDriveCard driveData={drive} studentData={studentData}  />
+     )) : null}
 
     </>
   )
