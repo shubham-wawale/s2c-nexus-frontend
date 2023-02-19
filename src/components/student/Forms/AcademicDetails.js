@@ -313,6 +313,16 @@ return (
           <button onClick={handleAddCertification} className="mt-4 w-full focus:outline-none bg-[#1F2937] px-1 py-1 rounded-md font-bold text-lg text-[#d1d5db] border">Add Certification</button>
         </div>
       </div>
+      <div className="left-0 my-2 uppercase focus:outline-none border-none 
+            bg-[#C2D3E4] border font-bold text-[#1F2937] text-xs  py-1 px-2 ">
+        <span>Technical Skills:</span></div>
+      <div className='mx-5 mt-2 grid grid-cols-2 gap-4'>
+        <div class="mb-3">
+          <label for="tenthPassingYear" class="block  text-sm font-bold text-[#1F2937]">Skills</label>
+          <input name='tenthPassingYear' onChange={handleInputChange} type="text" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
+          p-1.5  w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
+        </div>
+        </div>
     </div>
     <button onClick={handleAcademicDetailSubmit} className="float-right mr-4 ml-auto focus:outline-none bg-[#1F2937] px-1 py-1 rounded-md font-bold text-lg text-[#d1d5db] w-28 border">Save</button>
   </>
