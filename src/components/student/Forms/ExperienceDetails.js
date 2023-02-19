@@ -48,7 +48,21 @@ export default function ExperienceDetails() {
 
   const handleExperienceDetailsUpdate = e => {
     e.preventDefault()
-
+    axios.post('http://localhost:8080/student/updateDetails', {
+      studentId: "638d14885c37719538d6c86d",
+      key: "experienceDetails",
+      newData: experienceData
+    })
+    .then(function (response) {
+      if(response.data.success) {
+        alert(response.data.message)
+      } else {
+        alert(response.data.message)
+      }
+    })
+    .catch(function (error) {
+      alert("BACKEND SERVICE UNAVAILABLE");
+    })
   }
 
   return (
@@ -60,7 +74,10 @@ export default function ExperienceDetails() {
       <div className='mx-5 mt-2 grid grid-cols-2 gap-4'>
         {experienceData.map(experience=> (
           <div class="border cols-span-2 p-2 bg-[#C2D3E4]">
-          <b>Position: {experience.position}</b>
+          <div><b>Company:</b> {experience.organisation} - {experience.location}</div>
+          <div><b>Position:</b> {experience.position} ({experience.jobType})</div>
+          <div><b>Period:</b> {experience.startDate} - {experience.endDate} ({experience.duration} months)</div>
+          <div><b>Description:</b> {experience.workDescription}</div>
         </div>
         ))}
       </div>
