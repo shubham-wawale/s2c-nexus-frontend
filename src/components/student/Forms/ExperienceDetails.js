@@ -58,6 +58,9 @@ export default function ExperienceDetails() {
           </div>
           
         </div>
+        <div class="mb-3 cols-span-1">
+            <button className="mt-4 w-1/5 focus:outline-none bg-[#1F2937] px-1 py-1 rounded-md font-bold text-lg text-[#d1d5db] border">Add Experience</button>
+          </div>
     </div>
     
     
