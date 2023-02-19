@@ -8,15 +8,15 @@ export default function PersonalDetails() {
   useEffect( ()=> {
      axios.get("http://localhost:8080/student/getDetails", {
       params: {
-        studentId: studentId
+        studentId: "638d14885c37719538d6c86d"
       }
     }).then(response=> {
-      data = response.data.data;
+      var data = response.data.studentData;
       if(data.personalDetails) {
         setPersonalData(data.personalDetails)
       }
     }).catch(error=>{
-      console.log(error.response)
+      console.log(error)
     })
   }, [])
   
@@ -41,7 +41,7 @@ export default function PersonalDetails() {
   const handlePersonalDetailsUpdate = (e)=> {
     e.preventDefault()
     axios.post('http://localhost:8080/student/updateDetails', {
-      studentId: studentId,
+      studentId: "638d14885c37719538d6c86d",
       key: "personalDetails",
       newData: personalData
     })
