@@ -25,14 +25,14 @@ function ResumePDF({ data }) {
         class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-700 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-2xl print:bg-white"
       >
         <div class="block w-full">
-          <div class="relative w-16 h-16">
+          {/* <div class="relative w-16 h-16">
             <img
               class="rounded-full border border-gray-100 shadow-sm"
               src="https://randomuser.me/api/portraits/women/81.jpg"
               alt="user image"
             />
             <div class="absolute top-0 right-0 h-4 w-4 my-1  z-2"></div>
-          </div>
+          </div> */}
           <h1 class="mb-0 text-xl font-bold text-gray-750">Akansha Tripathi</h1>
           <h2 class="m-0 ml-2 text-md font-semibold text-gray-700 leading-snugish">
             Full Stack Web Developer
