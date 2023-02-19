@@ -5,7 +5,7 @@ import StudentDashboard from './StudentDashboard'
 import StudentProfile from './StudentProfile'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import DiscussionForum from './DiscussionForum'
+import DiscussionForum from './DiscussionForum/DiscussionForum'
 import ResumePDF from './ResumeToPdf'
 
 export default function StudentHome() {
