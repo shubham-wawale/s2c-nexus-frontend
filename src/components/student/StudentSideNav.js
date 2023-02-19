@@ -12,7 +12,7 @@ export default function StudentSideNav(props) {
 
   return (
     <div className="font-open-sans" id="main-div" >
-      <aside class="aside bg-[#1F2937] is-placed-left is-expanded  mt-16">
+      <aside class="aside bg-[#0f172a] is-placed-left is-expanded  mt-16">
         <div class="text-lg menu is-menu-main">
           <ul class="mt-8 menu-list">
             <li id="dashboard" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="dashboard" ? "bg-[#374151]" : '' }`}>
@@ -50,12 +50,12 @@ export default function StudentSideNav(props) {
                 <span class="menu-item-label">Discussion Forum</span>
               </a>
             </li>
-            <li id="interview" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="interview" ? "bg-[#374151]" : '' }`}>
+            {/* <li id="interview" onClick={handleSideNavTabs}  className={`rounded-md m-3 ${active==="interview" ? "bg-[#374151]" : '' }`}>
               <a class="rounded-md" href="/companyprofile">
                 <span class="icon"><i class="mdi mdi-account-circle"></i></span>
                 <span class="menu-item-label">Interviews</span>
               </a>
-            </li>
+            </li> */}
             <li>
               <a class="rounded-md m-2" href="#">
                 <span class="icon"><i class="mdi mdi-lock"></i></span>
@@ -67,7 +67,7 @@ export default function StudentSideNav(props) {
           {/* <p class="menu-label">About</p> */}
           <ul class="menu-list">
 
-            <li>
+            {/* <li>
               <a href="/" class="has-icon rounded-md m-2">
                 <span class="icon"><i class="mdi mdi-help-circle"></i></span>
                 <span class="menu-item-label">About</span>
@@ -78,7 +78,7 @@ export default function StudentSideNav(props) {
                 <span class="icon"><i class="mdi mdi-github-circle"></i></span>
                 <span class="menu-item-label">GitHub</span>
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </aside>

@@ -4,13 +4,13 @@ export default function SideNav() {
      <div id="main-div" >
         
         <aside class="aside bg-[#0f172a] is-placed-left is-expanded  mt-16">
-        <div class="aside-tools">
+        {/* <div class="aside-tools">
         <div>
           Admin <b class="font-black">TCS</b>
         </div>
-      </div>
-      <div class="menu is-menu-main">
-        <p class="menu-label">General</p>
+      </div> */}
+      <div class="menu text-lg is-menu-main">
+        <p class="menu-label ">General</p>
         <ul class="menu-list">
           <li class="active">
             <a href="/compdashboard">

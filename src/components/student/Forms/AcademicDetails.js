@@ -22,6 +22,8 @@ export default function AcademicDetails() {
           degreeCgpa: data.academicDetails.degreeCgpa,
           degreeCgpaInPercentage: data.academicDetails.degreeCgpaInPercentage,
           degreePassingYear: data.academicDetails.degreePassingYear,
+          // skills
+          academicSkills:data.academicDetails.academicSkills, 
           activeBacklogs: data.academicDetails.activeBacklogs,
           previousBacklogs: data.academicDetails.previousBacklogs,
           academicGap: data.academicDetails.academicGap,
@@ -49,6 +51,7 @@ const [academicData, setAcademicData] = useState({
   activeBacklogs: "",
   previousBacklogs: "",
   academicGap: "",
+  academicSkills:"",
   degreeGap: "",
   certifications: [],
   technicalSkills: []
@@ -128,6 +131,7 @@ const handleAcademicDetailSubmit = (e) => {
     activeBacklogs: academicData.activeBacklogs,
     previousBacklogs: academicData.previousBacklogs,
     academicGap: academicData.academicGap,
+    academicSkills: academicData.academicSkills,
     degreeGap: academicData.degreeGap,
     certifications: certifications,
     technicalSkills: technicalSkills.split(",")
@@ -293,6 +297,17 @@ return (
           p-1.5  w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
         </div>
       </div>
+      <div className="left-0 my-2 uppercase focus:outline-none border-none 
+            bg-[#C2D3E4] border font-bold text-[#1F2937] text-xs  py-1 px-2 ">
+        <span>Technical Skills:</span>
+      </div>
+      <div className='mx-5 mt-2 grid grid-cols-3 gap-4'>
+        <div class="mb-3 cols-span-1">
+          <label for="academicSkills" class="block text-sm font-bold text-[#1F2937]">Languages and Frameworks</label>
+          <input value={academicData.academicSkills} name='degreePassingYear' onChange={handleInputChange} type="text" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
+          p-1.5  w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
+        </div>
+        </div>
       <div className="left-0 my-2 uppercase focus:outline-none border-none 
             bg-[#C2D3E4] border font-bold text-[#1F2937] text-xs  py-1 px-2 ">
         <span>Certifications/Achievements:</span>
