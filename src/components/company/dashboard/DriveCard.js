@@ -10,7 +10,7 @@ export default function DriveCard(props) {
   
   const navigate = useNavigate()
   const handleDriveCardClick = () => {
-    navigate("/studentTable") 
+    navigate("/companyDrive") 
   }
   
   const [showModal, setShowModal] = useState(false);

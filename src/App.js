@@ -32,7 +32,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/compdashboard" element={<CompanyDash />}></Route>
           <Route path="/createDrive" element={<DriveForm />}></Route>
-          <Route path="/studentTable" element={<StudentTable />}></Route>
+          <Route path="/companyDrive" element={<StudentTable />}></Route>
           <Route path="/companyprofile" element={<CompanyProf/>}></Route>
           <Route path="/companyupdate" element={<CompanyUpdate />}></Route>
           <Route path="/studentDashboard" element={<StudentHome />}></Route>
