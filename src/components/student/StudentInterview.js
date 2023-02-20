@@ -30,9 +30,12 @@ export const StudentInterview = () => {
           
           
         </div>
-        <button onClick={interview} class="bg-green-500 w-1/3 text-white font-bold py-2 px-1 border border-black-700 rounded">
-                    Join Interview
-                </button>
+        <a href="https://s2c-nexus-jwao.onrender.com" target="_blank">
+        
+        <button class="bg-green-500 w-1/3 text-white font-bold py-2 px-1 border border-black-700 rounded">
+        Join Interview
+        </button>
+        </a>
       </div>
 
             </div>

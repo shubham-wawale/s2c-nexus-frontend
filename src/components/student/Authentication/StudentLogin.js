@@ -98,7 +98,7 @@ export default function StudentLogin() {
                 Forgot password?
               </a>
               <a
-                href="/signup"
+                href="/studentSignup"
                 className=" text-gray-700 hover:text-black text-sm md:text-base"
               >
                 Create new account
