@@ -24,7 +24,7 @@ export default function DriveCard(props) {
       <div class=" mt-10   max-w ">
         <div onClick={handleDriveCardClick} class="h-40 hover:scale-105 md:h-auto hover:cursor-grab duration-500 flex flex-col ml-40 mr-40  md:flex-row md:max-w-4xl rounded-lg bg-white shadow-lg group block max-w-xs mx-auto  r  hover:bg-[#edecec] ">
           <img
-            class="mx-2 my-4 md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+            class="mx-2 my-4 md:w-48 rounded-t-lg md:rounded-none md:rounded-lg"
             src={logo}
             alt=""
           />
