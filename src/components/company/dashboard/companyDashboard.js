@@ -2,37 +2,43 @@ import React from "react";
 import DriveCard from "./DriveCard";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CompanyDash() {
   const [driveData, setDriveData] = useState([])
+  const navigate = useNavigate()
   useEffect(() => {
-    axios.get('http://localhost:8080/company/drives', {
-      params: {
-        companyId: "634f32a053a9c8b4df5f9bd8"
-      }
-    })
-      .then(function (response) {
-        if (response.data.success) {
-          setDriveData(response.data.drives)
-          console.log(response.data.drives)
-        } else {
-          console.log(response.data.message)
+    var companyId = localStorage.getItem("activeCompanyId")
+    if (companyId) {
+      axios.get('http://localhost:8080/company/drives', {
+        params: {
+          companyId: companyId
         }
-        console.log(response)
       })
-      .catch(function (error) {
-        console.log(error);
-      })
-  }, []);
+        .then(function (response) {
+          if (response.data.success) {
+            setDriveData(response.data.drives)
+          } else {
+            console.log(response.data.message)
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    } else {
+      navigate("/")
+    }
+  }, [])
+
   return (
     <>
       <Navbar />
-      <SideNav  />
-      {driveData ? driveData.map(drive=><DriveCard data={drive}/>) : <h1>No Drives</h1>}
-      
+      <SideNav />
+      {driveData ? driveData.map(drive => <DriveCard data={drive} />) : <h1>No Drives</h1>}
+
 
       {/* <footer class="footer">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">

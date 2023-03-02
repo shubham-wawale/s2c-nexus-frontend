@@ -7,17 +7,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 export default function Signup() {
   const navigate = useNavigate()
-  const [credentials, setCredentials] = useState({
+  const [companyInfo, setCompanyInfo] = useState({
     email: "",
-    password: ""
+    password: "",
+    name:  "",
+    type: "",
+    yearOfEstablishment: "",
+    vision: ""
   })
-  const [companyUserId, setCompanyUserid] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
 
   const handleSignupChange = (e) => {
     const { name, value } = e.target
     console.log(name, value)
-    setCredentials(prevValue => (
+    setCompanyInfo(prevValue => (
       {
         ...prevValue,
         [name]: value
@@ -27,15 +29,12 @@ export default function Signup() {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault()
-    console.log(credentials)
-    axios.post('http://localhost:8080/company/signup', credentials)
+    axios.post('http://localhost:8080/company/signup', companyInfo)
       .then(function (response) {
         if (response.data.success) {
-          setCompanyUserid(response.data.companyId)
           console.log(response.data.message)
           navigate("/")
         } else {
-          setErrorMessage(response.data.message)
           console.log(response.data.message)
         }
       })
@@ -441,7 +440,7 @@ export default function Signup() {
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                 Company Name
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="Enter Your Company's Name" />
+              <input name="name" onChange={handleSignupChange} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" placeholder="Enter Your Company's Name" />
               {/* <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
             </div>
             {/* <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -465,7 +464,7 @@ export default function Signup() {
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                 Email ID
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="abc@gmail.com" />
+              <input name="email" onChange={handleSignupChange} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password"  placeholder="abc@gmail.com" />
 
             </div>
 
@@ -473,7 +472,7 @@ export default function Signup() {
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                 Password
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" />
+              <input name="password" onChange={handleSignupChange} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password"  placeholder="******************" />
               {/* <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
             </div>
           </div>
@@ -483,12 +482,12 @@ export default function Signup() {
                 Type of Company
               </label>
               <div class="relative">
-                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                  <option>Private Company</option>
-                  <option>Personal Liability Company</option>
-                  <option>Public Company</option>
-                  <option>Non-profit Company</option>
-                  <option>State-Owned Company</option>
+                <select name="type" onChange={handleSignupChange} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                  <option>Cloud Service Provider</option>
+                  <option>Database Management System</option>
+                  <option>Information Technology Services</option>
+                  <option>Computer Software</option>
+                  <option>Product Company</option>
 
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -500,13 +499,13 @@ export default function Signup() {
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
                 Year of Establishment
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="2001" />
+              <input name="yearOfEstablishment" onChange={handleSignupChange} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="2001" />
             </div>
             <div class="w-full px-3">
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-4 mb-3" for="grid-password">
                 Company Vision
               </label>
-              <textarea id="message" rows="4" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Write your company's goal..."></textarea>
+              <textarea name="vision" onChange={handleSignupChange} id="message" rows="4" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Write your company's goal..."></textarea>
               {/* <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
             </div>
 

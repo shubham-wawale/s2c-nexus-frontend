@@ -7,12 +7,8 @@ import { useSelector } from "react-redux";
 
 export default function StudentSignup() {
     const navigate = useNavigate()
-    var studentId = ""
-    studentId = useSelector(state => state.identity.studentId)
     useEffect(() => {
-        // localStorage.removeItem('state')
-        // dispatch(studentLogout())
-        if (studentId) {
+        if (localStorage.getItem("activeStudentId")) {
             navigate("/studentDashboard")
         }
     }, [])
@@ -20,13 +16,10 @@ export default function StudentSignup() {
         email: "",
         password: ""
     })
-    // const [studentId, setStudentId] = useState("")
-    // const [errorMessage, setErrorMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     const handleSignupChange = (e) => {
         const { name, value } = e.target
-        console.log(name, value)
         setCredentials(prevValue => (
             {
                 ...prevValue,

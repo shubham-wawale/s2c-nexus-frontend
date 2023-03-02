@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function StudentSideNav(props) {
 
   const [active, setActive] = useState("dashboard")
+  const navigate = useNavigate()
 
   const handleSideNavTabs = (e)=> {
     e.preventDefault()
     setActive(e.currentTarget.id)
     var data = e.currentTarget.id
     props.changeTab(data)
+  }
+
+  const handleLogout = (e)=> {
+    e.preventDefault()
+    localStorage.removeItem('activeStudentId')
+    navigate("/studentLogin")
   }
 
   return (
@@ -65,7 +73,7 @@ export default function StudentSideNav(props) {
                 <span class="menu-item-label">Interviews</span>
               </a>
             </li> */}
-            <li>
+            <li onClick={handleLogout}>
               <a class="rounded-md m-2" href="#">
                 <span class="icon"><i class="mdi mdi-lock"></i></span>
                 <span class="menu-item-label">Log Out</span>

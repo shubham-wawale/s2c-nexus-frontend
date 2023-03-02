@@ -8,12 +8,17 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate()
+  
+  useEffect(() => {
+    if(localStorage.getItem("activeCompanyId")) {
+      navigate("/compDashboard")
+    }
+  }, [])
+  
   const [credentials, setCredentials] = useState({
     email:"",
     password:""
   })
-  const [companyUserId, setCompanyUserid] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
 
   const handleLoginChange = (e) => {
     const {name, value} = e.target
@@ -32,12 +37,10 @@ export default function Login() {
     axios.post('http://localhost:8080/company/login', credentials)
     .then(function (response) {
       if(response.data.success) {
-        setCompanyUserid(response.data.companyId) 
-        console.log(response.data.message)
+        localStorage.setItem("activeCompanyId", response.data.companyId)
         navigate("/compdashboard")
       } else {
-        setErrorMessage(response.data.message)
-        console.log(response.data.message)
+        alert(response.data.message)
       }
     })
     .catch(function (error) {

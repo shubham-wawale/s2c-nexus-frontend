@@ -1,5 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 export default function SideNav() {
+  const navigate = useNavigate()
+  const handleLogout = (e) => {
+    e.preventDefault()
+    localStorage.removeItem("activeCompanyId")
+    navigate("/")
+  }
     return (
      <div id="main-div" >
         
@@ -34,7 +41,7 @@ export default function SideNav() {
               <span class="menu-item-label">Company Profile</span>
             </a>
           </li>
-          <li>
+          <li onClick={handleLogout}>
             <a href="/">
               <span class="icon"><i class="mdi mdi-lock"></i></span>
               <span class="menu-item-label">Log Out</span>
@@ -46,7 +53,7 @@ export default function SideNav() {
         <ul class="menu-list">
           
           <li>
-            <a href="/" class="has-icon">
+            <a class="has-icon">
               <span class="icon"><i class="mdi mdi-help-circle"></i></span>
               <span class="menu-item-label">About</span>
             </a>

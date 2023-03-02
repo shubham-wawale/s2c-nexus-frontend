@@ -9,22 +9,16 @@ import ProjectsImg from "./LoginImg";
 
 export default function StudentLogin() {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  var studentId = ""
-  studentId = useSelector(state=> state.identity.studentId)
   useEffect(()=> {
-    localStorage.removeItem('state')
-    dispatch(studentLogout())
-    // if(studentId){
-    //   navigate("/studentDashboard")
-    // }
+    // localStorage.removeItem("activeStudentId")
+    if(localStorage.getItem("activeStudentId")){
+      navigate("/studentDashboard")
+    }
   },[])
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
   })
-  // const [studentId, setStudentId] = useState("")
-  // const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const handleLoginChange = (e) => {
@@ -45,7 +39,7 @@ export default function StudentLogin() {
     }).then(function (response) {
       if (response.data.success) {
         setIsLoading(false)
-        dispatch(studentLogin(response.data.studentId))
+        localStorage.setItem("activeStudentId",response.data.studentId)
         navigate("/studentDashboard")
       } else {
         alert(response.data.message)

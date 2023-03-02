@@ -11,10 +11,8 @@ import { StudentInterview } from './StudentInterview'
 
 export default function StudentHome() {
   const navigate = useNavigate()
-  var studentId = ""
-  studentId = useSelector(state=> state.identity.studentId)
   useEffect(()=> {
-    if(!studentId){
+    if(!localStorage.getItem("activeStudentId")){
       alert("PLEASE LOGIN")
       navigate("/studentLogin")
     }
