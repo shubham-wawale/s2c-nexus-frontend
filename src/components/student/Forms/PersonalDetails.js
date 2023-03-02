@@ -67,7 +67,7 @@ export default function PersonalDetails() {
           p-2.5 w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
         </div>
         <div class="mb-3">
-          <label for="date" class="block mb-2 text-md font-bold text-[#1F2937]">Email-ID</label>
+          <label for="date" class="block mb-2 text-md font-bold text-[#1F2937]">Date of Birth</label>
           <input name='dateOfBirth' onChange={handleInputChange} value={personalData.dateOfBirth} datepicker type="date" id="dateOfBirth" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
           p-2.5 w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
         </div>

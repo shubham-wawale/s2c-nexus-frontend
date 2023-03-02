@@ -22,7 +22,7 @@ function ResumePDF({ data }) {
 
       <div
         ref={ref}
-        class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-700 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-2xl print:bg-white"
+        class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-500 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-md print:bg-white"
       >
         <div class="block w-full">
           {/* <div class="relative w-16 h-16">
@@ -33,7 +33,7 @@ function ResumePDF({ data }) {
             />
             <div class="absolute top-0 right-0 h-4 w-4 my-1  z-2"></div>
           </div> */}
-          <h1 class="mb-0 text-xl font-bold text-gray-750">Akansha Tripathi</h1>
+          <h1 class="mb-0 text-xl font-bold text-gray-750">Shubham Wawale</h1>
           <h2 class="m-0 ml-2 text-md font-semibold text-gray-700 leading-snugish">
             Full Stack Web Developer
           </h2>
@@ -45,7 +45,7 @@ function ResumePDF({ data }) {
               |
             </h2>
             <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-              akanshatripathi@gmail.com
+              wawaleshubham@gmail.com
             </h3>
             <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
               |
@@ -72,7 +72,7 @@ function ResumePDF({ data }) {
 
         {/* Education*/}
         <div>
-          <h2 className="text-md font-bold">Education</h2>
+          <h2 className="text-md font-bold italic">Education</h2>
           <div className="mt-0">
             <span className="text-sm font-md">
               {" "}
@@ -100,12 +100,12 @@ function ResumePDF({ data }) {
 
         {/* PROFESSIONAL EXPERIENCE   */}
         <div>
-          <h2 className="text-md font-bold">
+          <h2 className="text-md font-bold italic">
             Professional Experience/ Internships
           </h2>
         </div>
         <div className="mt-0">
-          <span className="text-md font-semibold"> SDG Internship</span>
+          <span className="text-md font-semibold text-gray-600"> SDG Internship</span>
           <ul class="list-disc ml-4  text-sm">
             <li>
               Developed “Personal Planner” a web application that was
@@ -122,7 +122,7 @@ function ResumePDF({ data }) {
         </div>
 
         <div className="mt-1">
-          <span className="text-md font-semibold"> EARNEEDS</span>
+          <span className="text-md font-semibold text-gray-600"> EARNEEDS</span>
           <ul class="list-disc ml-4  text-sm">
             <li>
               Developed “Personal Planner” a web application that was
@@ -140,10 +140,10 @@ function ResumePDF({ data }) {
 
         {/* Academic Projects*/}
         <div>
-          <h2 className="text-md font-bold">Academic Projects</h2>
+          <h2 className="text-md font-bold italic">Academic Projects</h2>
         </div>
         <div className="mt-0">
-          <span className="text-md font-semibold"> Foundem</span>
+          <span className="text-md font-semibold text-gray-600"> Foundem</span>
           <ul class="list-disc ml-4  text-sm">
             <li>
               Developed “Personal Planner” a web application that was
@@ -160,7 +160,7 @@ function ResumePDF({ data }) {
         </div>
 
         <div className="mt-1">
-          <span className="text-md font-semibold"> PawPet</span>
+          <span className="text-md font-semibold text-gray-600"> PawPet</span>
           <ul class="list-disc ml-4 text-sm">
             <li>
               Developed “Personal Planner” a web application that was
@@ -178,7 +178,7 @@ function ResumePDF({ data }) {
 
         {/* Technical skills */}
         <div>
-          <h2 className="text-md font-bold">Technical Skills</h2>
+          <h2 className="text-md font-bold italic">Technical Skills</h2>
           <div class="px-6 pt-2 pb-2">
             <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
               Python
@@ -204,7 +204,7 @@ function ResumePDF({ data }) {
 
         {/* Certification and Extra curricular */}
         <div>
-          <h2 class="text-md font-bold">
+          <h2 class="text-md font-bold italic">
             Certification and Extra-curricular
           </h2>
 
