@@ -10,6 +10,7 @@ export default function DriveCard(props) {
   
   const navigate = useNavigate()
   const handleDriveCardClick = () => {
+    localStorage.setItem("activeCompanyDriveId", props.data._id)
     navigate("/companyDrive") 
   }
   

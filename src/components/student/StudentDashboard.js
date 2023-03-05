@@ -6,45 +6,37 @@ import axios from 'axios'
 export default function StudentDashboard() {
   const [driveData, setDriveData] = useState([])
   const [studentData, setStudentData] = useState({})
-  const [eligibileDrives, setEligibleDrives] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:8080/student/drives')
-      .then(function (response) {
-        if (response.data.success) {
-          setDriveData(response.data.drives)
-          console.log(response.data.drives)
-        } else {
-          console.log(response.data.message)
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-    axios.get('http://localhost:8080/student/getDetails',{
+    var student = {}
+    axios.get('http://localhost:8080/student/getDetails', {
       params: {
-        studentId: "638d14885c37719538d6c86d"
+        studentId: localStorage.getItem("activeStudentId")
       }
     }).then(function (response) {
-        if (response.data.success) {
-          setStudentData(response.data.studentData)
-        } else {
-          console.log(response.data.message)
-        }
-      })
+      if (response.data.success) {
+        student = response.data.studentData
+        return axios.get('http://localhost:8080/student/drives', {
+          params: {
+            studentData: student
+          }
+        })
+          
+      } else {
+        console.log(response.data.message)
+      }
+    }).then (response=> {
+      if(response.data.success) {
+        console.log(response.data.drives)
+        setDriveData(response.data.drives)
+        setStudentData(student)
+      } else {
+        console.log(response.data.message)
+      }
+    })
       .catch(function (error) {
         console.log(error);
       })
-    // var filteredDrives = driveData.filter(drive => (
-    //   studentData.academicDetails.tenth.marks >= parseInt(drive.tenthPercentage) &&
-    //   studentData.academicDetails.twelfth.marks >= parseInt(drive.twelfthPercentage) &&
-    //   studentData.academicDetails.degreeCgpa >= parseInt(drive.cgpa) &&
-    //   studentData.academicDetails.activeBacklogs <= parseInt(drive.numberOfLiveKT) &&
-    //   studentData.academicDetails.previousBacklogs <= parseInt(drive.numberOfDeadKT) &&
-    //   studentData.academicDetails.academicGap <= parseInt(drive.numberOfAcademicGaps) &&
-    //   studentData.academicDetails.degreeGap <= parseInt(drive.numberOfDegreeGaps)
-    // ))
-    // console.log(filteredDrives)
-    // setEligibleDrives(filteredDrives)
+
   }, []);
   return (
     <>
@@ -59,9 +51,9 @@ export default function StudentDashboard() {
       </div>
 
 
-     {driveData && driveData.length!==0 ? driveData.map(drive=> (
-      <StuDriveCard driveData={drive} studentData={studentData}  />
-     )) : null}
+      {driveData && driveData.length !== 0 ? driveData.map(drive => (
+        <StuDriveCard driveData={drive} studentData={studentData} />
+      )) : null}
 
     </>
   )

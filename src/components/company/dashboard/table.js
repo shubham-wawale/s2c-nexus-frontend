@@ -79,12 +79,13 @@ class StudentTable extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:8080/company/driveInfo', {
       params: {
-        driveId: "63f0b983b46d279b6798b00f"
+        driveId: localStorage.getItem("activeCompanyDriveId")
       }
     })
       .then((response) => {
         if (response.data.success) {
           this.setState({
+            tableData: response.data.drive[0].appliedStudents,
             driveData: response.data.drive[0],
             skillsRequired: response.data.drive[0].skillsRequired.toString(),
             jobLocation: response.data.drive[0].jobLocation.toString(),
@@ -93,31 +94,30 @@ class StudentTable extends React.Component {
           console.log(response.data.drive[0])
         } else {
           console.log(response.data.message)
-        }
+        } 
         console.log(response)
       })
       .catch(function (error) {
         console.log(error);
       })
-    axios.get('http://localhost:8080/company/appliedStudentsDrive', {
-      params: {
-        driveId: "63f0b983b46d279b6798b00f"
-      }
-    })
-      .then((response) => {
-        if (response.data.success) {
-          this.setState({
-            tableData: response.data.drive.appliedStudents ? response.data.drive.appliedStudents : [],
-          })
-          console.log(response.data.drive)
-        } else {
-          console.log(response.data.message)
-        }
-        console.log(response)
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    // axios.get('http://localhost:8080/company/appliedStudentsDrive', {
+    //   params: {
+    //     driveId: localStorage.getItem("activeCompanyDriveId")
+    //   }
+    // })
+    //   .then((response) => {
+    //     if (response.data.success) {
+    //       this.setState({
+    //         tableData: response.data.appliedStudents ? response.data.appliedStudents : [],
+    //       })
+    //     } else {
+    //       console.log(response.data.message)
+    //     }
+    //     console.log(response)
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
   }
 
   showModal = () => {
@@ -171,6 +171,23 @@ class StudentTable extends React.Component {
     this.setState({
       SelectedList: this.state.List.filter((e) => e.selected),
     });
+  }
+
+  handleRejectStudent = (e) => {
+    e.preventDefault()
+    const studentId = e.target.id
+    axios.post('http://localhost:8080/company/removeStudentFromDrive', {
+      studentId: studentId,
+      driveId: localStorage.getItem("activeCompanyDriveId")
+    }).then(response=> {
+      if(response.data.success) {
+        alert(response.data.message)
+      } else {
+        alert(response.data.message)
+      }
+    }).catch(error=> {
+      console.log(error)
+    })
   }
 
 
@@ -459,8 +476,8 @@ class StudentTable extends React.Component {
                 </thead>
                 <tbody>
                   { this.state.tableData.length!=0 ?  this.state.tableData.map((user) => (
-                    <tr key={user.studentId} >
-                      {/* <th scope="row">
+                    <tr key={user.id} >
+                      <th scope="row">
                         <input
                           type="checkbox"
                           checked={user.selected}
@@ -468,12 +485,12 @@ class StudentTable extends React.Component {
                           id="rowcheck{user.id}"
                           onChange={(e) => this.onItemCheck(e, user)}
                         />
-                      </th> */}
+                      </th>
                       <td>{user.name}</td>
-                      <td>{user.email}</td>
+                      <td>wawaleshubham@gmail.com</td>
                       <td>{user.branch}</td>
-                      <td>{user.batch}</td>
-                      <td>{user.applied_on}</td>
+                      <td>2023</td>
+                      <td>{user.appliedDate}</td>
 
 
                       <div class="buttons right nowrap mr-7">
@@ -482,7 +499,7 @@ class StudentTable extends React.Component {
                         </button>
 
 
-                        <button class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
+                        <button id={user.id} onClick={this.handleRejectStudent} class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
                           <span class="icon"><i class="mdi mdi-window-close"></i></span>Reject
                         </button>
                       </div>

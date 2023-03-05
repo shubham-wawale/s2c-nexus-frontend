@@ -29,6 +29,35 @@ const StudentDriveInfo = () => {
   const [skillsRequired, setSkillsRequired] = useState("")
   const [jobLocation, setJobLocation] = useState("")
   const [preferredBranches, setPreferredBranches] = useState("")
+
+  const handleApplyDrive = (e) => {
+    e.preventDefault()
+    var studentData = JSON.parse(localStorage.getItem("activeStudentData"))
+    const data = {
+      studentData: {
+        id: studentData._id,
+        name: studentData.personalDetails.name,
+        // email: studentData.personalDetails.email,
+        branch: studentData.academicDetails.department,
+        appliedDate: new Date().toLocaleDateString() ,
+        status: "",
+        interviewCleared: false
+      },
+      driveId: localStorage.getItem("activeDriveId")
+    }
+
+    axios.post('http://localhost:8080/company/addStudentToDrive', data)
+    .then(response=> {
+      if( response.data.success) {
+        alert(response.data.message)
+      } else {
+        alert(response.data.message )
+      }
+    })
+    .catch(error=> {
+      console.log(error)
+    })
+  }
     return (
         
 <div>
@@ -145,6 +174,7 @@ const StudentDriveInfo = () => {
                   </div>
                 </div>
                 <button
+                  onClick={handleApplyDrive}
                   className="bg-blue-200 text-black active:bg-blue-500 
       font-bold px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-96 mt-10"
                   type="button"
