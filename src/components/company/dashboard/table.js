@@ -2,60 +2,7 @@ import React from "react";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
 import axios from "axios";
-
-
-const Users = [
-  {
-    id: 1,
-    selected: false,
-    name: "Leanne Graham",
-    email: "Sincere@april.biz",
-    branch: "IT",
-    batch: "2022",
-    applied_on: "11th october 2001",
-
-  },
-  {
-    id: 2,
-    selected: false,
-    name: "Ervin Howell",
-    email: "Shanna@melissa.tv",
-    branch: "COMPS",
-    batch: "2022",
-    applied_on: "11th october 2001",
-
-  },
-  {
-    id: 3,
-    selected: false,
-    name: "Clementine Bauch",
-    email: "Nathan@yesenia.net",
-    branch: "IT",
-    batch: "2023",
-    applied_on: "11th october 2001",
-
-  },
-  {
-    id: 4,
-    selected: false,
-    name: "Patricia Lebsack",
-    email: "Julianne.OConner@kory.org",
-    branch: "EXTC",
-    batch: "2024",
-    applied_on: "11th october 2001",
-
-  },
-  {
-    id: 5,
-    selected: false,
-    name: "Chelsey Dietrich",
-    email: "Lucio_Hettinger@annie.ca",
-    branch: "INSTRUMENTATION",
-    batch: "2022",
-    applied_on: "11th october 2001",
-
-  },
-];
+import * as XLSX from 'xlsx'
 
 class StudentTable extends React.Component {
 
@@ -64,16 +11,40 @@ class StudentTable extends React.Component {
     this.state = {
       tableData: [],
       driveData: {},
-      List: Users,
+      // List: Users,
       MasterChecked: false,
       SelectedList: [],
       show: false,
       skillsRequired: "",
       jobLocation: "",
-      preferredBranches: ""
+      preferredBranches: "",
+      jsonData: null,
+      isActive: true,
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  // handleFileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+
+  //   reader.onload = (e) => {
+  //     const data = e.target.result;
+  //     const workbook = XLSX.read(data, { type: 'binary' });
+  //     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+  //     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+  //     this.setState({ jsonData });
+  //   };
+
+  //   reader.readAsBinaryString(file);
+  // };
+
+  handleClick() {
+    this.setState((prevState) => ({
+      isActive: !prevState.isActive,
+    }));
   }
 
   componentDidMount() {
@@ -94,7 +65,7 @@ class StudentTable extends React.Component {
           console.log(response.data.drive[0])
         } else {
           console.log(response.data.message)
-        } 
+        }
         console.log(response)
       })
       .catch(function (error) {
@@ -130,13 +101,10 @@ class StudentTable extends React.Component {
     console.log(this.state.show)
   };
 
-  // Select/ UnSelect Table rows
   onMasterCheck(e) {
     let tempList = this.state.List;
-    // Check/ UnCheck All Items
     tempList.map((user) => (user.selected = e.target.checked));
 
-    //Update State
     this.setState({
       MasterChecked: e.target.checked,
       List: tempList,
@@ -144,7 +112,6 @@ class StudentTable extends React.Component {
     });
   }
 
-  // Update List Item's state and Master Checkbox State
   onItemCheck(e, item) {
     let tempList = this.state.List;
     tempList.map((user) => {
@@ -154,11 +121,10 @@ class StudentTable extends React.Component {
       return user;
     });
 
-    //To Control Master Checkbox State
     const totalItems = this.state.List.length;
     const totalCheckedItems = tempList.filter((e) => e.selected).length;
 
-    // Update State
+
     this.setState({
       MasterChecked: totalItems === totalCheckedItems,
       List: tempList,
@@ -166,7 +132,7 @@ class StudentTable extends React.Component {
     });
   }
 
-  // Event to get selected rows(Optional)
+
   getSelectedRows() {
     this.setState({
       SelectedList: this.state.List.filter((e) => e.selected),
@@ -179,21 +145,32 @@ class StudentTable extends React.Component {
     axios.post('http://localhost:8080/company/removeStudentFromDrive', {
       studentId: studentId,
       driveId: localStorage.getItem("activeCompanyDriveId")
-    }).then(response=> {
-      if(response.data.success) {
+    }).then(response => {
+      if (response.data.success) {
         alert(response.data.message)
       } else {
         alert(response.data.message)
       }
-    }).catch(error=> {
+    }).catch(error => {
       console.log(error)
     })
   }
+  handleDownload = () => {
+    const sheetName = 'Sheet1';
+    const worksheet = XLSX.utils.table_to_sheet(document.getElementById('table-id'));
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+    XLSX.writeFile(workbook, 'student-list.xlsx');
+  };
 
 
   render() {
+    const { isActive } = this.state;
+    const buttonColor = isActive ? "green" : "red";
+    const buttonText = isActive ? "Active" : "Inactive";
 
     return (
+
       <>
         <Navbar />
         <SideNav />
@@ -221,8 +198,15 @@ class StudentTable extends React.Component {
                   class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                   <li class="flex items-center py-3">
                     <span>Drive Status</span>
-                    <span class="ml-auto"><span
-                      class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                    {/* <span class="ml-auto"><span
+                      class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span> */}
+                    <button
+                      onClick={this.handleClick}
+                      style={{ backgroundColor: buttonColor }}
+                      class="ml-auto py-1 px-2 rounded text-white text-sm"
+                    >
+                      {buttonText}
+                    </button>
                   </li>
 
                 </ul>
@@ -452,7 +436,8 @@ class StudentTable extends React.Component {
                 <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
                 Applied Students
               </p>
-              <table className="table">
+              <table className="table" id="table-id" >
+
                 <thead>
                   <tr>
                     <th scope="col">
@@ -475,7 +460,7 @@ class StudentTable extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  { this.state.tableData.length!=0 ?  this.state.tableData.map((user) => (
+                  {this.state.tableData.length != 0 ? this.state.tableData.map((user) => (
                     <tr key={user.id} >
                       <th scope="row">
                         <input
@@ -508,6 +493,15 @@ class StudentTable extends React.Component {
                   )) : null}
                 </tbody>
               </table>
+
+              <button class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded " onClick={this.handleDownload}>Download List</button>
+              <div>
+        {/* <input type="file" onChange={this.handleFileUpload} />
+        {this.state.jsonData && (
+          <pre>{JSON.stringify(this.state.jsonData, null, 2)}</pre>
+        )} */}
+      </div>
+
               <button
                 className="btn btn-primary mt-3 ml-3"
                 onClick={() => this.getSelectedRows()}

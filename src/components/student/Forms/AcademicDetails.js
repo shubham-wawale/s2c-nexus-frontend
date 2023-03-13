@@ -352,3 +352,14 @@ return (
   </>
 )
 }
+
+
+
+
+// const[dicforum, setDicForum]=useState(
+//   {
+//     subject:"",
+//     ques:"",
+//     ans:[]
+//   }
+// )
