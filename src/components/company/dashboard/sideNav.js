@@ -52,12 +52,12 @@ export default function SideNav() {
         {/* <p class="menu-label">About</p> */}
         <ul class="menu-list">
           
-          <li>
+          {/* <li>
             <a class="has-icon">
               <span class="icon"><i class="mdi mdi-help-circle"></i></span>
               <span class="menu-item-label">About</span>
             </a>
-          </li>
+          </li> */}
           {/* <li>
             <a href="/" class="has-icon">
               <span class="icon"><i class="mdi mdi-github-circle"></i></span>

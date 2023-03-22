@@ -514,9 +514,9 @@ class StudentTable extends React.Component {
 
 
                       <div class="buttons right nowrap mr-7">
-                        <button class="button small text-center inline-flex items-center green --jb-modal" data-target="sample-modal-2" type="button">
+                        {/* <button class="button small text-center inline-flex items-center green --jb-modal" data-target="sample-modal-2" type="button">
                           <span class="icon"><i class="mdi mdi-check"></i></span>Accept
-                        </button>
+                        </button> */}
 
 
                         <button id={user.id} onClick={this.handleRejectStudent} class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">

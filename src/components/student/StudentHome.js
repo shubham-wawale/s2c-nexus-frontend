@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import DiscussionForum from './DiscussionForum/DiscussionForum'
 import ResumePDF from './ResumeToPdf'
-import { StudentInterview } from './StudentInterview'
+import { StudentOffers } from './StudentOffers'
 
 export default function StudentHome() {
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ export default function StudentHome() {
       {activeTab === "appliedDrive" && <StudentDashboard />}
       {activeTab === "profile" && <StudentProfile />}
       {activeTab === "dforum" && <DiscussionForum />}
-      {activeTab === "interview" && <StudentInterview />}
+      {activeTab === "interview" && <StudentOffers />}
     </div>
     </>
   )
