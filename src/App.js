@@ -15,6 +15,8 @@ import StudentHome from "./components/student/StudentHome";
 import StudentLogin from "./components/student/Authentication/StudentLogin";
 import StudentSignup from "./components/student/Authentication/StudentSignup";
 import StudentDriveInfo from "./components/student/StudentDriveInfo";
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import EmailSend from "./components/company/Email";
 
 
 
@@ -40,6 +42,7 @@ function App() {
           <Route path="/studentLogin" element={<StudentLogin />}></Route>
           <Route path="/studentSignup" element={<StudentSignup />}></Route>
           <Route path="/studentDriveInfo" element={<StudentDriveInfo />}></Route>
+          <Route path="/contactus" element={<EmailSend />}></Route>
 
          
 
