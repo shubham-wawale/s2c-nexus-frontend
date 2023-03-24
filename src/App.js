@@ -15,7 +15,7 @@ import StudentHome from "./components/student/StudentHome";
 import StudentLogin from "./components/student/Authentication/StudentLogin";
 import StudentSignup from "./components/student/Authentication/StudentSignup";
 import StudentDriveInfo from "./components/student/StudentDriveInfo";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
+// import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import EmailSend from "./components/company/Email";
 
 

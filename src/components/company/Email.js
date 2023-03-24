@@ -22,48 +22,51 @@ const EmailSend = () => {
   };
   
   return (
-    <div className="container">
-      <div class="row">  
-      
-       <div className="col-sm-4 mx-auto shadow p-5">
-        <h4 className="text-center mb-2">Send E Mail </h4>
-           <p class="mb-3 mt-2" style={{color:"green",marginLeft:"57px"}}><b>{msg}</b></p>
-          <div className="form-group mb-3">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="To"
-              name="to"
-              onChange={onInputChange}
-              value={user.to}
-            />
-          </div>
-          <div className="form-group  mb-4 ">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Subject"
-              name="subject"
-              onChange={onInputChange}
-              value={subject}
-            />
-          </div>
-          <div className="form-group  mb-4">
-            <textarea
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Description"
-              name="description"
-              onChange={onInputChange}
-              value={description}
-            />
-          </div>
-          
-          <button onClick={onSubmit} className="btn btn-primary btn-block " style={{marginLeft:"100px"}}>Send Mail</button>
-       
-      </div>
+    <div>
+      <h1>Hi</h1>
     </div>
-  </div>  
+  //   <div className="container">
+  //     <div class="row">  
+      
+  //      <div className="col-sm-4 mx-auto shadow p-5">
+  //       <h4 className="text-center mb-2">Send E Mail </h4>
+  //          <p class="mb-3 mt-2" style={{color:"green",marginLeft:"57px"}}><b>{msg}</b></p>
+  //         <div className="form-group mb-3">
+  //           <input
+  //             type="text"
+  //             className="form-control form-control-lg"
+  //             placeholder="To"
+  //             name="to"
+  //             onChange={onInputChange}
+  //             value={user.to}
+  //           />
+  //         </div>
+  //         <div className="form-group  mb-4 ">
+  //           <input
+  //             type="text"
+  //             className="form-control form-control-lg"
+  //             placeholder="Subject"
+  //             name="subject"
+  //             onChange={onInputChange}
+  //             value={subject}
+  //           />
+  //         </div>
+  //         <div className="form-group  mb-4">
+  //           <textarea
+  //             type="text"
+  //             className="form-control form-control-lg"
+  //             placeholder="Description"
+  //             name="description"
+  //             onChange={onInputChange}
+  //             value={description}
+  //           />
+  //         </div>
+          
+  //         <button onClick={onSubmit} className="btn btn-primary btn-block " style={{marginLeft:"100px"}}>Send Mail</button>
+       
+  //     </div>
+  //   </div>
+  // </div>  
   );
 };
  
