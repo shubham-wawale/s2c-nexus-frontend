@@ -5,7 +5,7 @@ export default function ExperienceDetails() {
   useEffect(() => {
     axios.get("http://localhost:8080/student/getDetails", {
       params: {
-        studentId: "638d14885c37719538d6c86d"
+        studentId: localStorage.getItem("activeStudentId")
       }
     }).then(response => {
       var data = response.data.studentData;
@@ -49,7 +49,7 @@ export default function ExperienceDetails() {
   const handleExperienceDetailsUpdate = e => {
     e.preventDefault()
     axios.post('http://localhost:8080/student/updateDetails', {
-      studentId: "638d14885c37719538d6c86d",
+      studentId: localStorage.getItem("activeStudentId"),
       key: "experienceDetails",
       newData: experienceData
     })

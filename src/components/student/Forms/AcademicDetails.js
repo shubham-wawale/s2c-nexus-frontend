@@ -5,7 +5,7 @@ export default function AcademicDetails() {
   useEffect(() => {
     axios.get("http://localhost:8080/student/getDetails", {
       params: {
-        studentId: "638d14885c37719538d6c86d"
+        studentId: localStorage.getItem("activeStudentId")
       }
     }).then(response => {
       var data = response.data.studentData;
@@ -137,7 +137,7 @@ const handleAcademicDetailSubmit = (e) => {
     technicalSkills: technicalSkills.split(",")
   }
   axios.post('http://localhost:8080/student/updateDetails', {
-    studentId: "638d14885c37719538d6c86d",
+    studentId: localStorage.getItem("activeStudentId"),
     key: "academicDetails",
     newData: payload
   })

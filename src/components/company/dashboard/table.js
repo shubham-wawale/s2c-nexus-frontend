@@ -10,6 +10,7 @@ class StudentTable extends React.Component {
     super(props);
     this.state = {
       tableData: [],
+      testResultClearedEmails: [],
       driveData: {},
       // List: Users,
       MasterChecked: false,
@@ -21,9 +22,12 @@ class StudentTable extends React.Component {
       preferredBranches: "",
       jsonData: null,
       isActive: true,
+      emailSubject: "",
+      emailDescription: "",
+      showOfferEmailModal: false,
       formData: {
-        
-    },
+
+      },
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -32,22 +36,119 @@ class StudentTable extends React.Component {
     this.showResume = this.showResume.bind(this);
     this.hideResume = this.hideResume.bind(this);
     this.handleResumeModal = this.handleResumeModal.bind(this);
+
+    this.showEmailModal = this.showEmailModal.bind(this);
+    this.hideEmailModal = this.hideEmailModal.bind(this);
+    this.handleEmailModal = this.handleEmailModal.bind(this);
+
+    this.showOfferEmailModal = this.showOfferEmailModal.bind(this);
+
+    this.onInputEmailChange = this.onInputEmailChange.bind(this)
+    this.onEmailSubmit = this.onEmailSubmit.bind(this)
   }
 
-  // handleFileUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
+  onInputEmailChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+    })
+  };
 
-  //   reader.onload = (e) => {
-  //     const data = e.target.result;
-  //     const workbook = XLSX.read(data, { type: 'binary' });
-  //     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-  //     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-  //     this.setState({ jsonData });
-  //   };
+  onEmailSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state.emailDescription)
+    console.log(this.state.emailSubject)
+    axios.post("http://localhost:8080/email/users/", {
+      subject: this.state.emailSubject,
+      description: this.state.emailDescription
 
-  //   reader.readAsBinaryString(file);
-  // };
+    })
+      .then(response => alert(response.data.respMesg));
+  };
+
+  onEmailOfferSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state.emailDescription)
+    console.log(this.state.emailSubject)
+    axios.post("http://localhost:8080/email/offer/", {
+      subject: this.state.emailSubject,
+      description: this.state.emailDescription
+
+    })
+      .then(response => alert(response.data.respMesg));
+  };
+
+  handleTestFileUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const data = e.target.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      this.setState({ jsonData });
+      var sortedEmails = []
+      jsonData.map((data, index) => {
+        if (index !== 0) {
+          if (data[2] < 40) {
+            sortedEmails.push(data[1])
+          }
+        }
+      })
+      axios.post('http://localhost:8080/company/filterStudentsByTest', {
+        driveId: localStorage.getItem("activeCompanyDriveId"),
+        studentEmails: sortedEmails,
+      }).then(response => {
+        if (response.data.success) {
+          console.log(response.data.message)
+          this.loadDriveData()
+        } else {
+          console.log(response.data.message)
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  handleInterviewFileUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const data = e.target.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      this.setState({ jsonData });
+      var sortedEmails = []
+      jsonData.map((data, index) => {
+        if (index !== 0) {
+          if (data[2] === "no") {
+            sortedEmails.push(data[1])
+          }
+        }
+      })
+      axios.post('http://localhost:8080/company/filterStudentsByInterview', {
+        driveId: localStorage.getItem("activeCompanyDriveId"),
+        studentEmails: sortedEmails,
+      }).then(response => {
+        if (response.data.success) {
+          console.log(response.data.message)
+          this.loadDriveData()
+        } else {
+          console.log(response.data.message)
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    };
+
+    reader.readAsBinaryString(file);
+  };
 
   handleClick() {
     this.setState((prevState) => ({
@@ -61,7 +162,13 @@ class StudentTable extends React.Component {
     }));
   }
 
-  componentDidMount() {
+  handleEmailModal() {
+    this.setState((prevState) => ({
+      isActive: !prevState.isActive,
+    }));
+  }
+
+  loadDriveData() {
     axios.get('http://localhost:8080/company/driveInfo', {
       params: {
         driveId: localStorage.getItem("activeCompanyDriveId")
@@ -70,7 +177,7 @@ class StudentTable extends React.Component {
       .then((response) => {
         if (response.data.success) {
           this.setState({
-            tableData: response.data.drive[0].appliedStudents,
+            tableData: response.data.drive[0].appliedStudents.filter(student => student.rejected == false),
             driveData: response.data.drive[0],
             skillsRequired: response.data.drive[0].skillsRequired.toString(),
             jobLocation: response.data.drive[0].jobLocation.toString(),
@@ -86,6 +193,10 @@ class StudentTable extends React.Component {
       .catch(function (error) {
         console.log(error);
       })
+  }
+
+  componentDidMount() {
+    this.loadDriveData()
     // axios.get('http://localhost:8080/company/appliedStudentsDrive', {
     //   params: {
     //     driveId: localStorage.getItem("activeCompanyDriveId")
@@ -126,36 +237,51 @@ class StudentTable extends React.Component {
     console.log(this.state.show)
   };
 
-  onMasterCheck(e) {
-    let tempList = this.state.List;
-    tempList.map((user) => (user.selected = e.target.checked));
+  showEmailModal = () => {
+    this.setState({ showEmailModal: true });
+    console.log(this.state.show)
+  };
 
-    this.setState({
-      MasterChecked: e.target.checked,
-      List: tempList,
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
-  }
+  hideEmailModal = () => {
+    this.setState({ showEmailModal: false, showOfferEmailModal: false });
+    console.log(this.state.show)
+  };
 
-  onItemCheck(e, item) {
-    let tempList = this.state.List;
-    tempList.map((user) => {
-      if (user.id === item.id) {
-        user.selected = e.target.checked;
-      }
-      return user;
-    });
+  showOfferEmailModal = () => {
+    this.setState({ showOfferEmailModal: true });
+    console.log(this.state.show)
+  };
 
-    const totalItems = this.state.List.length;
-    const totalCheckedItems = tempList.filter((e) => e.selected).length;
+  // onMasterCheck(e) {
+  //   let tempList = this.state.List;
+  //   tempList.map((user) => (user.selected = e.target.checked));
+
+  //   this.setState({
+  //     MasterChecked: e.target.checked,
+  //     List: tempList,
+  //     SelectedList: this.state.List.filter((e) => e.selected),
+  //   });
+  // }
+
+  // onItemCheck(e, item) {
+  //   let tempList = this.state.List;
+  //   tempList.map((user) => {
+  //     if (user.id === item.id) {
+  //       user.selected = e.target.checked;
+  //     }
+  //     return user;
+  //   });
+
+  //   const totalItems = this.state.List.length;
+  //   const totalCheckedItems = tempList.filter((e) => e.selected).length;
 
 
-    this.setState({
-      MasterChecked: totalItems === totalCheckedItems,
-      List: tempList,
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
-  }
+  //   this.setState({
+  //     MasterChecked: totalItems === totalCheckedItems,
+  //     List: tempList,
+  //     SelectedList: this.state.List.filter((e) => e.selected),
+  //   });
+  // }
 
 
   getSelectedRows() {
@@ -199,23 +325,23 @@ class StudentTable extends React.Component {
     }));
   };
 
-  handleDriveDetails = (e)=> {
+  handleDriveDetails = (e) => {
     e.preventDefault()
     this.setState({ show: false })
     axios.post('http://localhost:8080/company/updateDrive', {
       driveId: localStorage.getItem("activeCompanyDriveId"),
-      updatedData:this.state.formData
+      updatedData: this.state.formData
     })
-    .then(function (response) {
-      if(response.data.success) {
-        alert(response.data.message)
-      } else {
-        alert(response.data.message)
-      }
-    })
-    .catch(function (error) {
-      alert("BACKEND SERVICE UNAVAILABLE");
-    })
+      .then(function (response) {
+        if (response.data.success) {
+          alert(response.data.message)
+        } else {
+          alert(response.data.message)
+        }
+      })
+      .catch(function (error) {
+        alert("BACKEND SERVICE UNAVAILABLE");
+      })
   }
 
 
@@ -226,17 +352,17 @@ class StudentTable extends React.Component {
     return (
 
       <>
-      
+
         <Navbar />
         <SideNav />
-        
+
         {this.state.showResume ? (
           <div className="flex justify-center  items-center h-[100%] w-[100%] overflow-x-hidden overflow-y-auto absolute top-[10%]  inset-0 z-50 outline-none focus:outline-none">
-              <div className="relative w-auto my-16 mx-auto max-w-3xl">
-                <div className="border-0 rounded-lg mt-24 shadow-lg relative flex flex-col w-full   outline-none focus:outline-none">
-                  <div className="flex items-start justify-between  mt-32 border-b border-solid border-gray-300 rounded-t ">
-                    <h3 className="text-2xl font=semibold">Update Drive Info</h3>
-                    {/* <button
+            <div className="relative w-auto my-16 mx-auto max-w-3xl">
+              <div className="border-0 rounded-lg mt-24 shadow-lg relative flex flex-col w-full   outline-none focus:outline-none">
+                <div className="flex items-start justify-between  mt-32 border-b border-solid border-gray-300 rounded-t ">
+                  <h3 className="text-2xl font=semibold">Update Drive Info</h3>
+                  {/* <button
                         className="bg-transparent border-0 text-black float-right"
                         onClick={this.hideModal}
                       >
@@ -244,12 +370,12 @@ class StudentTable extends React.Component {
                           x
                         </span>
                       </button> */}
-                  </div>
-                  <div
-        class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-500 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-md print:bg-white"
-      >
-        <div class="block w-full">
-          {/* <div class="relative w-16 h-16">
+                </div>
+                <div
+                  class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-500 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-md print:bg-white"
+                >
+                  <div class="block w-full">
+                    {/* <div class="relative w-16 h-16">
             <img
               class="rounded-full border border-gray-100 shadow-sm"
               src="https://randomuser.me/api/portraits/women/81.jpg"
@@ -257,206 +383,206 @@ class StudentTable extends React.Component {
             />
             <div class="absolute top-0 right-0 h-4 w-4 my-1  z-2"></div>
           </div> */}
-          <h1 class="mb-0 text-xl font-bold text-gray-750">Shubham Wawale</h1>
-          <h2 class="m-0 ml-2 text-md font-semibold text-gray-700 leading-snugish">
-            Full Stack Web Developer
-          </h2>
-          <div class="flex justify-start w-full">
-            <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-              Mumbai, India
-            </h3>
-            <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
-              |
-            </h2>
-            <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-              wawaleshubham@gmail.com
-            </h3>
-            <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
-              |
-            </h2>
-            <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-              {}LinkedIn
-            </h3>
-            <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
-              |
-            </h2>
-            <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-              {}7388967896
-            </h3>
-          </div>
-          <h1 class=" items-baseline mt-1 justify-between w-full  align-top border-b-4"></h1>
-        </div>
+                    <h1 class="mb-0 text-xl font-bold text-gray-750">Shubham Wawale</h1>
+                    <h2 class="m-0 ml-2 text-md font-semibold text-gray-700 leading-snugish">
+                      Full Stack Web Developer
+                    </h2>
+                    <div class="flex justify-start w-full">
+                      <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
+                        Mumbai, India
+                      </h3>
+                      <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
+                        |
+                      </h2>
+                      <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
+                        wawaleshubham@gmail.com
+                      </h3>
+                      <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
+                        |
+                      </h2>
+                      <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
+                        { }LinkedIn
+                      </h3>
+                      <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
+                        |
+                      </h2>
+                      <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
+                        { }7388967896
+                      </h3>
+                    </div>
+                    <h1 class=" items-baseline mt-1 justify-between w-full  align-top border-b-4"></h1>
+                  </div>
 
-        {/* <div className="container flex-col items-center p-2 " >
+                  {/* <div className="container flex-col items-center p-2 " >
       <h1 className="text-3xl font-bold">Resume</h1>
       <div className="w-full bg-white rounded-lg p-6 shadow-lg">
       <div className="flex justify-center items-center mb-2">
           <img src="" alt="Profile" className="w-32 h-32 rounded-full" />
         </div> */}
 
-        {/* Education*/}
-        <div>
-          <h2 className="text-md font-bold italic">Education</h2>
-          <div className="mt-0">
-            <span className="text-sm font-md">
-              {" "}
-              Ramrao Adik Institute of Technology - Bachelor of Science in
-              Computer Science (2013 - 2017)
-            </span>
-            {/* <p className="text-lg">{resumeData.name}</p> */}
-          </div>
+                  {/* Education*/}
+                  <div>
+                    <h2 className="text-md font-bold italic">Education</h2>
+                    <div className="mt-0">
+                      <span className="text-sm font-md">
+                        {" "}
+                        Ramrao Adik Institute of Technology - Bachelor of Science in
+                        Computer Science (2013 - 2017)
+                      </span>
+                      {/* <p className="text-lg">{resumeData.name}</p> */}
+                    </div>
 
-          <div className="mt-0">
-            <span className="text-sm font-md">
-              {" "}
-              St. John Junior College - Science (2011 - 2013)
-            </span>
-          </div>
+                    <div className="mt-0">
+                      <span className="text-sm font-md">
+                        {" "}
+                        St. John Junior College - Science (2011 - 2013)
+                      </span>
+                    </div>
 
-          <div className="mt-0">
-            <span className="text-sm font-md">
-              {" "}
-              National English School (2011)
-            </span>
-            <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>{" "}
-          </div>
-        </div>
-
-        {/* PROFESSIONAL EXPERIENCE   */}
-        <div>
-          <h2 className="text-md font-bold italic">
-            Professional Experience/ Internships
-          </h2>
-        </div>
-        <div className="mt-0">
-          <span className="text-md font-semibold text-gray-600"> SDG Internship</span>
-          <ul class="list-disc ml-4  text-sm">
-            <li>
-              Developed “Personal Planner” a web application that was
-              effectively created to aid in task planning and organization by
-              viewing or deleting existing ones. The user can also conduct data
-              analysis.
-            </li>
-            <li>
-              Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
-              Numpy, Matplotlib, Seaborn.
-            </li>
-          </ul>
-          {/* <p className="text-lg">{resumeData.name}</p> */}
-        </div>
-
-        <div className="mt-1">
-          <span className="text-md font-semibold text-gray-600"> EARNEEDS</span>
-          <ul class="list-disc ml-4  text-sm">
-            <li>
-              Developed “Personal Planner” a web application that was
-              effectively created to aid in task planning and organization by
-              viewing or deleting existing ones. The user can also conduct data
-              analysis.
-            </li>
-            <li>
-              Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
-              Numpy, Matplotlib, Seaborn.
-            </li>
-          </ul>
-          <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>
-        </div>
-
-        {/* Academic Projects*/}
-        <div>
-          <h2 className="text-md font-bold italic">Academic Projects</h2>
-        </div>
-        <div className="mt-0">
-          <span className="text-md font-semibold text-gray-600"> Foundem</span>
-          <ul class="list-disc ml-4  text-sm">
-            <li>
-              Developed “Personal Planner” a web application that was
-              effectively created to aid in task planning and organization by
-              viewing or deleting existing ones. The user can also conduct data
-              analysis.
-            </li>
-            <li>
-              Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
-              Numpy, Matplotlib, Seaborn.
-            </li>
-          </ul>
-          {/* <p className="text-lg">{resumeData.name}</p> */}
-        </div>
-
-        <div className="mt-1">
-          <span className="text-md font-semibold text-gray-600"> PawPet</span>
-          <ul class="list-disc ml-4 text-sm">
-            <li>
-              Developed “Personal Planner” a web application that was
-              effectively created to aid in task planning and organization by
-              viewing or deleting existing ones. The user can also conduct data
-              analysis.
-            </li>
-            <li>
-              Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
-              Numpy, Matplotlib, Seaborn.
-            </li>
-          </ul>
-          <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>
-        </div>
-
-        {/* Technical skills */}
-        <div>
-          <h2 className="text-md font-bold italic">Technical Skills</h2>
-          <div class="px-6 pt-2 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-              Python
-            </span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-              Java
-            </span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-              SQL
-            </span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-              JavaScript
-            </span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-              ReactJs
-            </span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-              MondoDB
-            </span>
-          </div>
-          <h3 class="items-baseline justify-between  w-full mt-0.5 align-top border-b-4"></h3>
-        </div>
-
-        {/* Certification and Extra curricular */}
-        <div>
-          <h2 class="text-md font-bold italic">
-            Certification and Extra-curricular
-          </h2>
-
-          <ul className="list-disc text-sm list-inside">
-          <li>AWS Foundational Course</li>
-          <li>30 Days of Google Cloud </li>
-          <li>HTML, CSS, JS foundations</li>
-          <li>SUSE Cloud Native Foundational Course</li>
-          <li>Git/Github</li>
-        </ul>
-        </div>
-      </div>
-
-
-                  <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 z-50 rounded-b">
-                    <button
-                      className="text-black background-transparent font-bold bg-gray-400 uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                      type="button"
-                      onClick={this.hideResume}
-                    >
-                      Close
-                    </button>
-                    
+                    <div className="mt-0">
+                      <span className="text-sm font-md">
+                        {" "}
+                        National English School (2011)
+                      </span>
+                      <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>{" "}
+                    </div>
                   </div>
+
+                  {/* PROFESSIONAL EXPERIENCE   */}
+                  <div>
+                    <h2 className="text-md font-bold italic">
+                      Professional Experience/ Internships
+                    </h2>
+                  </div>
+                  <div className="mt-0">
+                    <span className="text-md font-semibold text-gray-600"> SDG Internship</span>
+                    <ul class="list-disc ml-4  text-sm">
+                      <li>
+                        Developed “Personal Planner” a web application that was
+                        effectively created to aid in task planning and organization by
+                        viewing or deleting existing ones. The user can also conduct data
+                        analysis.
+                      </li>
+                      <li>
+                        Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
+                        Numpy, Matplotlib, Seaborn.
+                      </li>
+                    </ul>
+                    {/* <p className="text-lg">{resumeData.name}</p> */}
+                  </div>
+
+                  <div className="mt-1">
+                    <span className="text-md font-semibold text-gray-600"> EARNEEDS</span>
+                    <ul class="list-disc ml-4  text-sm">
+                      <li>
+                        Developed “Personal Planner” a web application that was
+                        effectively created to aid in task planning and organization by
+                        viewing or deleting existing ones. The user can also conduct data
+                        analysis.
+                      </li>
+                      <li>
+                        Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
+                        Numpy, Matplotlib, Seaborn.
+                      </li>
+                    </ul>
+                    <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>
+                  </div>
+
+                  {/* Academic Projects*/}
+                  <div>
+                    <h2 className="text-md font-bold italic">Academic Projects</h2>
+                  </div>
+                  <div className="mt-0">
+                    <span className="text-md font-semibold text-gray-600"> Foundem</span>
+                    <ul class="list-disc ml-4  text-sm">
+                      <li>
+                        Developed “Personal Planner” a web application that was
+                        effectively created to aid in task planning and organization by
+                        viewing or deleting existing ones. The user can also conduct data
+                        analysis.
+                      </li>
+                      <li>
+                        Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
+                        Numpy, Matplotlib, Seaborn.
+                      </li>
+                    </ul>
+                    {/* <p className="text-lg">{resumeData.name}</p> */}
+                  </div>
+
+                  <div className="mt-1">
+                    <span className="text-md font-semibold text-gray-600"> PawPet</span>
+                    <ul class="list-disc ml-4 text-sm">
+                      <li>
+                        Developed “Personal Planner” a web application that was
+                        effectively created to aid in task planning and organization by
+                        viewing or deleting existing ones. The user can also conduct data
+                        analysis.
+                      </li>
+                      <li>
+                        Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
+                        Numpy, Matplotlib, Seaborn.
+                      </li>
+                    </ul>
+                    <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>
+                  </div>
+
+                  {/* Technical skills */}
+                  <div>
+                    <h2 className="text-md font-bold italic">Technical Skills</h2>
+                    <div class="px-6 pt-2 pb-2">
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+                        Python
+                      </span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+                        Java
+                      </span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+                        SQL
+                      </span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+                        JavaScript
+                      </span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+                        ReactJs
+                      </span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+                        MondoDB
+                      </span>
+                    </div>
+                    <h3 class="items-baseline justify-between  w-full mt-0.5 align-top border-b-4"></h3>
+                  </div>
+
+                  {/* Certification and Extra curricular */}
+                  <div>
+                    <h2 class="text-md font-bold italic">
+                      Certification and Extra-curricular
+                    </h2>
+
+                    <ul className="list-disc text-sm list-inside">
+                      <li>AWS Foundational Course</li>
+                      <li>30 Days of Google Cloud </li>
+                      <li>HTML, CSS, JS foundations</li>
+                      <li>SUSE Cloud Native Foundational Course</li>
+                      <li>Git/Github</li>
+                    </ul>
+                  </div>
+                </div>
+
+
+                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 z-50 rounded-b">
+                  <button
+                    className="text-black background-transparent font-bold bg-gray-400 uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                    type="button"
+                    onClick={this.hideResume}
+                  >
+                    Close
+                  </button>
+
                 </div>
               </div>
             </div>
-          ):null}
+          </div>
+        ) : null}
         <div>
 
           <header class="card-header ">
@@ -586,10 +712,10 @@ class StudentTable extends React.Component {
               </div>
 
             </div>
-            
+
           </div>
         </div>
-        
+
 
 
         {this.state.show ? (
@@ -697,7 +823,7 @@ class StudentTable extends React.Component {
                       className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                       type="button"
                       onClick={this.handleDriveDetails}
-                      
+
                     >
                       Update
                     </button>
@@ -724,7 +850,7 @@ class StudentTable extends React.Component {
 
                 <thead>
                   <tr>
-                    <th scope="col">
+                    {/* <th scope="col">
                       <input
                         type="checkbox"
                         className="form-check-input"
@@ -732,7 +858,7 @@ class StudentTable extends React.Component {
                         id="mastercheck"
                         onChange={(e) => this.onMasterCheck(e)}
                       />
-                    </th>
+                    </th> */}
 
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
@@ -747,7 +873,7 @@ class StudentTable extends React.Component {
                 <tbody>
                   {this.state.tableData.length != 0 ? this.state.tableData.map((user) => (
                     <tr key={user.id} >
-                      <th scope="row">
+                      {/* <th scope="row">
                         <input
                           type="checkbox"
                           checked={user.selected}
@@ -755,9 +881,9 @@ class StudentTable extends React.Component {
                           id="rowcheck{user.id}"
                           onChange={(e) => this.onItemCheck(e, user)}
                         />
-                      </th>
+                      </th> */}
                       <td>{user.name}</td>
-                      <td>wawaleshubham@gmail.com</td>
+                      <td>{user.email}</td>
                       <td><button class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
                       <td>{user.branch}</td>
                       <td>2023</td>
@@ -782,32 +908,78 @@ class StudentTable extends React.Component {
 
               <button class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded " onClick={this.handleDownload}>Download List</button>
               <div>
-        {/* <input type="file" onChange={this.handleFileUpload} />
-        {this.state.jsonData && (
-          <pre>{JSON.stringify(this.state.jsonData, null, 2)}</pre>
-        )} */}
-      </div>
+                <label class="block mb-2 text-sm font-medium text-gray-900" for="Upload Test Results">Upload Test Results: </label>
+                <input class="block mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700"
+                  type="file" onChange={this.handleTestFileUpload} />
+              </div>
 
-              <button
-                className="btn btn-primary mt-3 ml-3"
-                onClick={() => this.getSelectedRows()}
-              >
-                Number of selected Students: {this.state.SelectedList.length}
-              </button>
-              {/* <div className="row">
-              <b>All Row Items:</b>
-              <code>{JSON.stringify(this.state.List)}</code>
-            </div>
-            <div className="row">
-              <b>Selected Row Items(Click Button To Get):</b>
-              <code>{JSON.stringify(this.state.SelectedList)}</code>
-            </div> */}
+              <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900" for="Upload Interview Results">Upload Interview Results: </label>
+                <input class="block mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700 " type="file" onChange={this.handleInterviewFileUpload} />
+              </div>
+
+
+              {this.state.showEmailModal || this.state.showOfferEmailModal ? (
+
+                <div class="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+
+                  <form class="bg-[#BFDBFE] shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+                    <div class="mb-4">
+                      {/* <p class="text-green-500 text-xs bold italic">{this.state.msg}</p> */}
+                      <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">
+                        Subject
+                      </label>
+                      <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={this.state.emailSubject}
+                        onChange={(e) => this.setState({ emailSubject: e.target.value })}
+                        name="subject"
+                        type="text"
+                        placeholder="Subject" />
+                    </div>
+                    <div class="mb-6">
+                      <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                        Description
+                      </label>
+
+                      <textarea
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Description"
+                        name="description"
+                        onChange={(e) => this.setState({ emailDescription: e.target.value })}
+                        value={this.state.emailDescription}
+                      >
+                      </textarea>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline" type="button">
+                        Send Email
+                      </button>
+                      <button
+                        className="text-black background-transparent font-bold bg-gray-400 uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
+                        type="button"
+                        onClick={this.hideEmailModal}
+                      >
+                        Close
+                      </button>
+
+                    </div>
+                  </form>
+
+                </div>
+              ) : null}
+
+
+
+
+
               <div class="buttons right nowrap">
                 <div class="flex items-center justify-between mb-5">
                   <div class="buttons">
-                    <button type="button" class="button bg-sky-500 hover:bg-sky-300 ... ">Send Exam Link</button>
-                    <button type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded ">Schedule Interview</button>
-                    <button type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-2 border border-blue-500 hover:border-transparent rounded">Send Offer Letter</button>
+                    <button onClick={this.showEmailModal} type="button" class="button bg-sky-500 hover:bg-sky-300 ... ">Send Exam Link</button>
+                    <button onClick={this.showEmailModal} type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded ">Schedule Interview</button>
+                    <button onClick={this.showOfferEmailModal} type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-2 border border-blue-500 hover:border-transparent rounded">Send Offer Letter</button>
                   </div>
 
                 </div>
@@ -824,7 +996,6 @@ class StudentTable extends React.Component {
 }
 
 export default StudentTable;
-
 
 
 

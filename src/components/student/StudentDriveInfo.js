@@ -37,11 +37,13 @@ const StudentDriveInfo = () => {
       studentData: {
         id: studentData._id,
         name: studentData.personalDetails.name,
-        // email: studentData.personalDetails.email,
+        email: studentData.credentials.email,
         branch: studentData.academicDetails.department,
         appliedDate: new Date().toLocaleDateString() ,
-        status: "",
-        interviewCleared: false
+        status: "In process",
+        rejected : false,
+        interviewCleared: false,
+        testCleared: false
       },
       driveId: localStorage.getItem("activeDriveId")
     }
