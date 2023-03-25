@@ -20,7 +20,7 @@ import EmailSend from "./components/company/Email";
 import AdminSignup from "./components/admin/AdminSignup";
 import AdminLogin from "./components/admin/AdminLogin";
 
-import LandingPage from "./Landing";
+import Land from "./Land";
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
           <Route path="/adminLogin" element={<AdminLogin />}></Route>
           <Route path="/adminSignup" element={<AdminSignup />}></Route>
 
-          <Route path="/landing" element={<LandingPage/>}></Route>
+          <Route path="/landing" element={<Land/>}></Route>
 
          
 

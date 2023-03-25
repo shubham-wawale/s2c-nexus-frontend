@@ -5,6 +5,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
+    "@mdi/js": "^7.2.96",
+    "@mdi/react": "^1.6.1",
     "@tailwindui/react": "^0.1.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
