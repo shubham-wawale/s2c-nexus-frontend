@@ -73,14 +73,18 @@ module.exports = {
         },
 
         extend: {
-            backgroundImage: (theme) => ({
-                'footer-bg': "url('/images/footer.jpg')",
-                spec: "url('/images/spec.jpg')",
-                'cake-bg': "url('/images/cakedivider.png')",
-                'video-bg': "url('/images/video_bg4.png')",
-                'login-bg': "url('/images/login_bg.jpeg')",
-                'checkout-bg': "url('/images/donuts.jpg')"
-            }),
+            // backgroundImage: {
+            //     'admin-bg' : "url('/images/comp_login.jpg')"},
+
+            // backgroundImage: (theme) => ({
+            //     'admin-bg' : "url('/images/comp_login.jpg')",
+            //     'footer-bg': "url('/images/footer.jpg')",
+            //     spec: "url('/images/spec.jpg')",
+            //     'cake-bg': "url('/images/cakedivider.png')",
+            //     'video-bg': "url('/images/video_bg4.png')",
+            //     'login-bg': "url('/images/login_bg.jpeg')",
+            //     'checkout-bg': "url('/images/donuts.jpg')"
+            // }),
 
             height: {
                 '104': '28rem'
