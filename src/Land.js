@@ -15,12 +15,12 @@ function Land() {
             //    src="https://www.peenaksolutions.com/wp-content/uploads/2020/05/Talent-Acquisition.png"
             //    src="https://e1.pxfuel.com/desktop-wallpaper/945/354/desktop-wallpaper-manpower.jpg"
             // src="https://quotienthr.com/wp-content/uploads/2021/02/All-About-HR-Automation-1024x631-1.png"
-               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgrr9rVzR0DMw_w5xEDHc0YyPM8muTLa4NI9ScY_1p5r4fhu4PLErxIqWfn-BUOMkZTg&usqp=CAU"
+               src="https://i.pinimg.com/736x/30/8f/2f/308f2fd627c36e007527bc50337f6c7b.jpg"
             />
 
             <div className="relative "> 
 
-            <div className="max-w-3xl mx-auto text-center  pb-12 md:pb-16">
+            <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
               <h1 className="text-3xl text-center  text-bold text-white mb-4">
                 Explore the services provided by S2C Nexus!
               </h1>

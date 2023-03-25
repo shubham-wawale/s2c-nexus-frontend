@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import DiscussionForum from './DiscussionForum/DiscussionForum'
 import ResumePDF from './ResumeToPdf'
 import { StudentOffers } from './StudentOffers'
+import AppliedStudentDrive from './StudentAppliedDrive'
 
 export default function StudentHome() {
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ export default function StudentHome() {
       <StudentSideNav changeTab={handleTabChange} />
       {activeTab === "dashboard" && <StudentDashboard />}
       {activeTab === "resume" && <ResumePDF />}
-      {activeTab === "appliedDrive" && <StudentDashboard />}
+      {activeTab === "appliedDrive" && <AppliedStudentDrive />}
       {activeTab === "profile" && <StudentProfile />}
       {activeTab === "dforum" && <DiscussionForum />}
       {activeTab === "interview" && <StudentOffers />}
