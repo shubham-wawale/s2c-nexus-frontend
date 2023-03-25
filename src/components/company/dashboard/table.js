@@ -25,6 +25,8 @@ class StudentTable extends React.Component {
       emailSubject: "",
       emailDescription: "",
       showOfferEmailModal: false,
+      showProcessor: false,
+      showEmailSendProcessor: false,
       formData: {
 
       },
@@ -56,29 +58,38 @@ class StudentTable extends React.Component {
 
   onEmailSubmit = (e) => {
     e.preventDefault();
+    this.showEmailSendProcessor()
     console.log(this.state.emailDescription)
     console.log(this.state.emailSubject)
     axios.post("http://localhost:8080/email/users/", {
       subject: this.state.emailSubject,
-      description: this.state.emailDescription
-
+      description: this.state.emailDescription,
+      driveData: this.state.driveData
     })
-      .then(response => alert(response.data.respMesg));
+      .then(response => {
+        this.hideEmailSendProcessor()
+        alert(response.data.respMesg)}
+        );
   };
 
   onEmailOfferSubmit = (e) => {
     e.preventDefault();
+    this.showEmailSendProcessor()
     console.log(this.state.emailDescription)
     console.log(this.state.emailSubject)
     axios.post("http://localhost:8080/email/offer/", {
       subject: this.state.emailSubject,
-      description: this.state.emailDescription
-
+      description: this.state.emailDescription,
+      driveData: this.state.driveData
     })
-      .then(response => alert(response.data.respMesg));
+      .then(response => {
+        this.hideEmailSendProcessor()
+        alert(response.data.respMesg)
+      });
   };
 
   handleTestFileUpload = (event) => {
+    this.showProcessor()
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -103,6 +114,7 @@ class StudentTable extends React.Component {
         if (response.data.success) {
           console.log(response.data.message)
           this.loadDriveData()
+          this.hideProcessor()
         } else {
           console.log(response.data.message)
         }
@@ -115,6 +127,7 @@ class StudentTable extends React.Component {
   };
 
   handleInterviewFileUpload = (event) => {
+    this.showProcessor()
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -139,6 +152,7 @@ class StudentTable extends React.Component {
         if (response.data.success) {
           console.log(response.data.message)
           this.loadDriveData()
+          this.hideProcessor()
         } else {
           console.log(response.data.message)
         }
@@ -234,6 +248,22 @@ class StudentTable extends React.Component {
   hideResume = () => {
     this.setState({ showResume: false });
     console.log(this.state.show)
+  };
+
+  showProcessor = () => {
+    this.setState({ showProcessor: true });
+  };
+
+  hideProcessor = () => {
+    this.setState({ showProcessor: false });
+  };
+
+  showEmailSendProcessor = () => {
+    this.setState({ showEmailSendProcessor: true });
+  };
+
+  hideEmailSendProcessor = () => {
+    this.setState({ showEmailSendProcessor: false });
   };
 
   showEmailModal = () => {
@@ -842,15 +872,28 @@ class StudentTable extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <p class="card-header-title">
-                <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-                Applied Students
-              </p>
-              <table className="table" id="table-id" >
+              {this.state.showProcessor ?
+                <div class="flex items-center justify-center">
+                  <div
+                    class="inline-block mr-5 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                    >
+                  </div>
+                  <span>Processing Excel files</span>
+                </div> :
+                <div>
+                  <p class="card-header-title">
+                    <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+                    Applied Students
+                  </p>
+                  <table className="table" id="table-id" >
 
-                <thead>
-                  <tr>
-                    {/* <th scope="col">
+                    <thead>
+                      <tr>
+                        {/* <th scope="col">
                       <input
                         type="checkbox"
                         className="form-check-input"
@@ -860,20 +903,20 @@ class StudentTable extends React.Component {
                       />
                     </th> */}
 
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Resume</th>
-                    <th scope="col">Branch</th>
-                    <th scope="col">Batch</th>
-                    <th scope="col">Applied on</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Resume</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Batch</th>
+                        <th scope="col">Applied on</th>
 
 
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.tableData.length != 0 ? this.state.tableData.map((user) => (
-                    <tr key={user.id} >
-                      {/* <th scope="row">
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.tableData.length != 0 ? this.state.tableData.map((user) => (
+                        <tr key={user.id} >
+                          {/* <th scope="row">
                         <input
                           type="checkbox"
                           checked={user.selected}
@@ -882,29 +925,30 @@ class StudentTable extends React.Component {
                           onChange={(e) => this.onItemCheck(e, user)}
                         />
                       </th> */}
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td><button class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
-                      <td>{user.branch}</td>
-                      <td>2023</td>
-                      <td>{user.appliedDate}</td>
+                          <td>{user.name}</td>
+                          <td>{user.email}</td>
+                          <td><button class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
+                          <td>{user.branch}</td>
+                          <td>2023</td>
+                          <td>{user.appliedDate}</td>
 
 
-                      <div class="buttons right nowrap mr-7">
-                        {/* <button class="button small text-center inline-flex items-center green --jb-modal" data-target="sample-modal-2" type="button">
+                          <div class="buttons right nowrap mr-7">
+                            {/* <button class="button small text-center inline-flex items-center green --jb-modal" data-target="sample-modal-2" type="button">
                           <span class="icon"><i class="mdi mdi-check"></i></span>Accept
                         </button> */}
 
 
-                        <button id={user.id} onClick={this.handleRejectStudent} class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
-                          <span class="icon"><i class="mdi mdi-window-close"></i></span>Reject
-                        </button>
-                      </div>
+                            <button id={user.id} onClick={this.handleRejectStudent} class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
+                              <span class="icon"><i class="mdi mdi-window-close"></i></span>Reject
+                            </button>
+                          </div>
 
-                    </tr>
-                  )) : null}
-                </tbody>
-              </table>
+                        </tr>
+                      )) : null}
+                    </tbody>
+                  </table>
+                </div>}
 
               <button class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded " onClick={this.handleDownload}>Download List</button>
               <div>
@@ -952,6 +996,18 @@ class StudentTable extends React.Component {
                       >
                       </textarea>
                     </div>
+                    {this.state.showEmailSendProcessor ?
+                    <div class="flex items-center justify-center">
+                      <div
+                        class="inline-block mr-5 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                        role="status">
+                        <span
+                          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                        >Loading...</span
+                        >
+                      </div>
+                      <span>Sending Email</span>
+                    </div> :
                     <div class="flex items-center justify-between">
                       <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline" type="button">
                         Send Email
@@ -964,7 +1020,7 @@ class StudentTable extends React.Component {
                         Close
                       </button>
 
-                    </div>
+                    </div> }
                   </form>
 
                 </div>
