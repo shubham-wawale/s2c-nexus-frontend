@@ -2,9 +2,9 @@ import React from "react";
 export default function Navbar() {
   return (
     <div class="main">
-      <nav class=" p-3 mix-blend-screen	 fixed w-full  z-50 top-0 left-0  dark:bg-gray-800 ">
-        <div class="container w-full m-0  flex  justify-between items-center ">
-          <div class="flex flex-column w-3/4 ">
+      <nav class=" p-3 mix-blend-exclusion fixed w-1/2  z-50 top-0 left-0  dark:bg-gray-800 ">
+        <div class="container w-auto  m-0  flex  justify-between items-center ">
+          <div class="flex flex-column ">
             <img
               class="rounded-full border  h-10 mx-3"
               src="./images/login.png"
@@ -12,10 +12,10 @@ export default function Navbar() {
 
             />
 
-            <span class="mx-3 text-white text-xl font-semibold my-2">S2C Nexus</span>
+            <span class=" text-white text-3xl font-black my-3">S2C Nexus</span>
           </div>
           {/* class=" text-xl font-semibold  whitespace-nowrap dark:text-white" */}
-          <div class=" w-full m-0 md:block md:w-auto " id="navbar-solid-bg">
+          {/* <div class=" w-full m-0 md:block md:w-auto " id="navbar-solid-bg">
             <ul class="flex  flex-col justify-between items-end mt-4 bg-gray-50 p-0 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
               <li>
                 <a
@@ -51,7 +51,7 @@ export default function Navbar() {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </nav>
     </div>

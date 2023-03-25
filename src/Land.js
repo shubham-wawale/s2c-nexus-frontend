@@ -2,12 +2,14 @@ import React from "react";
 import Icon from "@mdi/react";
 import { mdiAccountSchool,mdiDomain, mdiSecurity } from "@mdi/js";
 // import recrutment from "./images/recrutment.jpg";
+import Navbar from "./LandingNav";
 function Land() {
   return (
     <>
+    <Navbar/>
       <div style={{ marginLeft: "-15rem", marginTop: "-3.5rem" }}>
         <div>
-          <div className=" h-96 w-full hue-rotate-15  relative">
+          <div className=" h-96 w-full  relative">
             <img
               className="w-full h-screen object-cover absolute"
             //    src="https://www.peenaksolutions.com/wp-content/uploads/2020/05/Talent-Acquisition.png"
@@ -18,8 +20,8 @@ function Land() {
 
             <div className="relative "> 
 
-            <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-              <h1 className="text-3xl text-center text-bold text-white mb-4">
+            <div className="max-w-3xl mx-auto text-center  pb-12 md:pb-16">
+              <h1 className="text-3xl text-center  text-bold text-white mb-4">
                 Explore the services provided by S2C Nexus!
               </h1>
               <p className="underline decoration-1 text-lg text-gray-400">
