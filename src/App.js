@@ -1,6 +1,5 @@
 import Login from "./components/company/Login";
 import Signup from "./components/company/Signup";
-// import Link from "react-scroll/modules/components/Link";
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,11 +14,11 @@ import StudentHome from "./components/student/StudentHome";
 import StudentLogin from "./components/student/Authentication/StudentLogin";
 import StudentSignup from "./components/student/Authentication/StudentSignup";
 import StudentDriveInfo from "./components/student/StudentDriveInfo";
-// import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import AdminSignup from "./components/admin/AdminSignup";
 import AdminLogin from "./components/admin/AdminLogin";
 
-
+import LandingPage from "./Land";
+import AdminDashboard from "./components/admin/AdminDashboard";
 
 function App() {
   return (
@@ -45,6 +44,10 @@ function App() {
           <Route path="/studentDriveInfo" element={<StudentDriveInfo />}></Route>
           <Route path="/adminLogin" element={<AdminLogin />}></Route>
           <Route path="/adminSignup" element={<AdminSignup />}></Route>
+          <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
+          <Route path="/landing" element={<LandingPage/>}></Route>
+
+         
 
         </Routes>
        
