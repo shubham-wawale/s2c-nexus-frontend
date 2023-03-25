@@ -22,7 +22,7 @@ function Land() {
 
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
               <h1 className="text-3xl text-center  text-bold text-black mb-4">
-                Explore the services provided by S2C Nexus!
+                .
               </h1>
               <h1 className="text-3xl text-center  text-bold text-white mb-4">
                 Explore the services provided by S2C Nexus!
