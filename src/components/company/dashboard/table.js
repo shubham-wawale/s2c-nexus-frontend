@@ -703,7 +703,7 @@ class StudentTable extends React.Component {
                 </div>
                 <button
                   className="bg-blue-200 text-black active:bg-blue-500 
-      font-bold px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-96 mt-10"
+      font-bold px-3 py-2 rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ml-96 mt-10"
                   type="button"
                   onClick={this.showModal}
                 >
@@ -846,7 +846,7 @@ class StudentTable extends React.Component {
                 <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
                 Applied Students
               </p>
-              <table className="table" id="table-id" >
+              <table className="table ml-2" id="table-id" >
 
                 <thead>
                   <tr>
@@ -906,16 +906,17 @@ class StudentTable extends React.Component {
                 </tbody>
               </table>
 
-              <button class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded " onClick={this.handleDownload}>Download List</button>
+              <button class="py-2 px-4 ml-3 bg-blue-200 text-black active:bg-blue-500 
+            font-bold text-center rounded shadow hover:shadow-lg outline-none focus:outline-none mt-2 mb-1 hover:text-white hover:bg-[#0f172a] ..." onClick={this.handleDownload}>Download List</button>
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900" for="Upload Test Results">Upload Test Results: </label>
-                <input class="block mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700"
+                <label class="block mb-2 text-md font-medium text-gray-900 mt-3 ml-4" for="Upload Test Results">Upload Test Results: </label>
+                <input class="block mb-5 ml-4 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700"
                   type="file" onChange={this.handleTestFileUpload} />
               </div>
 
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900" for="Upload Interview Results">Upload Interview Results: </label>
-                <input class="block mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700 " type="file" onChange={this.handleInterviewFileUpload} />
+                <label class="block mb-2 mt-3 ml-4 text-md font-medium text-gray-900" for="Upload Interview Results">Upload Interview Results: </label>
+                <input class="block mb-5 ml-4 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700 " type="file" onChange={this.handleInterviewFileUpload} />
               </div>
 
 
@@ -923,7 +924,7 @@ class StudentTable extends React.Component {
 
                 <div class="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
 
-                  <form class="bg-[#BFDBFE] shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                  <form class="bg-[#ccdcf1] shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
                     <div class="mb-4">
                       {/* <p class="text-green-500 text-xs bold italic">{this.state.msg}</p> */}
@@ -953,11 +954,12 @@ class StudentTable extends React.Component {
                       </textarea>
                     </div>
                     <div class="flex items-center justify-between">
-                      <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline" type="button">
+                      <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class=" bg-[#6f8aaf]  text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none py-2 px-4 mx-1" type="button">
                         Send Email
                       </button>
                       <button
-                        className="text-black background-transparent font-bold bg-gray-400 uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
+                        className="text-black background-transparent font-bold bg-gray-400 hover:bg-gray-500 hover:text-white rounded uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                         onClick={this.hideEmailModal}
                       >
@@ -977,9 +979,12 @@ class StudentTable extends React.Component {
               <div class="buttons right nowrap">
                 <div class="flex items-center justify-between mb-5">
                   <div class="buttons">
-                    <button onClick={this.showEmailModal} type="button" class="button bg-sky-500 hover:bg-sky-300 ... ">Send Exam Link</button>
-                    <button onClick={this.showEmailModal} type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded ">Schedule Interview</button>
-                    <button onClick={this.showOfferEmailModal} type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-2 border border-blue-500 hover:border-transparent rounded">Send Offer Letter</button>
+                    <button onClick={this.showEmailModal} type="button" class="button bg-blue-200 text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ">Send Exam Link</button>
+                    <button onClick={this.showEmailModal} type="button" class="button bg-blue-200 text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ">Schedule Interview</button>
+                    <button onClick={this.showOfferEmailModal} type="button" class="button  bg-blue-200 text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ">Send Offer Letter</button>
                   </div>
 
                 </div>
