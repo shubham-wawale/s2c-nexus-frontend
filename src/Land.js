@@ -17,10 +17,13 @@ function Land() {
             // src="https://quotienthr.com/wp-content/uploads/2021/02/All-About-HR-Automation-1024x631-1.png"
                src="https://i.pinimg.com/736x/30/8f/2f/308f2fd627c36e007527bc50337f6c7b.jpg"
             />
-
+            
             <div className="relative "> 
 
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+              <h1 className="text-3xl text-center  text-bold text-black mb-4">
+                .
+              </h1>
               <h1 className="text-3xl text-center  text-bold text-white mb-4">
                 Explore the services provided by S2C Nexus!
               </h1>
@@ -41,7 +44,7 @@ function Land() {
 
 <div className="group">
             <a className="group-hover:bg-gray-500" href="/adminLogin">
-              <div className="bg-gray-200 ml-10 w-1/2 hover:bg-gray-300 dark:bg-slate-900 rounded-lg px-6  py-8 ring-1 ring-slate-900/5 shadow-xl">
+              <div className="bg-gray-200 ml-10 w-1/2 hover:bg-gray-300 dark:bg-slate-900 rounded-lg px-6 h-28 py-6 ring-1 ring-slate-900/5 shadow-xl">
                 <div>
                   <span className="inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg">
                     <Icon path={mdiSecurity} size={1} />
@@ -58,7 +61,7 @@ function Land() {
             </a>
 
             <a href="/">
-              <div className="bg-gray-200 ml-10 w-1/2  mt-6 dark:bg-slate-900 rounded-lg px-6  py-8 ring-1 ring-slate-900/5 shadow-xl">
+              <div className="bg-gray-200 ml-10 w-1/2  mt-6 dark:bg-slate-900 rounded-lg px-6 h-28 py-6 ring-1 ring-slate-900/5 shadow-xl">
                 <div>
                   <span className="inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg">
                     <Icon path={mdiDomain} size={1} />
@@ -75,7 +78,7 @@ function Land() {
             </a>
 
             <a href="/studentLogin">
-              <div className="bg-gray-200 ml-10 w-1/2  mt-6 dark:bg-slate-900 rounded-lg px-6  py-8 ring-1 ring-slate-900/5 shadow-xl">
+              <div className="bg-gray-200 ml-10 w-1/2  mt-6 dark:bg-slate-900 rounded-lg px-6 h-28 py-6 ring-1 ring-slate-900/5 shadow-xl">
                 <div>
                   <span className="inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg">
                     <Icon path={mdiAccountSchool} size={1} />
@@ -93,7 +96,7 @@ function Land() {
             </div>
             </div>
 
-          </div>
+            </div>
         </div>
       </div>
    </>
