@@ -30,7 +30,6 @@ export default function StuDriveCard(props) {
 
   const navigate = useNavigate()
   const handleDriveCardClick = () => {
-    localStorage.setItem("activeStudentData", JSON.stringify(props.studentData))
     localStorage.setItem('activeDriveId', props.driveData._id)
     navigate("/studentDriveInfo") 
   }

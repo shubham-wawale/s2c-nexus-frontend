@@ -6,17 +6,18 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function CompanyProf() {
+  useEffect(() => {
+    var compData = JSON.parse(localStorage.getItem("activeCompany"))
+    console.log(compData)
+    setCompData(compData)
+  }, [])
+  
 
-  const [compData, setPersonalData] = useState({
-    compname: "",
-    yearofestablish: "",
-    email: "",
-    goal: ""
-  })
+  const [compData, setCompData] = useState({})
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setPersonalData(prevValue => (
+    setCompData(prevValue => (
       {
         ...prevValue,
         [name]: value
@@ -24,23 +25,23 @@ export default function CompanyProf() {
     ))
   }
 
-  const handlePersonalDetailsUpdate = (e) => {
+  const handleCompanyDetailsUpdate = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8080/company/updateDetails', {
-      studentId: "638d14885c37719538d6c86d",
-      key: "compDetails",
-      newData: compData
-    })
-      .then(function (response) {
-        if (response.data.success) {
-          alert(response.data.message)
-        } else {
-          alert(response.data.message)
-        }
-      })
-      .catch(function (error) {
-        alert("BACKEND SERVICE UNAVAILABLE");
-      })
+    // axios.post('http://localhost:8080/company/updateDetails', {
+    //   studentId: "638d14885c37719538d6c86d",
+    //   key: "compDetails",
+    //   newData: compData
+    // })
+    //   .then(function (response) {
+    //     if (response.data.success) {
+    //       alert(response.data.message)
+    //     } else {
+    //       alert(response.data.message)
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     alert("BACKEND SERVICE UNAVAILABLE");
+    //   })
   }
 
   return (
@@ -48,6 +49,7 @@ export default function CompanyProf() {
       <Navbar />
       <SideNav />
 
+      {compData ?
       <div class=" flex flex-wrap items-center  justify-center">
         <div class="container  bg-white rounded  shadow-lg  ">
           <div class="h-2/4 sm:h-64 overflow-hidden">
@@ -71,12 +73,12 @@ export default function CompanyProf() {
             <form className='mx-5 mt-6 grid grid-cols-2 gap-4'>
               <div class="mb-3">
                 <label for="name" class="block mb-2 text-md font-bold text-[#1F2937]">Company name</label>
-                <input name='name' onChange={handleInputChange} value={compData.compname} type="text" id="name" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
+                <input name='name' onChange={handleInputChange} value={compData.name} type="text" id="name" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
           p-2.5 w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
               </div>
               <div class="mb-3">
                 <label for="date" class="block mb-2 text-md font-bold text-[#1F2937]">Year of Establishment</label>
-                <input name='dateOfBirth' onChange={handleInputChange} value={compData.yearofestablish} id="dateOfBirth" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
+                <input name='dateOfBirth' onChange={handleInputChange} value={compData.yearOfEstablishment} id="dateOfBirth" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
           p-2.5 w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
               </div>
               <div class="mb-3">
@@ -86,7 +88,7 @@ export default function CompanyProf() {
               </div>
               <div class="mb-3">
                 <label for="mobilenumber" class="block mb-2 text-md font-bold text-[#1F2937]">Goals</label>
-                <input name='mobileNumber' onChange={handleInputChange} value={compData.goal} type="text" id="mobileNumber" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
+                <input name='mobileNumber' onChange={handleInputChange} value={compData.vision} type="text" id="mobileNumber" class="shadow-sm focus:bg-[#C2D3E4] focus:outline-none 
           p-2.5 w-full   bg-gray-50 border border-gray-300 text-[#1F2937]  text-sm rounded-lg" />
               </div>
               {/* <div class="mb-3 col-span-2">
@@ -98,11 +100,12 @@ export default function CompanyProf() {
             </form>
           </div>
           {/* <button onClick={handlePersonalDetailsUpdate} className="float-right mr-4 ml-auto focus:outline-none bg-[#1F2937] px-1 py-1 rounded-md font-bold text-lg text-[#d1d5db] w-28 border">Save</button> */}
-          <div onClick={handlePersonalDetailsUpdate} class="justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 ... focus:ring-4  focus:ring-blue-300 font-medium rounded-lg dark:focus:ring-blue-800 px-4 py-2 cursor-pointer  w-1/6 mx-auto text-center mt-2 mb-3  text-black hover:text-white dark:hover:text-white">
+          <div onClick={handleCompanyDetailsUpdate} class="justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 ... focus:ring-4  focus:ring-blue-300 font-medium rounded-lg dark:focus:ring-blue-800 px-4 py-2 cursor-pointer  w-1/6 mx-auto text-center mt-2 mb-3  text-black hover:text-white dark:hover:text-white">
             <button type="submit" >Edit Profile</button>
           </div>
         </div>
-      </div>
+      </div> :
+      null}
     </>
 
   )

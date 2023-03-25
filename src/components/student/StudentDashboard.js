@@ -16,23 +16,24 @@ export default function StudentDashboard() {
     }).then(function (response) {
       if (response.data.success) {
         student = response.data.studentData
-        return axios.get('http://localhost:8080/student/drives', {
-          params: {
-            studentData: student
-          }
-        })
-          
+        if (student.academicDetails.tenth) {
+          localStorage.setItem("activeStudentData", JSON.stringify(student))
+          return axios.get('http://localhost:8080/student/drives', {
+            params: {
+              studentData: student
+            }
+          })
+        }
+
       } else {
         console.log(response.data.message)
       }
-    }).then (response=> {
-      if(response.data.success) {
+    }).then(response => {
+      if (response.data.success) {
         console.log(response.data.drives)
         setDriveData(response.data.drives)
         setStudentData(student)
-      } else {
-        console.log(response.data.message)
-      }
+      } 
     })
       .catch(function (error) {
         console.log(error);
@@ -48,72 +49,8 @@ export default function StudentDashboard() {
             <path fillRule="evenodd" d="M7.5 5.25a3 3 0 013-3h3a3 3 0 013 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0112 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 017.5 5.455V5.25zm7.5 0v.09a49.488 49.488 0 00-6 0v-.09a1.5 1.5 0 011.5-1.5h3a1.5 1.5 0 011.5 1.5zm-3 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
             <path d="M3 18.4v-2.796a4.3 4.3 0 00.713.31A26.226 26.226 0 0012 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 01-6.477-.427C4.047 21.128 3 19.852 3 18.4z" />
           </svg>
-          <span>Eligible Drives</span></div>
+          <span>Applied Drives</span></div>
       </div>
-
-      <div className="flex flex-col">
-      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Title
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Role
-                  </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
-                        <img className="h-10 w-10 rounded-full" src={image} alt="" />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          Tata Consultancy Services
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          tcs@example.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">Software Engineer</div>
-                    <div className="text-sm text-gray-500">Web Development</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Active
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    Admin
-                  </td>
-                  <td className="px-3 py-4 whitespace-nowrap text-centre text-sm font-medium">
-                    <a href="#" className="text-indigo-600 hover:text-indigo-900">Attend Interview</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
       {driveData && driveData.length !== 0 ? driveData.map(drive => (

@@ -26,6 +26,7 @@
     "react-scroll": "^1.8.8",
     "react-select": "^5.7.0",
     "redux": "^4.2.0",
+    "simple-excel-to-json": "^2.3.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"

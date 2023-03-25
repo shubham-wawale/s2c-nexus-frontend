@@ -33,11 +33,12 @@ export default function Login() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault()
-    console.log(credentials)
     axios.post('http://localhost:8080/company/login', credentials)
     .then(function (response) {
       if(response.data.success) {
-        localStorage.setItem("activeCompanyId", response.data.companyId)
+        console.log(response.data)
+        localStorage.setItem("activeCompanyId", response.data.companyData._id)
+        localStorage.setItem("activeCompany", JSON.stringify(response.data.companyData))
         navigate("/compdashboard")
       } else {
         alert(response.data.message)
