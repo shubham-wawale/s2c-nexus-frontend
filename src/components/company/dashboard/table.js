@@ -424,7 +424,7 @@ class StudentTable extends React.Component {
 
         {this.state.showResume ? (
           
-          <div className="flex justify-center  items-center h-[100%] w-[100%] overflow-x-hidden overflow-y-auto absolute top-[10%]  inset-0 z-50 outline-none focus:outline-none">
+          <div className="flex justify-center  items-center overflow-x-hidden overflow-y-auto absolute top-[10%]  inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-16 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg mt-24 shadow-lg relative flex flex-col w-full   outline-none focus:outline-none">
                 <div className="flex items-start justify-between  mt-32 border-b border-solid border-gray-300 rounded-t ">
@@ -440,8 +440,9 @@ class StudentTable extends React.Component {
                 </div>
                 {this.state.studentData.personalDetails ? 
                 <div
+
                   id="myDiv" ref={(el) => (this.pdfRef = el)}
-                  class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-500 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-md print:bg-white"
+                  class="max-w-5xl  p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-500 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-md print:bg-white"
                 >
                   <div class="block w-full">
                     <h1 class="mb-0 text-xl font-bold text-gray-750">{this.state.studentData.personalDetails.name}</h1>
@@ -787,7 +788,7 @@ class StudentTable extends React.Component {
                         </span>
                       </button> */}
                   </div>
-                  <form >
+                  <form class="h-96 overflow-auto">
                     <div class="relative z-0 ml-10 mb-6 mt-7 mr-10 group"  >
                       <input value={this.state.formData.driveName} onChange={this.handleInputChange} type="name" name="driveName" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="*" />
                       <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Drive Name</label>
@@ -973,7 +974,7 @@ class StudentTable extends React.Component {
                   </table>
                 </div>}
 
-              <button class="py-2 px-4 ml-3 bg-blue-200 text-black active:bg-blue-500 
+              <button class="py-2 px-4 float-right mr-5 ml-3 bg-blue-200 text-black active:bg-blue-500 
             font-bold text-center rounded shadow hover:shadow-lg outline-none focus:outline-none mt-2 mb-1 hover:text-white hover:bg-[#0f172a] ..." onClick={this.handleDownload}>Download List</button>
               <div>
                 <label class="block mb-2 text-md font-medium text-gray-900 mt-3 ml-4" for="Upload Test Results">Upload Test Results: </label>
