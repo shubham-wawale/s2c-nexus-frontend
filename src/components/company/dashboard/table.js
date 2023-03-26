@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Navbar from "./navBar";
 import SideNav from "./sideNav";
 import axios from "axios";
 import * as XLSX from 'xlsx'
+import html2pdf from "html2pdf.js";
 
 class StudentTable extends React.Component {
 
@@ -27,6 +28,7 @@ class StudentTable extends React.Component {
       showOfferEmailModal: false,
       showProcessor: false,
       showEmailSendProcessor: false,
+      studentData:{},
       formData: {
 
       },
@@ -68,8 +70,9 @@ class StudentTable extends React.Component {
     })
       .then(response => {
         this.hideEmailSendProcessor()
-        alert(response.data.respMesg)}
-        );
+        alert(response.data.respMesg)
+      }
+      );
   };
 
   onEmailOfferSubmit = (e) => {
@@ -240,10 +243,23 @@ class StudentTable extends React.Component {
     console.log(this.state.show)
   };
 
-  showResume = () => {
-    this.setState({ showResume: true });
-    console.log(this.state.show)
-  };
+  showResume = (e) => {
+    e.preventDefault()   
+    console.log(e.target.id)
+    const studentId = e.target.id
+    axios.get('http://localhost:8080/student/getDetails', {
+      params:{
+        studentId: studentId,
+      }
+    }).then(response => {
+      if (response.data.success) {
+        this.setState({ showResume: true , studentData: response.data.studentData});
+      
+      } 
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
   hideResume = () => {
     this.setState({ showResume: false });
@@ -374,11 +390,31 @@ class StudentTable extends React.Component {
       })
   }
 
+  handleDownloadPDF = () => {
+    const options = {
+      margin: 0.5,
+      filename: 'resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+    };
+
+    html2pdf()
+      .from(this.pdfRef)
+      .set(options)
+      .save();
+  };
+
+
 
   render() {
     const { isActive } = this.state;
     const buttonColor = isActive ? "green" : "red";
     const buttonText = isActive ? "Active" : "Inactive";
+
+    
+    // const { data } = this.props;
+    // const { studentData } = this.state;
     return (
 
       <>
@@ -387,11 +423,12 @@ class StudentTable extends React.Component {
         <SideNav />
 
         {this.state.showResume ? (
+          
           <div className="flex justify-center  items-center h-[100%] w-[100%] overflow-x-hidden overflow-y-auto absolute top-[10%]  inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-16 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg mt-24 shadow-lg relative flex flex-col w-full   outline-none focus:outline-none">
                 <div className="flex items-start justify-between  mt-32 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-2xl font=semibold">Update Drive Info</h3>
+                  {/* <h3 className="text-2xl font=semibold">Update Drive Info</h3> */}
                   {/* <button
                         className="bg-transparent border-0 text-black float-right"
                         onClick={this.hideModal}
@@ -401,43 +438,37 @@ class StudentTable extends React.Component {
                         </span>
                       </button> */}
                 </div>
+                {this.state.studentData.personalDetails ? 
                 <div
+                  id="myDiv" ref={(el) => (this.pdfRef = el)}
                   class="max-w-5xl p-3 mx-auto my-auto bg-gray-100 border-2 border-gray-500 print:border-0 page print:max-w-screen print:max-h-screen print:mx-0 print:my-o lg:h-letter md:max-w-letter md:h-letter xsm:p-8 sm:p-9 md:p-6 lg:mt-4 rounded-md print:bg-white"
                 >
                   <div class="block w-full">
-                    {/* <div class="relative w-16 h-16">
-            <img
-              class="rounded-full border border-gray-100 shadow-sm"
-              src="https://randomuser.me/api/portraits/women/81.jpg"
-              alt="user image"
-            />
-            <div class="absolute top-0 right-0 h-4 w-4 my-1  z-2"></div>
-          </div> */}
-                    <h1 class="mb-0 text-xl font-bold text-gray-750">Shubham Wawale</h1>
+                    <h1 class="mb-0 text-xl font-bold text-gray-750">{this.state.studentData.personalDetails.name}</h1>
                     <h2 class="m-0 ml-2 text-md font-semibold text-gray-700 leading-snugish">
                       Full Stack Web Developer
                     </h2>
                     <div class="flex justify-start w-full">
                       <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-                        Mumbai, India
+                        {this.state.studentData.personalDetails.address}
                       </h3>
                       <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
                         |
                       </h2>
                       <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-                        wawaleshubham@gmail.com
+                        {this.state.studentData.credentials.email}
                       </h3>
                       <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
                         |
                       </h2>
-                      <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
+                      {/* <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
                         { }LinkedIn
-                      </h3>
-                      <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
+                      </h3> */}
+                      {/* <h2 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish mx-2">
                         |
-                      </h2>
+                      </h2> */}
                       <h3 class="m-0 mt-1 ml-2 font-md text-sm text-gray-550 leading-snugish">
-                        { }7388967896
+                        { }{this.state.studentData.personalDetails.mobileNumber}
                       </h3>
                     </div>
                     <h1 class=" items-baseline mt-1 justify-between w-full  align-top border-b-4"></h1>
@@ -484,24 +515,23 @@ class StudentTable extends React.Component {
                       Professional Experience/ Internships
                     </h2>
                   </div>
+                  {this.state.studentData.experienceDetails  && this.state.studentData.experienceDetails.map(exp=> (
                   <div className="mt-0">
-                    <span className="text-md font-semibold text-gray-600"> SDG Internship</span>
+                    <span className="text-md font-semibold text-gray-600"> {exp.organisation}-{exp.position}</span>
                     <ul class="list-disc ml-4  text-sm">
                       <li>
-                        Developed “Personal Planner” a web application that was
-                        effectively created to aid in task planning and organization by
-                        viewing or deleting existing ones. The user can also conduct data
-                        analysis.
+                      {exp.workDescription}
                       </li>
-                      <li>
+                      {/* <li>
                         Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
                         Numpy, Matplotlib, Seaborn.
-                      </li>
+                      </li> */}
                     </ul>
                     {/* <p className="text-lg">{resumeData.name}</p> */}
                   </div>
-
-                  <div className="mt-1">
+                  ))}
+                  
+                  {/* <div className="mt-1">
                     <span className="text-md font-semibold text-gray-600"> EARNEEDS</span>
                     <ul class="list-disc ml-4  text-sm">
                       <li>
@@ -516,30 +546,31 @@ class StudentTable extends React.Component {
                       </li>
                     </ul>
                     <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>
-                  </div>
+                  </div> */}
 
+                  
                   {/* Academic Projects*/}
+                  
                   <div>
                     <h2 className="text-md font-bold italic">Academic Projects</h2>
                   </div>
+                  {this.state.studentData.projectDetails  && this.state.studentData.projectDetails.map(project=> (
                   <div className="mt-0">
-                    <span className="text-md font-semibold text-gray-600"> Foundem</span>
+                    <span className="text-md font-semibold text-gray-600">  {project.name}</span>
                     <ul class="list-disc ml-4  text-sm">
                       <li>
-                        Developed “Personal Planner” a web application that was
-                        effectively created to aid in task planning and organization by
-                        viewing or deleting existing ones. The user can also conduct data
-                        analysis.
+                      {project.description}
                       </li>
-                      <li>
+                      {/* <li>
                         Technologies used: Pythons GUI package Tkinter, MySQL, Pandas,
                         Numpy, Matplotlib, Seaborn.
-                      </li>
+                      </li> */}
                     </ul>
-                    {/* <p className="text-lg">{resumeData.name}</p> */}
+                    
                   </div>
+                  ))}
 
-                  <div className="mt-1">
+                  {/* <div className="mt-1">
                     <span className="text-md font-semibold text-gray-600"> PawPet</span>
                     <ul class="list-disc ml-4 text-sm">
                       <li>
@@ -554,30 +585,18 @@ class StudentTable extends React.Component {
                       </li>
                     </ul>
                     <h3 class="items-baseline justify-between mt-2 w-full mt-0.5 align-top border-b-4"></h3>
-                  </div>
+                  </div> */}
 
                   {/* Technical skills */}
                   <div>
                     <h2 className="text-md font-bold italic">Technical Skills</h2>
                     <div class="px-6 pt-2 pb-2">
+                    {this.state.studentData.academicDetails.technicalSkills  && this.state.studentData.academicDetails.technicalSkills.map(skill=>(
                       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-                        Python
+                        {skill}
                       </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-                        Java
-                      </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-                        SQL
-                      </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-                        JavaScript
-                      </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-                        ReactJs
-                      </span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-                        MondoDB
-                      </span>
+                      
+                    ))}
                     </div>
                     <h3 class="items-baseline justify-between  w-full mt-0.5 align-top border-b-4"></h3>
                   </div>
@@ -589,17 +608,21 @@ class StudentTable extends React.Component {
                     </h2>
 
                     <ul className="list-disc text-sm list-inside">
-                      <li>AWS Foundational Course</li>
-                      <li>30 Days of Google Cloud </li>
-                      <li>HTML, CSS, JS foundations</li>
-                      <li>SUSE Cloud Native Foundational Course</li>
-                      <li>Git/Github</li>
+                    {this.state.studentData.academicDetails.certifications  && this.state.studentData.academicDetails.certifications.map(certification=>(
+                    <li>{certification.certificationName} - {certification.certificationYear}</li>
+                    ))}            
                     </ul>
                   </div>
                 </div>
+                :<h1>Couldn't load resume</h1>
+        }
 
 
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 z-50 rounded-b">
+                  <button class="mr-80 mb-5 mt-4 inline-block px-6 py-3 bg-[#0f172a] text-white font-medium text-xs uppercase rounded shadow-md hover:bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 ... hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    onClick={this.handleDownloadPDF}>
+                    Download PDF
+                  </button>
                   <button
                     className="text-black background-transparent font-bold bg-gray-400 uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                     type="button"
@@ -927,7 +950,7 @@ class StudentTable extends React.Component {
                       </th> */}
                           <td>{user.name}</td>
                           <td>{user.email}</td>
-                          <td><button class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
+                          <td><button id={user.id} class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
                           <td>{user.branch}</td>
                           <td>2023</td>
                           <td>{user.appliedDate}</td>
@@ -998,31 +1021,31 @@ class StudentTable extends React.Component {
                       </textarea>
                     </div>
                     {this.state.showEmailSendProcessor ?
-                    <div class="flex items-center justify-center">
-                      <div
-                        class="inline-block mr-5 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                        role="status">
-                        <span
-                          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                        >Loading...</span
-                        >
-                      </div>
-                      <span>Sending Email</span>
-                    </div> :
-                    <div class="flex items-center justify-between">
-                      <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class=" bg-[#6f8aaf]  text-black active:bg-blue-500 
+                      <div class="flex items-center justify-center">
+                        <div
+                          class="inline-block mr-5 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                          role="status">
+                          <span
+                            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                          >Loading...</span
+                          >
+                        </div>
+                        <span>Sending Email</span>
+                      </div> :
+                      <div class="flex items-center justify-between">
+                        <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class=" bg-[#6f8aaf]  text-black active:bg-blue-500 
       font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none py-2 px-4 mx-1" type="button">
-                        Send Email
-                      </button>
-                      <button
-                        className="text-black background-transparent font-bold bg-gray-400 hover:bg-gray-500 hover:text-white rounded uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                        onClick={this.hideEmailModal}
-                      >
-                        Close
-                      </button>
+                          Send Email
+                        </button>
+                        <button
+                          className="text-black background-transparent font-bold bg-gray-400 hover:bg-gray-500 hover:text-white rounded uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
+                          type="button"
+                          onClick={this.hideEmailModal}
+                        >
+                          Close
+                        </button>
 
-                    </div> }
+                      </div>}
                   </form>
 
                 </div>

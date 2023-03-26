@@ -15,7 +15,7 @@ export default function StudentSideNav(props) {
   const handleLogout = (e)=> {
     e.preventDefault()
     localStorage.removeItem('activeStudentId')
-    navigate("/studentLogin")
+    navigate("/")
   }
 
   return (

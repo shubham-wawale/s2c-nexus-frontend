@@ -6,7 +6,7 @@ export default function AdminSideNav() {
   const handleLogout = (e)=> {
     e.preventDefault()
     localStorage.removeItem('activeAdminId')
-    navigate("/adminLogin")
+    navigate("/")
   }
   
     return (

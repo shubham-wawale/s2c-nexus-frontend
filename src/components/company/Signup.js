@@ -33,7 +33,7 @@ export default function Signup() {
       .then(function (response) {
         if (response.data.success) {
           console.log(response.data.message)
-          navigate("/")
+          navigate("/login")
         } else {
           console.log(response.data.message)
         }
