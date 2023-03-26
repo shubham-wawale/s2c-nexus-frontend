@@ -23,7 +23,7 @@ function OpenDiscussion(props){
   }
 
   const submitResponse = (e) =>{
-    e.preventDefault()
+    // e.preventDefault()
     axios.post('http://localhost:8080/discussion/updateMessageContent', {
       msg_id:props.message._id, 
       reply: response

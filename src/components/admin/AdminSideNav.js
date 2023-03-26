@@ -10,7 +10,7 @@ export default function AdminSideNav() {
         <p class="menu-label ">General</p>
         <ul class="menu-list">
           <li class="active">
-            <a href="/compdashboard">
+            <a href="/adminDashboard">
               <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
               <span class="menu-item-label">Dashboard</span>
             </a>
@@ -19,14 +19,14 @@ export default function AdminSideNav() {
         
         <ul class="menu-list">
           <li class="--set-active-tables-html">
-            <a href="/createDrive">
+            <a href="/adminCompanyDrives">
               <span class="icon"><i class="mdi mdi-table"></i></span>
-              <span class="menu-item-label">Something</span>
+              <span class="menu-item-label">Company Drives</span>
             </a>
           </li>
           
           <li class="--set-active-profile-html">
-            <a href="/companyprofile">
+            <a href="">
               <span class="icon"><i class="mdi mdi-account-circle"></i></span>
               <span class="menu-item-label">Admin Profile</span>
             </a>

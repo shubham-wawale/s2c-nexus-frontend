@@ -19,6 +19,8 @@ import AdminLogin from "./components/admin/AdminLogin";
 
 import LandingPage from "./Land";
 import AdminDashboard from "./components/admin/AdminDashboard";
+import CompanyDrives from "./components/admin/CompanyDrives";
+import AdminDriveInfo from "./components/admin/CompanyDriveCardInfo";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
           <Route path="/adminSignup" element={<AdminSignup />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
           <Route path="/landing" element={<LandingPage/>}></Route>
+          <Route path="/adminCompanyDrives" element={<CompanyDrives/>}></Route>
+          <Route path="/adminCompanyDrivesInfo" element={<AdminDriveInfo/>}></Route>
 
          
 
