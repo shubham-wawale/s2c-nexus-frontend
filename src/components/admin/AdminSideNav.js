@@ -1,6 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminSideNav() {
+  const navigate = useNavigate()
+  const handleLogout = (e)=> {
+    e.preventDefault()
+    localStorage.removeItem('activeAdminId')
+    navigate("/adminLogin")
+  }
   
     return (
      <div id="main-div" >
@@ -31,7 +38,7 @@ export default function AdminSideNav() {
               <span class="menu-item-label">Student Info</span>
             </a>
           </li>
-          <li>
+          <li onClick={handleLogout}>
             <a href="/">
               <span class="icon"><i class="mdi mdi-lock"></i></span>
               <span class="menu-item-label">Log Out</span>

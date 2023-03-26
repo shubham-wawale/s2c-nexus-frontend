@@ -7,10 +7,12 @@ import Search from "./SearchBar"
 
 export default function StudentInfo() {
     const [students, setStudents] = useState([])
+    const [filteredStudents, setFilteredStudents] = useState([])
     useEffect(() => {
         axios.get('http://localhost:8080/student/getAllDetails').then(response => {
             if (response.data.success) {
                 setStudents(response.data.studentData)
+                setFilteredStudents(response.data.studentData)
                 // console.log(response.data.drives)
             } else {
                 alert(response.data.message)
@@ -20,11 +22,22 @@ export default function StudentInfo() {
         })
     }, [])
 
+    const handleSearch = (value) => {
+        console.log(value)
+        var filteredStudent = students.filter(student=> (
+            student.credentials.email===value ||
+            student.personalDetails.name===value ||
+            student.academicDetails.department===value ||
+            student.offerCount===parseInt(value)
+            ) )
+        setFilteredStudents(filteredStudent)
+    }
+
     return (
         <>
         <AdminNavbar/>
         <AdminSideNav/>
-        <Search/>
+        <Search handleSearch={handleSearch}/>
             <div className='font-open-sans'>
                 <div className="left-0 w-5/5 shadow-xl  mx-2 my-10 focus:outline-none border-none 
             bg-[#C2D3E4] border font-bold text-[#1F2937] text-lg  py-2 px-4 rounded-md">
@@ -60,7 +73,7 @@ export default function StudentInfo() {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {students.length !== 0 ? students.map(student =>
+                                    {filteredStudents.length !== 0 ? filteredStudents.map(student =>
                                         <tr>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
@@ -95,7 +108,7 @@ export default function StudentInfo() {
                                             </td>
 
                                         </tr>
-                                    ) : <h1>No Students Found</h1>}
+                                    ) : <h1>No Student Found</h1>}
                                 </tbody>
                             </table>
                         </div>
