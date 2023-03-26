@@ -26,9 +26,9 @@ export default function AdminSideNav() {
           </li>
           
           <li class="--set-active-profile-html">
-            <a href="">
+            <a href="/studentInfo">
               <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-              <span class="menu-item-label">Admin Profile</span>
+              <span class="menu-item-label">Student Info</span>
             </a>
           </li>
           <li>

@@ -65,7 +65,7 @@ function Land() {
 
             
               <div className="bg-gray-200 ml-10 w-1/2  mt-6 dark:bg-slate-900 rounded-lg px-6 h-28 ring-1 ring-slate-900/5 shadow-xl">
-              <a href="/">
+              <a href="/login">
                 <div>
                   <span className="inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg">
                     <Icon path={mdiDomain} size={1} />

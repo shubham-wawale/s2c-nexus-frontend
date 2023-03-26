@@ -21,6 +21,7 @@ import LandingPage from "./Land";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import CompanyDrives from "./components/admin/CompanyDrives";
 import AdminDriveInfo from "./components/admin/CompanyDriveCardInfo";
+import StudentInfo from "./components/admin/StudentInfo";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         
         <Routes>
 
-          <Route path="/" element={<Login />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/compdashboard" element={<CompanyDash />}></Route>
           <Route path="/createDrive" element={<DriveForm />}></Route>
@@ -47,9 +48,11 @@ function App() {
           <Route path="/adminLogin" element={<AdminLogin />}></Route>
           <Route path="/adminSignup" element={<AdminSignup />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
-          <Route path="/landing" element={<LandingPage/>}></Route>
+          <Route path="/" element={<LandingPage/>}></Route>
           <Route path="/adminCompanyDrives" element={<CompanyDrives/>}></Route>
           <Route path="/adminCompanyDrivesInfo" element={<AdminDriveInfo/>}></Route>
+          <Route path="/studentInfo" element={<StudentInfo/>}></Route>
+
 
          
 
