@@ -25,6 +25,8 @@ class StudentTable extends React.Component {
       emailSubject: "",
       emailDescription: "",
       showOfferEmailModal: false,
+      showProcessor: false,
+      showEmailSendProcessor: false,
       formData: {
 
       },
@@ -56,29 +58,38 @@ class StudentTable extends React.Component {
 
   onEmailSubmit = (e) => {
     e.preventDefault();
+    this.showEmailSendProcessor()
     console.log(this.state.emailDescription)
     console.log(this.state.emailSubject)
     axios.post("http://localhost:8080/email/users/", {
       subject: this.state.emailSubject,
-      description: this.state.emailDescription
-
+      description: this.state.emailDescription,
+      driveData: this.state.driveData
     })
-      .then(response => alert(response.data.respMesg));
+      .then(response => {
+        this.hideEmailSendProcessor()
+        alert(response.data.respMesg)}
+        );
   };
 
   onEmailOfferSubmit = (e) => {
     e.preventDefault();
+    this.showEmailSendProcessor()
     console.log(this.state.emailDescription)
     console.log(this.state.emailSubject)
     axios.post("http://localhost:8080/email/offer/", {
       subject: this.state.emailSubject,
-      description: this.state.emailDescription
-
+      description: this.state.emailDescription,
+      driveData: this.state.driveData
     })
-      .then(response => alert(response.data.respMesg));
+      .then(response => {
+        this.hideEmailSendProcessor()
+        alert(response.data.respMesg)
+      });
   };
 
   handleTestFileUpload = (event) => {
+    this.showProcessor()
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -103,6 +114,7 @@ class StudentTable extends React.Component {
         if (response.data.success) {
           console.log(response.data.message)
           this.loadDriveData()
+          this.hideProcessor()
         } else {
           console.log(response.data.message)
         }
@@ -115,6 +127,7 @@ class StudentTable extends React.Component {
   };
 
   handleInterviewFileUpload = (event) => {
+    this.showProcessor()
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -139,6 +152,7 @@ class StudentTable extends React.Component {
         if (response.data.success) {
           console.log(response.data.message)
           this.loadDriveData()
+          this.hideProcessor()
         } else {
           console.log(response.data.message)
         }
@@ -234,6 +248,22 @@ class StudentTable extends React.Component {
   hideResume = () => {
     this.setState({ showResume: false });
     console.log(this.state.show)
+  };
+
+  showProcessor = () => {
+    this.setState({ showProcessor: true });
+  };
+
+  hideProcessor = () => {
+    this.setState({ showProcessor: false });
+  };
+
+  showEmailSendProcessor = () => {
+    this.setState({ showEmailSendProcessor: true });
+  };
+
+  hideEmailSendProcessor = () => {
+    this.setState({ showEmailSendProcessor: false });
   };
 
   showEmailModal = () => {
@@ -703,7 +733,7 @@ class StudentTable extends React.Component {
                 </div>
                 <button
                   className="bg-blue-200 text-black active:bg-blue-500 
-      font-bold px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-96 mt-10"
+      font-bold px-3 py-2 rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ml-96 mt-10"
                   type="button"
                   onClick={this.showModal}
                 >
@@ -842,15 +872,28 @@ class StudentTable extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <p class="card-header-title">
-                <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-                Applied Students
-              </p>
-              <table className="table" id="table-id" >
+              {this.state.showProcessor ?
+                <div class="flex items-center justify-center">
+                  <div
+                    class="inline-block mr-5 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                    >
+                  </div>
+                  <span>Processing Excel files</span>
+                </div> :
+                <div>
+                  <p class="card-header-title">
+                    <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+                    Applied Students
+                  </p>
+                  <table className="table ml-2" id="table-id" >
 
-                <thead>
-                  <tr>
-                    {/* <th scope="col">
+                    <thead>
+                      <tr>
+                        {/* <th scope="col">
                       <input
                         type="checkbox"
                         className="form-check-input"
@@ -860,20 +903,20 @@ class StudentTable extends React.Component {
                       />
                     </th> */}
 
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Resume</th>
-                    <th scope="col">Branch</th>
-                    <th scope="col">Batch</th>
-                    <th scope="col">Applied on</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Resume</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Batch</th>
+                        <th scope="col">Applied on</th>
 
 
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.tableData.length != 0 ? this.state.tableData.map((user) => (
-                    <tr key={user.id} >
-                      {/* <th scope="row">
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.tableData.length != 0 ? this.state.tableData.map((user) => (
+                        <tr key={user.id} >
+                          {/* <th scope="row">
                         <input
                           type="checkbox"
                           checked={user.selected}
@@ -882,40 +925,42 @@ class StudentTable extends React.Component {
                           onChange={(e) => this.onItemCheck(e, user)}
                         />
                       </th> */}
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td><button class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
-                      <td>{user.branch}</td>
-                      <td>2023</td>
-                      <td>{user.appliedDate}</td>
+                          <td>{user.name}</td>
+                          <td>{user.email}</td>
+                          <td><button class="bg-gray-200 p-1 rounded px-2" onClick={this.showResume}>Resume</button></td>
+                          <td>{user.branch}</td>
+                          <td>2023</td>
+                          <td>{user.appliedDate}</td>
 
 
-                      <div class="buttons right nowrap mr-7">
-                        {/* <button class="button small text-center inline-flex items-center green --jb-modal" data-target="sample-modal-2" type="button">
+                          <div class="buttons right nowrap mr-7">
+                            {/* <button class="button small text-center inline-flex items-center green --jb-modal" data-target="sample-modal-2" type="button">
                           <span class="icon"><i class="mdi mdi-check"></i></span>Accept
                         </button> */}
 
 
-                        <button id={user.id} onClick={this.handleRejectStudent} class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
-                          <span class="icon"><i class="mdi mdi-window-close"></i></span>Reject
-                        </button>
-                      </div>
+                            <button id={user.id} onClick={this.handleRejectStudent} class="button small text-center inline-flex items-center red --jb-modal" data-target="sample-modal" type="button">
+                              <span class="icon"><i class="mdi mdi-window-close"></i></span>Reject
+                            </button>
+                          </div>
 
-                    </tr>
-                  )) : null}
-                </tbody>
-              </table>
+                        </tr>
+                      )) : null}
+                    </tbody>
+                  </table>
+                </div>}
 
-              <button class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded " onClick={this.handleDownload}>Download List</button>
+              <button class="py-2 px-4 ml-3 bg-blue-200 text-black active:bg-blue-500 
+            font-bold text-center rounded shadow hover:shadow-lg outline-none focus:outline-none mt-2 mb-1 hover:text-white hover:bg-[#0f172a] ..." onClick={this.handleDownload}>Download List</button>
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900" for="Upload Test Results">Upload Test Results: </label>
-                <input class="block mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700"
+                <label class="block mb-2 text-md font-medium text-gray-900 mt-3 ml-4" for="Upload Test Results">Upload Test Results: </label>
+                <input class="block mb-5 ml-4 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700"
                   type="file" onChange={this.handleTestFileUpload} />
               </div>
 
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900" for="Upload Interview Results">Upload Interview Results: </label>
-                <input class="block mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700 " type="file" onChange={this.handleInterviewFileUpload} />
+                <label class="block mb-2 mt-3 ml-4 text-md font-medium text-gray-900" for="Upload Interview Results">Upload Interview Results: </label>
+                <input class="block mb-5 ml-4 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-700 " type="file" onChange={this.handleInterviewFileUpload} />
               </div>
 
 
@@ -923,7 +968,7 @@ class StudentTable extends React.Component {
 
                 <div class="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
 
-                  <form class="bg-[#BFDBFE] shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                  <form class="bg-[#ccdcf1] shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
                     <div class="mb-4">
                       {/* <p class="text-green-500 text-xs bold italic">{this.state.msg}</p> */}
@@ -952,19 +997,32 @@ class StudentTable extends React.Component {
                       >
                       </textarea>
                     </div>
+                    {this.state.showEmailSendProcessor ?
+                    <div class="flex items-center justify-center">
+                      <div
+                        class="inline-block mr-5 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                        role="status">
+                        <span
+                          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                        >Loading...</span
+                        >
+                      </div>
+                      <span>Sending Email</span>
+                    </div> :
                     <div class="flex items-center justify-between">
-                      <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline" type="button">
+                      <button onClick={this.state.showEmailModal ? this.onEmailSubmit : this.onEmailOfferSubmit} class=" bg-[#6f8aaf]  text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none py-2 px-4 mx-1" type="button">
                         Send Email
                       </button>
                       <button
-                        className="text-black background-transparent font-bold bg-gray-400 uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
+                        className="text-black background-transparent font-bold bg-gray-400 hover:bg-gray-500 hover:text-white rounded uppercase px-6 py-2 mx-2 mt-1 text-sm outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                         onClick={this.hideEmailModal}
                       >
                         Close
                       </button>
 
-                    </div>
+                    </div> }
                   </form>
 
                 </div>
@@ -977,9 +1035,12 @@ class StudentTable extends React.Component {
               <div class="buttons right nowrap">
                 <div class="flex items-center justify-between mb-5">
                   <div class="buttons">
-                    <button onClick={this.showEmailModal} type="button" class="button bg-sky-500 hover:bg-sky-300 ... ">Send Exam Link</button>
-                    <button onClick={this.showEmailModal} type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-1.5 border border-blue-500 hover:border-transparent rounded ">Schedule Interview</button>
-                    <button onClick={this.showOfferEmailModal} type="button" class="bg-transparent hover:bg-sky-500 text-blue-700 font-semibold hover:text-white py-2 px-4 mr-2 border border-blue-500 hover:border-transparent rounded">Send Offer Letter</button>
+                    <button onClick={this.showEmailModal} type="button" class="button bg-blue-200 text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ">Send Exam Link</button>
+                    <button onClick={this.showEmailModal} type="button" class="button bg-blue-200 text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ">Schedule Interview</button>
+                    <button onClick={this.showOfferEmailModal} type="button" class="button  bg-blue-200 text-black active:bg-blue-500 
+      font-bold rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ">Send Offer Letter</button>
                   </div>
 
                 </div>

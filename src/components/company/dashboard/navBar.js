@@ -19,7 +19,7 @@ export default function Navbar() {
             <ul class="flex  flex-col justify-between items-end mt-4 bg-gray-50 p-0 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
               <li>
                 <a
-                  href="#"
+                  href="/landing"
                   class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
                   aria-current="page"
                 >

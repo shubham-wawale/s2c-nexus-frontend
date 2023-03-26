@@ -178,7 +178,7 @@ const StudentDriveInfo = () => {
                 <button
                   onClick={handleApplyDrive}
                   className="bg-blue-200 text-black active:bg-blue-500 
-      font-bold px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-96 mt-10"
+                  font-bold px-3 py-2 rounded shadow hover:text-white hover:bg-[#0f172a] outline-none focus:outline-none ml-96 mt-10"
                   type="button"
                 >
                   Apply Drive
