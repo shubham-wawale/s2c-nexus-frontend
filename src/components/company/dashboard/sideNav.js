@@ -34,6 +34,16 @@ export default function SideNav() {
               <span class="menu-item-label">Create Drive</span>
             </a>
           </li>
+
+           
+           <li  className="--set-active-tables-html">
+              <a class="rounded-md" href="https://s2c-nexus-jwao.onrender.com/e2f313e2-747f-478f-af77-6d0e2ea7cd63?host=abc">
+                <span class="icon"><i class="mdi mdi-xbox-controller-view"></i></span>
+                <span class="menu-item-label" >Interview</span>
+                
+              </a>
+            </li>
+
           
           <li class="--set-active-profile-html">
             <a href="/companyprofile">
