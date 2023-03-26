@@ -3,18 +3,15 @@ import React, { useEffect, useState } from "react"
 import image from '../../images/comp_login.jpg'
 import AdminNavbar from "./AdminNavbar"
 import AdminSideNav from "./AdminSideNav"
+import Search from "./SearchBar"
 
 export default function StudentInfo() {
-    const [appliedDrives, setAppliedDrives] = useState([])
+    const [students, setStudents] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:8080/student/getAppliedDrives', {
-            params: {
-                studentId: localStorage.getItem("activeStudentId")
-            }
-        }).then(response => {
+        axios.get('http://localhost:8080/student/getAllDetails').then(response => {
             if (response.data.success) {
-                setAppliedDrives(response.data.drives)
-                console.log(response.data.drives)
+                setStudents(response.data.studentData)
+                // console.log(response.data.drives)
             } else {
                 alert(response.data.message)
             }
@@ -27,6 +24,7 @@ export default function StudentInfo() {
         <>
         <AdminNavbar/>
         <AdminSideNav/>
+        <Search/>
             <div className='font-open-sans'>
                 <div className="left-0 w-5/5 shadow-xl  mx-2 my-10 focus:outline-none border-none 
             bg-[#C2D3E4] border font-bold text-[#1F2937] text-lg  py-2 px-4 rounded-md">
@@ -56,13 +54,13 @@ export default function StudentInfo() {
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Offers
                                         </th>
-                                        {/* <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Stage
-                                        </th> */}
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Offer Count
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {appliedDrives.length !== 0 ? appliedDrives.map(drive =>
+                                    {students.length !== 0 ? students.map(student =>
                                         <tr>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
@@ -71,31 +69,33 @@ export default function StudentInfo() {
                                                     </div>
                                                     <div className="ml-4">
                                                         <div className="text-sm font-medium text-gray-900">
-                                                            {drive.driveName}
+                                                            {student.personalDetails.name}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-900">{drive.jobRole}</div>
+                                                <div className="text-sm text-gray-900">{student.credentials.email}</div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-900">{drive.ctcOffered}</div>
+                                                <div className="text-sm text-gray-900">{student.academicDetails.department}</div>
                                             </td>
+                                           
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-900">{drive.isRejected ? "Rejected" : "In process"}</div>
-                                            </td>
-                                            {/* <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-sm text-gray-900">
                                                     <ul>
-                                                        {drive.testCleared && <li>Test Cleared</li>}
-                                                        {drive.interviewCleared && <li>Interview Cleared</li>}
+                                                        {student.offers.length!==0 ? student.offers.map(offer=><li>{offer.driveName}</li>) : <li>No Offers</li>}
+            
                                                     </ul>
                                                 </div>
-                                            </td> */}
+                                            </td>
+
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-sm text-gray-900">{student.offerCount}</div>
+                                            </td>
 
                                         </tr>
-                                    ) : <h1>No Drives Applied</h1>}
+                                    ) : <h1>No Students Found</h1>}
                                 </tbody>
                             </table>
                         </div>
