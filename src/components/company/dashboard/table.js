@@ -379,7 +379,7 @@ class StudentTable extends React.Component {
       updatedData: this.state.formData
     })
       .then(function (response) {
-        if (response.data.success) {
+        if (response.data.success) {        
           alert(response.data.message)
         } else {
           alert(response.data.message)
