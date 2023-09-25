@@ -8,6 +8,9 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        fontFamily: {
+            'open-sans': '"Open Sans"'
+        },
         stroke: (theme) => ({
             cyan: theme('colors.myCyan.100'),
             choco: theme('colors.mybrown.100'),
@@ -46,6 +49,14 @@ module.exports = {
             rose: colors.rose,
             white: colors.white,
             black: colors.black,
+            myblue:{
+                    900:'#0f172a'
+            },
+           
+            mygrey:{
+                100:'#1F2937'
+
+            },
             myCyan: {
                 100: '#5fcac7'
             },
@@ -62,19 +73,27 @@ module.exports = {
         },
 
         extend: {
-            backgroundImage: (theme) => ({
-                'footer-bg': "url('/images/footer.jpg')",
-                spec: "url('/images/spec.jpg')",
-                'cake-bg': "url('/images/cakedivider.png')",
-                'video-bg': "url('/images/video_bg4.png')",
-                'login-bg': "url('/images/login_bg.jpeg')",
-                'checkout-bg': "url('/images/donuts.jpg')"
-            }),
+            // backgroundImage: {
+            //     'admin-bg' : "url('/images/comp_login.jpg')"},
+
+            // backgroundImage: (theme) => ({
+            //     'admin-bg' : "url('/images/comp_login.jpg')",
+            //     'footer-bg': "url('/images/footer.jpg')",
+            //     spec: "url('/images/spec.jpg')",
+            //     'cake-bg': "url('/images/cakedivider.png')",
+            //     'video-bg': "url('/images/video_bg4.png')",
+            //     'login-bg': "url('/images/login_bg.jpeg')",
+            //     'checkout-bg': "url('/images/donuts.jpg')"
+            // }),
+
+            height: {
+                '104': '28rem'
+            },
 
             fontFamily: {
                 header: ['Merienda One'],
                 body: ['ABeeZee'],
-                hero: ['Leckerli One']
+                hero: ['Leckerli One'],
             },
             strokeWidth: {
                 6: '6',
@@ -90,5 +109,7 @@ module.exports = {
             backgroundColor: ['disabled']
         }
     },
-    plugins: []
+    plugins: [
+        require('tailwind-scrollbar-hide')
+    ]
 };
