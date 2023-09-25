@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import { Student } from '../../../backendRequests';
 
 export default function ExperienceDetails() {
   useEffect(() => {
-    axios.get("http://localhost:8080/student/getDetails", {
+    Student.get("/getDetails", {
       params: {
         studentId: localStorage.getItem("activeStudentId")
       }
@@ -48,7 +49,7 @@ export default function ExperienceDetails() {
 
   const handleExperienceDetailsUpdate = e => {
     e.preventDefault()
-    axios.post('http://localhost:8080/student/updateDetails', {
+    Student.post('/updateDetails', {
       studentId: localStorage.getItem("activeStudentId"),
       key: "experienceDetails",
       newData: experienceData

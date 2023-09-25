@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import StudentSideNav from './StudentSideNav';
 import Navbar from '../company/dashboard/navBar';
 import axios from 'axios';
+import { Company } from '../../backendRequests';
 
 const StudentDriveInfo = () => {
   useEffect(() => {
-    axios.get('http://localhost:8080/company/driveInfo', {
+    Company.get('/driveInfo', {
       params: {
         driveId: localStorage.getItem("activeDriveId")
       }
@@ -48,7 +49,7 @@ const StudentDriveInfo = () => {
       driveId: localStorage.getItem("activeDriveId")
     }
 
-    axios.post('http://localhost:8080/company/addStudentToDrive', data)
+    Company.post('/addStudentToDrive', data)
     .then(response=> {
       if( response.data.success) {
         alert(response.data.message)

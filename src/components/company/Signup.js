@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import login from "../../images/login.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Company } from "../../backendRequests";
 export default function Signup() {
   const navigate = useNavigate()
   const [companyInfo, setCompanyInfo] = useState({
@@ -29,7 +30,7 @@ export default function Signup() {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8080/company/signup', companyInfo)
+    Company.post('/signup', companyInfo)
       .then(function (response) {
         if (response.data.success) {
           console.log(response.data.message)

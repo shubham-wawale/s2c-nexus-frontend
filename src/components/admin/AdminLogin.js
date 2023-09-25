@@ -3,11 +3,11 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ProjectsImg from "../student/Authentication/LoginImg";
+import {Admin} from "../../backendRequests";
 
 export default function AdminLogin() {
   const navigate = useNavigate()
   useEffect(()=> {
-   
     if(localStorage.getItem("activeAdminId")){
       navigate("/adminDashboard")
     }
@@ -31,7 +31,7 @@ export default function AdminLogin() {
   const handleLoginSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    axios.get('http://localhost:8080/admin/login', {
+    Admin.get('/login', {
       params: credentials
     }).then(function (response) {
       console.log(response)

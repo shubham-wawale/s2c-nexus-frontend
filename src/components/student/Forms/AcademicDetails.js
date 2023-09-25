@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { Student } from '../../../backendRequests';
 
 export default function AcademicDetails() {
   useEffect(() => {
-    axios.get("http://localhost:8080/student/getDetails", {
+    Student.get("/getDetails", {
       params: {
         studentId: localStorage.getItem("activeStudentId")
       }
@@ -136,10 +137,10 @@ const handleAcademicDetailSubmit = (e) => {
     certifications: certifications,
     technicalSkills: technicalSkills.split(",")
   }
-  axios.post('http://localhost:8080/student/updateDetails', {
-    studentId: localStorage.getItem("activeStudentId"),
+  Student.post('/updateDetails', {
+    studentId: localStorage.getItem("activeStudentId"), 
     key: "academicDetails",
-    newData: payload
+    newData: payload 
   })
     .then(function (response) {
       if (response.data.success) {

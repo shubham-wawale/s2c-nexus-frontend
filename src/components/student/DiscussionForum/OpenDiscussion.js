@@ -5,6 +5,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import DiscussionTopic from "./DiscussionTopic";
 import Response from "./Response";
 import axios from "axios";
+import { Discussion } from "../../../backendRequests";
 
 
 
@@ -24,7 +25,7 @@ function OpenDiscussion(props){
 
   const submitResponse = (e) =>{
     // e.preventDefault()
-    axios.post('http://localhost:8080/discussion/updateMessageContent', {
+    Discussion.post('/updateMessageContent', {
       msg_id:props.message._id, 
       reply: response
     })

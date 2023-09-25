@@ -4,6 +4,7 @@ import SideNav from "./sideNav";
 import axios from "axios";
 import * as XLSX from 'xlsx'
 import html2pdf from "html2pdf.js";
+import { Company, Email , Student} from "../../../backendRequests";
 
 class StudentTable extends React.Component {
 
@@ -63,7 +64,7 @@ class StudentTable extends React.Component {
     this.showEmailSendProcessor()
     console.log(this.state.emailDescription)
     console.log(this.state.emailSubject)
-    axios.post("http://localhost:8080/email/users/", {
+    Email.post("/users/", {
       subject: this.state.emailSubject,
       description: this.state.emailDescription,
       driveData: this.state.driveData
@@ -80,7 +81,7 @@ class StudentTable extends React.Component {
     this.showEmailSendProcessor()
     console.log(this.state.emailDescription)
     console.log(this.state.emailSubject)
-    axios.post("http://localhost:8080/email/offer/", {
+    Email.post("/offer/", {
       subject: this.state.emailSubject,
       description: this.state.emailDescription,
       driveData: this.state.driveData
@@ -110,7 +111,7 @@ class StudentTable extends React.Component {
           }
         }
       })
-      axios.post('http://localhost:8080/company/filterStudentsByTest', {
+      Company.post('/filterStudentsByTest', {
         driveId: localStorage.getItem("activeCompanyDriveId"),
         studentEmails: sortedEmails,
       }).then(response => {
@@ -148,7 +149,7 @@ class StudentTable extends React.Component {
           }
         }
       })
-      axios.post('http://localhost:8080/company/filterStudentsByInterview', {
+      Company.post('/filterStudentsByInterview', {
         driveId: localStorage.getItem("activeCompanyDriveId"),
         studentEmails: sortedEmails,
       }).then(response => {
@@ -186,7 +187,7 @@ class StudentTable extends React.Component {
   }
 
   loadDriveData() {
-    axios.get('http://localhost:8080/company/driveInfo', {
+    Company.get('/driveInfo', {
       params: {
         driveId: localStorage.getItem("activeCompanyDriveId")
       }
@@ -247,7 +248,7 @@ class StudentTable extends React.Component {
     e.preventDefault()   
     console.log(e.target.id)
     const studentId = e.target.id
-    axios.get('http://localhost:8080/student/getDetails', {
+    Student.get('/getDetails', {
       params:{
         studentId: studentId,
       }
@@ -338,7 +339,7 @@ class StudentTable extends React.Component {
   handleRejectStudent = (e) => {
     e.preventDefault()
     const studentId = e.target.id
-    axios.post('http://localhost:8080/company/removeStudentFromDrive', {
+    Company.post('/removeStudentFromDrive', {
       studentId: studentId,
       driveId: localStorage.getItem("activeCompanyDriveId")
     }).then(response => {
@@ -374,7 +375,7 @@ class StudentTable extends React.Component {
   handleDriveDetails = (e) => {
     e.preventDefault()
     this.setState({ show: false })
-    axios.post('http://localhost:8080/company/updateDrive', {
+    Company.post('/updateDrive', {
       driveId: localStorage.getItem("activeCompanyDriveId"),
       updatedData: this.state.formData
     })

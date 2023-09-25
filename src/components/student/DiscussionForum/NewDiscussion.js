@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DiscussionTopic from "./DiscussionTopic";
 import axios from "axios";
+import { Discussion } from "../../../backendRequests";
 
 function NewDiscussion(props) {
   const[newMessage,setNewMessage] = useState({
@@ -18,7 +19,7 @@ function NewDiscussion(props) {
   const submitQuestion = (e) =>{
     // e.preventDefault()
     // props.addToMessages(newMessage)
-    axios.post('http://localhost:8080/discussion/addNewMessage', {message:newMessage})
+    Discussion.post('/addNewMessage', {message:newMessage})
       .then(function (response) {
         if (response.data.success) {
           console.log(response.data.message)

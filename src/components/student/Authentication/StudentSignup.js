@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProjectsImg from "./LoginImg";
 import axios from "axios";
+import {Student} from "../../../backendRequests"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -31,7 +32,7 @@ export default function StudentSignup() {
     const handleSignupSubmit = (e) => {
         e.preventDefault()
         setIsLoading(true)
-        axios.post('http://localhost:8080/student/signup', credentials).then(function (response) {
+        Student.post('/signup', credentials).then(function (response) {
             if (response.data.success) {
                 setIsLoading(false)
                 alert(response.data.message)

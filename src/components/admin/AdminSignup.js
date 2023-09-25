@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import ProjectsImg from "../student/Authentication/LoginImg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Admin } from "../../backendRequests";
 // import { useDispatch } from "react-redux";
 // import { useSelector } from "react-redux";
 
@@ -31,7 +32,7 @@ export default function AdminSignup() {
     const handleSignupSubmit = (e) => {
         e.preventDefault()
         setIsLoading(true)
-        axios.post('http://localhost:8080/admin/signup', credentials).then(function (response) {
+        Admin.post('/signup', credentials).then(function (response) {
             if (response.data.success) {
                 setIsLoading(false)
                 alert(response.data.message)

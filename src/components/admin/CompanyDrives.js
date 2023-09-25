@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import AdminSideNav from "./AdminSideNav";
 import AdminNavbar from "./AdminNavbar";
 import AdminDriveCard from "./AdminDriveCard";
+import { Company } from "../../backendRequests";
 
 
 export default function CompanyDrives(props) {
@@ -13,7 +14,7 @@ export default function CompanyDrives(props) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:8080/company/allDrives')
+        Company.get('/allDrives')
           .then(function (response) {
             if (response.data.success) {
               setDriveData(response.data.drives)

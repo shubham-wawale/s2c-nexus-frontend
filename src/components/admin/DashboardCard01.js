@@ -2,12 +2,13 @@ import React from 'react';
 import Icon from '../../images/icon-01.svg';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Student } from '../../backendRequests';
 
 function DashboardCard01() {
   const [count, setCount] = useState([])
   
   useEffect(() => {
-      axios.get('http://localhost:8080/student/getAllDetailsCount'
+      Student.get('/getAllDetailsCount'
       )
         .then(function (response) {
           if (response.data.success) {

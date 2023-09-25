@@ -3,13 +3,14 @@ import StuDriveCard from './StuDriveCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import image from '../../images/comp_login.jpg'
+import { Student } from '../../backendRequests'
 
 export default function StudentDashboard() {
   const [driveData, setDriveData] = useState([])
   const [studentData, setStudentData] = useState({})
   useEffect(() => {
     var student = {}
-    axios.get('http://localhost:8080/student/getDetails', {
+    Student.get('/getDetails', {
       params: {
         studentId: localStorage.getItem("activeStudentId")
       }
@@ -18,7 +19,7 @@ export default function StudentDashboard() {
         student = response.data.studentData
         if (student.academicDetails.tenth) {
           localStorage.setItem("activeStudentData", JSON.stringify(student))
-          return axios.get('http://localhost:8080/student/drives', {
+          return Student.get('/drives', {
             params: {
               studentData: student
             }

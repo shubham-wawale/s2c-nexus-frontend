@@ -1,11 +1,12 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import image from '../../images/comp_login.jpg'
+import { Student } from "../../backendRequests"
 
 export default function AppliedStudentDrive() {
     const [appliedDrives, setAppliedDrives] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:8080/student/getAppliedDrives', {
+        Student.get('/getAppliedDrives', {
             params: {
                 studentId: localStorage.getItem("activeStudentId")
             }

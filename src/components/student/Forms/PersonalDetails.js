@@ -2,11 +2,12 @@ import { data } from 'autoprefixer'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Student } from '../../../backendRequests'
 
 export default function PersonalDetails() {  
   const studentId = useSelector(state=> state.identity.studentId)
   useEffect( ()=> {
-     axios.get("http://localhost:8080/student/getDetails", {
+     Student.get("/getDetails", {
       params: {
         studentId: localStorage.getItem("activeStudentId")
       }
@@ -40,7 +41,7 @@ export default function PersonalDetails() {
 
   const handlePersonalDetailsUpdate = (e)=> {
     e.preventDefault()
-    axios.post('http://localhost:8080/student/updateDetails', {
+    Student.post('/updateDetails', {
       studentId: localStorage.getItem("activeStudentId"),
       key: "personalDetails",
       newData: personalData

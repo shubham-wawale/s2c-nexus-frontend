@@ -6,6 +6,7 @@ import {studentLogin,studentLogout} from "./../../../actions/index"
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ProjectsImg from "./LoginImg";
+import { Student } from "../../../backendRequests";
 
 export default function StudentLogin() {
   const navigate = useNavigate()
@@ -34,7 +35,7 @@ export default function StudentLogin() {
   const handleLoginSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    axios.get('http://localhost:8080/student/login', {
+    Student.get('/login', {
       params: credentials
     }).then(function (response) {
       if (response.data.success) {

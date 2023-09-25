@@ -5,6 +5,7 @@ import SideNav from "./sideNav";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Company } from "../../../backendRequests";
 
 
 export default function CompanyDash() {
@@ -13,7 +14,7 @@ export default function CompanyDash() {
   useEffect(() => {
     var companyId = localStorage.getItem("activeCompanyId")
     if (companyId) {
-      axios.get('http://localhost:8080/company/drives', {
+      Company.get('/drives', {
         params: {
           companyId: companyId
         }

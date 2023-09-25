@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DiscussionTopic from "./DiscussionTopic";
 import NewDiscussion from "./NewDiscussion";
 import OpenDiscussion from "./OpenDiscussion";
+import { Discussion } from "../../../backendRequests";
 import axios from "axios";
 
 function DiscussionForum() {
@@ -29,7 +30,7 @@ function DiscussionForum() {
   // }
 
   useEffect(() => {
-    axios.get('http://localhost:8080/discussion/getMessages')
+    Discussion.get('/getMessages')
     .then(function (response) {
       console.log(response)
       if (response.data.success) {

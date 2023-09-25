@@ -4,12 +4,13 @@ import image from '../../images/comp_login.jpg'
 import AdminNavbar from "./AdminNavbar"
 import AdminSideNav from "./AdminSideNav"
 import Search from "./SearchBar"
+import { Student } from "../../backendRequests"
 
 export default function StudentInfo() {
     const [students, setStudents] = useState([])
     const [filteredStudents, setFilteredStudents] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:8080/student/getAllDetails').then(response => {
+        Student.get('/getAllDetails').then(response => {
             if (response.data.success) {
                 setStudents(response.data.studentData)
                 setFilteredStudents(response.data.studentData)

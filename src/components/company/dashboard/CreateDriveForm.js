@@ -3,6 +3,7 @@ import SideNav from './sideNav'
 import React, { Component } from "react";
 import Select from "react-select";
 import axios from "axios";
+import { Company } from '../../../backendRequests';
 // import { withRouter } from 'react-router'
 // import { useHistory } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
@@ -113,7 +114,7 @@ class DriveForm extends Component {
   }
   // const history = useHistory()
   
-    axios.post('http://localhost:8080/company/createDrive', data)
+    Company.post('/createDrive', data)
     .then(function (response) {
       if(response.data.success) {
         console.log(response.data.message)

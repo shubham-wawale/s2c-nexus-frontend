@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import AdminSideNav from "./AdminSideNav";
 import AdminNavbar from "./AdminNavbar";
 import axios from 'axios';
+import { Company } from '../../backendRequests';
 
 const AdminDriveInfo = () => {
     useEffect(() => {
-        axios.get('http://localhost:8080/company/driveInfo', {
+        Company.get('/driveInfo', {
           params: {
             driveId: localStorage.getItem("activeAdminDriveId")
           }
