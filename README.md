@@ -72,10 +72,4 @@ npm install
 ```sh
 npm start
 ```
-> Backend should be started separately s2c-nexus-backend repository.
-
----
-
-## 📜 License  
-This project is licensed under the **MIT License**.  
-```
+> Backend should be started separately from the s2c-nexus-backend repository.
