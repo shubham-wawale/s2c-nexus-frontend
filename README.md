@@ -72,12 +72,7 @@ npm install
 ```sh
 npm start
 ```
-> Backend should be started separately in the `/server` directory.
-
----
-
-## 🤝 Contributors  
-👨‍💻 Your Name – [GitHub](https://github.com/yourusername)  
+> Backend should be started separately s2c-nexus-backend repository.
 
 ---
 
